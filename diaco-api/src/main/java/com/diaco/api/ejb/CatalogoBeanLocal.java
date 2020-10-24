@@ -4,6 +4,7 @@ import com.diaco.api.entity.Departamento;
 import com.diaco.api.entity.Estadoqueja;
 import com.diaco.api.entity.Genero;
 import com.diaco.api.entity.Municipio;
+import com.diaco.api.entity.Perfil;
 import com.diaco.api.entity.Region;
 import com.diaco.api.entity.Tipoconsumidor;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface CatalogoBeanLocal {
     Estadoqueja findEstadoQuejaById(Integer idestadoqueja);
 
     List<Departamento> listDepartamentoByIdRegion(Integer idregion);
+
+    List<Perfil> listPerfiles();
 }
