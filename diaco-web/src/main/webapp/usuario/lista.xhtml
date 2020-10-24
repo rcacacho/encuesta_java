@@ -8,70 +8,64 @@
                 template="/templates/template.xhtml">
 
     <ui:define name="pageTitle">
-        Consulta de Colaboradores
+        Consulta de usuarios
     </ui:define>
 
     <ui:define name="content">
-        <f:metadata>
-            <f:event type="preRenderView" listener="#{listaColaboradoresMB.cargarDatos()}" />
-        </f:metadata>
         <h:form id="frm_content">
             <div align="center">
                 <ui:define name="pageTitle">
                     <h1 style="margin: 0 0 0 0;">Consulta de Colaboradores</h1>            
                 </ui:define>
                 <br />
-
-                <div>
-                    <p:commandButton value="Agregar Colaborador" style="float:left!important; margin-left:7.5% !important; margin-top: -15px!important;" styleClass="button-16 b-greylight-16" icon="ui-icon-plus" 
-                                     action="#{listaColaboradoresMB.linkRegistro()}" update="@all"/>
-                </div>
-                <br />
-                <p:dataTable id="dt_colaborador" var="col" value="#{listaColaboradoresMB.listColaboradores}" widgetVar="asuetos"
-                             emptyMessage="No hay colaboradores registrados" 
+                <p:dataTable id="dt_colaborador" var="col" value="#{consultaUsuarioMB.listUsuario}"
+                             emptyMessage="No hay usuarios registrados" 
                              styleClass="tabla-mp" style="width: 85%" rowIndexVar="rowId"
-                             rows="10" paginator="#{listaColaboradoresMB.listColaboradores.size()>10}"  paginatorPosition="bottom">
+                             rows="10" paginator="#{consultaUsuarioMB.listUsuario.size()>10}"  paginatorPosition="bottom">
 
                     <p:column headerText="No." style="width: 5%;">
                         #{rowId+1}
                     </p:column>
 
-                    <p:column headerText="Primer Nombre" width="25%" >
-                        <p:outputLabel value="#{col.primerNombre}"/>
+                    <p:column headerText="Nombres" width="25%" >
+                        <p:outputLabel value="#{col.nombres}"/>
                     </p:column>
 
-                    <p:column headerText="Primer Apellido" width="25%" >
-                        <p:outputLabel value="#{col.primerApellido}"/>
+                    <p:column headerText="Apellidos" width="25%" >
+                        <p:outputLabel value="#{col.apellidos}"/>
                     </p:column>
 
-                    <p:column headerText="Segundo Apellido" width="25%" >
-                        <p:outputLabel value="#{col.segundoApellido}"/>
+                    <p:column headerText="Correo Electronico" width="25%" >
+                        <p:outputLabel value="#{col.email}"/>
                     </p:column>
 
-                    <p:column headerText="Dirección" width="20%" >
-                        <p:outputLabel value="#{col.direccion}"/>
+                    <p:column headerText="Usuario" width="20%" >
+                        <p:outputLabel value="#{col.usuario}"/>
                     </p:column>
 
-                    <p:column headerText="Teléfono" width="15%" >
-                        <p:outputLabel value="#{col.telefono}"/>
+                    <p:column width="17%" exportable="false" >
+                        <p:commandButton value="Reiniciar Contraseña" 
+                                         style="float:left!important; margin-left:7.5% !important;" 
+                                         styleClass="button-16 b-greylight-16" icon="ui-icon-refresh" immediate="true"
+                                         action="#{consultaUsuarioMB.dialogReinicioPassword(col.idusuario)}" update="@form"/>
                     </p:column>
-
-                    <p:column headerText="Fecha de Inicio" width="17%" >
-                        <p:outputLabel value="#{col.fechaCreacion}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </p:outputLabel>
-                    </p:column>
-
-                    <p:column width="9%" exportable="false" >
-                        <p:commandLink value="Detalle" action="#{listaColaboradoresMB.verDetalle}" title="Ver detalle de Colaborador">
-                            <f:setPropertyActionListener value="#{col}" target="#{listaColaboradoresMB.selectedColaborador}"/>                                
-                        </p:commandLink>
-
-                    </p:column>
-
                 </p:dataTable>
-
             </div>
+
+            <p:dialog header="Reinicio contraseña" widgetVar="dlgReinicio" id="dlgReinicio" 
+                      onShow="stop();"  onHide="stop();" 
+                      modal="true" position="top" resizable="false" width="450px">
+
+                <h:outputLabel  value="Ingrese la contraseña: " style="font-weight: bold;"  />
+                <p:password value="#{consultaUsuarioMB.password}" id="password" required="true"
+                            requiredMessage="Debes de ingresar una contraseña" label="password" />  
+
+                <p:outputPanel  style="margin-top: 4%; margin-bottom: 20px; margin-right: 6%; margin-left: 34%;  font-size: 14px;"  >
+                    <p:commandButton value="Guardar" action="#{consultaUsuarioMB.reinicioPassword()}" icon="ui-icon-disk" process="@form"  style=" margin-left: 5px; " onstart="return confirm('¿Confirmas guardar el colaborador?');" update="@form"/>
+                    <p:commandButton value="Cancelar"  process="@this" action="#{consultaUsuarioMB.cerraDialog()}" icon="ui-icon-close" style="margin-left: 12px; " update="@form"/>
+                </p:outputPanel>
+            </p:dialog>
+
         </h:form>
     </ui:define>
 
