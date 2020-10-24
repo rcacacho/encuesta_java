@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"             
+                xmlns:h="http://java.sun.com/jsf/html"             
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="frm_menu" >
+
+        <p:menubar style="border: 1px solid #ccc; font-size: small; height: 30px; margin-top: 48px;"  autoDisplay="false" >
+
+            <p:submenu label="Encuesta" icon="ui-icon-document">  
+                <p:menuitem value="Consulta" outcome="/queja/lista.xhtml" style="width: 90px;"/>
+                <p:menuitem value="Registro" outcome="/queja/registro.xhtml" style="width: 90px;"/>
+            </p:submenu>
+
+            <p:submenu label="Configuracion" icon="ui-icon-signal-diag"> 
+                <p:menuitem value="Ingreso" url="configuracion/login.xhtml"  target="_">
+                </p:menuitem>
+            </p:submenu>
+        </p:menubar>
+
+    </h:form>
+</ui:composition>

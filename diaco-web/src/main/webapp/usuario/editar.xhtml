@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"     
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml"
+                xmlns:shiro="http://shiro.apache.org/tags">
+
+    <f:metadata>
+        <f:viewParam name="idColaborador" value="#{edicionColaboradorMB.idColaborador}"/>
+        <f:event type="preRenderView" listener="#{edicionColaboradorMB.cargarDatos()}"/>
+    </f:metadata>
+
+    <ui:define name="pageTitle">
+        Edición del Colaborador
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="frm_content">
+
+            <table style="width: 100%; margin-top: 23px;">
+                <tr>
+                    <td style="width: 50%;">
+                        <p:outputLabel value="1. Información del Colaborador" 
+                                       style="font-size: 16px !important; display: block; width: 100%; text-align: left;" />
+                    </td>
+                </tr>
+            </table>
+
+            <hr class="hr-mp" style="margin-bottom: 10px!important;"/>
+
+            <p:panelGrid  id="pg_info" styleClass="no-border" style="width: 90%; margin-left: 4%;">
+                <p:row>
+                    <p:column >
+                        <p:outputLabel value="Primer Nombre:" styleClass="colorTitulo" />
+                    </p:column>
+                    <p:column >
+                        <p:outputLabel value="Segundo Nombre:" styleClass="colorTitulo" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <p:inputText value="#{edicionColaboradorMB.colaborador.primerNombre}" style="font-size: 16px!important;" size="35"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText value="#{edicionColaboradorMB.colaborador.segundoNombre}" style="font-size: 16px!important;" size="35"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column >
+                        <p:outputLabel value="Primer Apellido:" styleClass="colorTitulo" />
+                    </p:column>
+                    <p:column >
+                        <p:outputLabel value="Segundo Apellido:" styleClass="colorTitulo" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <p:inputText value="#{edicionColaboradorMB.colaborador.primerApellido}" style="font-size: 16px!important;" size="35"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText value="#{edicionColaboradorMB.colaborador.segundoApellido}" style="font-size: 16px!important;" size="35" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column >
+                        <p:outputLabel value="Teléfono:" styleClass="colorTitulo" />
+                    </p:column>
+                    <p:column >
+                        <p:outputLabel value="Dirección:" styleClass="colorTitulo" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <p:inputText value="#{edicionColaboradorMB.colaborador.telefono}" style="font-size: 16px!important;" size="25"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText value="#{edicionColaboradorMB.colaborador.direccion}" style="font-size: 16px!important;" size="35"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="Estado:"/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel  value=""/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <h:selectOneMenu id="tipo"  value="#{edicionColaboradorMB.colaborador.idTipoColaborador}" style="width: 272px;" >
+                            <f:selectItem itemLabel="Seleccione un elemento" value="#{null}" noSelectionOption="true"/>
+                            <f:selectItem itemValue="#{true}" itemLabel="Activo" />
+                            <f:selectItem itemValue="#{false}" itemLabel="Inactivo" />
+                        </h:selectOneMenu>
+                    </p:column>
+                </p:row>
+
+
+            </p:panelGrid>
+            <p:outputPanel  style="margin-top: 4%; margin-bottom: 20px; margin-right: 6%; margin-left: 34%;  font-size: 14px;"  >
+                <p:commandButton value="Guardar" action="#{edicionColaboradorMB.actualizarColaborador()}" icon="ui-icon-disk" process="@form" 
+                                 style=" margin-left: 5px; " onstart="return confirm('¿Confirmas actualizar el colaborador?');" update="@form"/>
+                <p:commandButton value="Cancelar" process="@this" action="#{edicionColaboradorMB.cancelarEdicion()}" icon="ui-icon-close" style="margin-left: 12px; " update="@form"/>
+            </p:outputPanel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
