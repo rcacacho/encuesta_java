@@ -23,6 +23,12 @@
                             <p:commandButton id="loginButton" value="Acceder" style="margin-left: 125px;"
                                              action="#{loginMB.loginProject()}"  onstart="start();" oncomplete="stop();"/>
 
+                            <p:commandButton value="Cancelar" process="@this" action="#{loginMB.regresar()}" 
+                                             icon="ui-icon-close" style="margin-left: 12px; " update="@form"/>
+                            
+                            <p:commandButton value="Cancelar" process="@this" action="#{loginMB.md5()}" 
+                                             style="margin-left: 12px; " update="@form"/>
+
                         </f:facet>
                     </h:panelGrid>
                 </p:panel>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"             
+                xmlns:h="http://java.sun.com/jsf/html"             
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="frm_menu" >
+
+        <p:menubar style="border: 1px solid #ccc; font-size: small; height: 30px; margin-top: 48px;"  autoDisplay="false" >
+
+            <p:submenu label="Queja" icon="ui-icon-comment"> 
+                <p:menuitem value="Seguimiento" url="/queja/bandeja.xhtml"/>
+            </p:submenu>
+
+            <p:submenu label="Usuario" icon="ui-icon-person">  
+                <p:menuitem value="Consulta" outcome="/usuario/lista.xhtml" style="width: 90px;"/>
+                <p:menuitem value="Registro" outcome="/usuario/registro.xhtml" style="width: 90px;"/>
+            </p:submenu>
+
+            <p:submenu label="Perfil" icon="ui-icon-contact" > 
+                <p:menuitem value="Consulta" url="/perfiles/buzon.xhtml" />
+                <p:menuitem value="Registro" url="/perfiles/registro.xhtml" />
+            </p:submenu>
+
+
+        </p:menubar>
+
+    </h:form>
+</ui:composition>

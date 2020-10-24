@@ -2,9 +2,13 @@ package com.diaco.web.login;
 
 import com.diaco.api.ejb.LoginBeanLocal;
 import com.diaco.api.entity.Usuario;
+import com.diaco.web.utils.JsfUtil;
 import com.diaco.web.utils.UtilMB;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +17,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
+import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -53,6 +58,30 @@ public class LoginMB implements Serializable {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.invalidateSession();
         ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
+    }
+
+    public void regresar() {
+        JsfUtil.redirectTo("index.xhtml");
+    }
+
+    public void md5() {
+        try {
+            String plainData = "hola", cipherText, decryptedText;
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+            keyGen.init(128);
+            SecretKey secretKey = keyGen.generateKey();
+            Cipher aesCipher = Cipher.getInstance("AES");
+            aesCipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            byte[] byteDataToEncrypt = plainData.getBytes();
+            byte[] byteCipherText = aesCipher.doFinal(byteDataToEncrypt);
+            cipherText = new BASE64Encoder().encode(byteCipherText);
+            aesCipher.init(Cipher.DECRYPT_MODE, secretKey, aesCipher.getParameters());
+            byte[] byteDecryptedText = aesCipher.doFinal(byteCipherText);
+            decryptedText = new String(byteDecryptedText);
+            System.out.println("\n Plain Data : " + plainData + " \n Cipher Data : " + cipherText + " \n Decrypted Data : " + decryptedText);
+        } catch (Exception e) {
+
+        }
     }
 
     /*Metodos Getters y setters*/
