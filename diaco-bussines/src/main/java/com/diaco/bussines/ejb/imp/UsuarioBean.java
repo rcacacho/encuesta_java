@@ -89,4 +89,29 @@ public class UsuarioBean implements UsuarioBeanLocal {
         return lst;
     }
 
+    @Override
+    public Usuario reinicioPassword(Integer idusuario, String password) {
+        if (idusuario == null) {
+            context.setRollbackOnly();
+            return null;
+        }
+
+        try {
+            Usuario toUpdate = em.find(Usuario.class, idusuario);
+
+            toUpdate.setPassword(password);
+            em.merge(toUpdate);
+
+            return toUpdate;
+        } catch (ConstraintViolationException ex) {
+            String validationError = getConstraintViolationExceptionAsString(ex);
+            log.error(validationError);
+            context.setRollbackOnly();
+            return null;
+        } catch (Exception ex) {
+            processException(ex);
+            return null;
+        }
+    }
+
 }

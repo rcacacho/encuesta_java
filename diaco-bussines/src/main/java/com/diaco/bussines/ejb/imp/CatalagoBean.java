@@ -5,6 +5,7 @@ import com.diaco.api.entity.Departamento;
 import com.diaco.api.entity.Estadoqueja;
 import com.diaco.api.entity.Genero;
 import com.diaco.api.entity.Municipio;
+import com.diaco.api.entity.Perfil;
 import com.diaco.api.entity.Region;
 import com.diaco.api.entity.Tipoconsumidor;
 import java.util.List;
@@ -122,6 +123,18 @@ public class CatalagoBean implements CatalogoBeanLocal {
         }
 
         return lst.get(0);
+    }
+
+    @Override
+    public List<Perfil> listPerfiles() {
+        List<Perfil> lst = em.createQuery("SELECT per FROM Perfil per WHERE per.activo = true", Perfil.class)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst;
     }
 
 }
