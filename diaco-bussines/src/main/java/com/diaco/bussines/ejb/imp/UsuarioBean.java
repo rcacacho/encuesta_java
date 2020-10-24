@@ -1,14 +1,10 @@
 package com.diaco.bussines.ejb.imp;
 
-import com.diaco.api.ejb.CatalogoBeanLocal;
-import com.diaco.api.ejb.QuejaBeanLocal;
-import com.diaco.api.entity.Estadoqueja;
-import com.diaco.api.entity.Queja;
-import com.diaco.api.enums.Estado;
+import com.diaco.api.ejb.UsuarioBeanLocal;
+import com.diaco.api.entity.Usuario;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.EJBContext;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -19,10 +15,10 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Singleton
-public class QuejaBean implements QuejaBeanLocal {
+public class UsuarioBean implements UsuarioBeanLocal {
 
     private static final Logger log = Logger.getLogger(CatalagoBean.class);
 
@@ -31,9 +27,6 @@ public class QuejaBean implements QuejaBeanLocal {
 
     @Resource
     private EJBContext context;
-
-    @EJB
-    private CatalogoBeanLocal catalogoBean;
 
     private void processException(Exception ex) {
         log.error(ex.getMessage(), ex);
@@ -52,27 +45,13 @@ public class QuejaBean implements QuejaBeanLocal {
     }
 
     @Override
-    public List<Queja> ListaQuejas() {
-        List<Queja> lst = em.createQuery("SELECT qj FROM Queja qj ", Queja.class)
-                .getResultList();
-
-        if (lst == null || lst.isEmpty()) {
-            return null;
-        }
-
-        return lst;
-    }
-
-    @Override
-    public Queja saveQueja(Queja queja) {
+    public Usuario saveUsuario(Usuario usuario) {
         try {
-            Estadoqueja estado = catalogoBean.findEstadoQuejaById(Estado.REGISTRADA.getValue());
-
-            queja.setIdestadoqueja(estado);
-            queja.setFechacreacion(new Date());
-            em.persist(queja);
+            usuario.setFechacreacion(new Date());
+            usuario.setActivo(true);
+            em.persist(usuario);
             em.flush();
-            return (queja);
+            return (usuario);
         } catch (ConstraintViolationException ex) {
             String validationError = getConstraintViolationExceptionAsString(ex);
             log.error(validationError);
@@ -86,9 +65,9 @@ public class QuejaBean implements QuejaBeanLocal {
     }
 
     @Override
-    public Queja findQueja(Integer idQueja) {
-        List<Queja> lst = em.createQuery("SELECT qj FROM Queja qj WHERE qj.idqueja =:idqueja", Queja.class)
-                .setParameter("idQueja", idQueja)
+    public Usuario findUsuario(Integer idusuario) {
+        List<Usuario> lst = em.createQuery("SELECT us FROM Usuario us WHERE us.idusuario =:idsuario and us.activo = true", Usuario.class)
+                .setParameter("idusuario", idusuario)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -99,9 +78,8 @@ public class QuejaBean implements QuejaBeanLocal {
     }
 
     @Override
-    public List<Queja> listQuejaByIdQueja(Integer idqueja) {
-        List<Queja> lst = em.createQuery("SELECT qj FROM Queja qj WHERE qj.idqueja =:idqueja", Queja.class)
-                .setParameter("idqueja", idqueja)
+    public List<Usuario> ListaUsuarios() {
+        List<Usuario> lst = em.createQuery("SELECT us FROM Usuario us WHERE us.activo = true ", Usuario.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -110,4 +88,5 @@ public class QuejaBean implements QuejaBeanLocal {
 
         return lst;
     }
+
 }
