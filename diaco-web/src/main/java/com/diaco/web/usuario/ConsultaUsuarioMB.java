@@ -3,7 +3,11 @@ package com.diaco.web.usuario;
 import com.diaco.api.ejb.UsuarioBeanLocal;
 import com.diaco.api.entity.Usuario;
 import com.diaco.web.utils.JsfUtil;
+import com.diaco.web.utils.UtilMB;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -34,20 +38,37 @@ public class ConsultaUsuarioMB implements Serializable {
         listUsuario = usuarioBean.ListaUsuarios();
     }
 
-    public void dialogReinicioPassword(Integer idUsuario) {
-        idUsuario = this.idUsuario;
+    public void dialogReinicioPassword(Integer id) {
+        idUsuario = id;
         RequestContext.getCurrentInstance().execute("PF('dlgReinicio').show()");
     }
 
     public void reinicioPassword() {
+        password = md5(password);
         Usuario response = usuarioBean.reinicioPassword(idUsuario, password);
-        if (response != null){
+        if (response != null) {
             JsfUtil.addSuccessMessage("Reinicio de contraseña exitoso");
         }
     }
 
     public void cerraDialog() {
         RequestContext.getCurrentInstance().execute("PF('dlgReinicio').hide()");
+    }
+
+    public static String md5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /*Metodos getters y setters*/

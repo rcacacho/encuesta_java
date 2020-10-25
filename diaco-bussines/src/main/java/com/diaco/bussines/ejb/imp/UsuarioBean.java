@@ -1,6 +1,7 @@
 package com.diaco.bussines.ejb.imp;
 
 import com.diaco.api.ejb.UsuarioBeanLocal;
+import com.diaco.api.entity.Perfil;
 import com.diaco.api.entity.Usuario;
 import java.util.Date;
 import java.util.List;
@@ -112,6 +113,19 @@ public class UsuarioBean implements UsuarioBeanLocal {
             processException(ex);
             return null;
         }
+    }
+
+    @Override
+    public Perfil findPerfilIdUsuario(Integer idPerfil) {
+        List<Perfil> lst = em.createQuery("SELECT us.idperfil FROM Usuario us WHERE us.idperfil.idperfil =:idPerfil and us.activo = true", Perfil.class)
+                .setParameter("idperfil", idPerfil)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst.get(0);
     }
 
 }

@@ -6,6 +6,9 @@ import com.diaco.web.utils.JsfUtil;
 import com.diaco.web.utils.UtilMB;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -36,9 +39,9 @@ public class LoginMB implements Serializable {
 
     public String loginProject() {
         Usuario usu = new Usuario();
+        password = md5(password);
         usu = loginBeanLocal.verificarUsuario(usuario, password);
         if (usu != null) {
-            // get Http Session and store username
             HttpSession session = UtilMB.getSession();
             session.setAttribute("usuario", usuario);
 
@@ -57,7 +60,23 @@ public class LoginMB implements Serializable {
     }
 
     public void regresar() {
-        JsfUtil.redirectTo("index.xhtml");
+        JsfUtil.redirectTo("/index.xhtml");
+    }
+
+    public static String md5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /*Metodos Getters y setters*/

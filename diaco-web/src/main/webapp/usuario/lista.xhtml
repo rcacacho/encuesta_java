@@ -45,8 +45,8 @@
 
                     <p:column width="17%" exportable="false" >
                         <p:commandButton value="Reiniciar Contraseña" 
-                                         style="float:left!important; margin-left:7.5% !important;" 
-                                         styleClass="button-16 b-greylight-16" icon="ui-icon-refresh" immediate="true"
+                                         style="float:left!important; margin-left:7.5% !important;" process="@this" 
+                                         styleClass="button-16 b-greylight-16" icon="ui-icon-refresh"
                                          action="#{consultaUsuarioMB.dialogReinicioPassword(col.idusuario)}" update="@form"/>
                     </p:column>
                 </p:dataTable>

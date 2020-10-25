@@ -1,5 +1,6 @@
 package com.diaco.api.ejb;
 
+import com.diaco.api.entity.Perfil;
 import com.diaco.api.entity.Usuario;
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface UsuarioBeanLocal {
     List<Usuario> ListaUsuarios();
     
     Usuario reinicioPassword(Integer idusuario, String password);
+    
+    Perfil findPerfilIdUsuario(Integer idPerfil);
 
 }

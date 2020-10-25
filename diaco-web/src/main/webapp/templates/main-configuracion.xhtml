@@ -2,10 +2,9 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"             
                 xmlns:h="http://java.sun.com/jsf/html"             
-                xmlns:p="http://primefaces.org/ui">
-
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="frm_menu" >
-
         <p:menubar style="border: 1px solid #ccc; font-size: small; height: 30px; margin-top: 48px;"  autoDisplay="false" >
 
             <p:submenu label="Queja" icon="ui-icon-comment"> 
@@ -22,7 +21,7 @@
                 <p:menuitem value="Registro" url="/perfiles/registro.xhtml" />
             </p:submenu>
 
-              <p:submenu label="Reportes" icon="ui-icon-comment"> 
+            <p:submenu label="Reportes" icon="ui-icon-comment"> 
                 <p:menuitem value="Reporte" url="/reportes/menuReporte.xhtml"/>
             </p:submenu>
 

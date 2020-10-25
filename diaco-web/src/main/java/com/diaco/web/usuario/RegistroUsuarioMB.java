@@ -6,16 +6,15 @@ import com.diaco.api.entity.Perfil;
 import com.diaco.api.entity.Usuario;
 import com.diaco.web.utils.JsfUtil;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
-import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -53,25 +52,20 @@ public class RegistroUsuarioMB implements Serializable {
         Usuario response = usuarioBean.saveUsuario(usuario);
     }
 
-    public String md5(String contra) {
+    public String md5(String input) {
         try {
-            String cipherText, decryptedText;
-            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
-            keyGen.init(128);
-            SecretKey secretKey = keyGen.generateKey();
-            Cipher aesCipher = Cipher.getInstance("AES");
-            aesCipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            byte[] byteDataToEncrypt = password.getBytes();
-            byte[] byteCipherText = aesCipher.doFinal(byteDataToEncrypt);
-            cipherText = new BASE64Encoder().encode(byteCipherText);
-            aesCipher.init(Cipher.DECRYPT_MODE, secretKey, aesCipher.getParameters());
-            byte[] byteDecryptedText = aesCipher.doFinal(byteCipherText);
-            decryptedText = new String(byteDecryptedText);
-            return cipherText;
-            //System.out.println("\n Plain Data : " + plainData + " \n Cipher Data : " + cipherText + " \n Decrypted Data : " + decryptedText);
-        } catch (Exception e) {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger number = new BigInteger(1, messageDigest);
+            String hashtext = number.toString(16);
+
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     public void regresarMenu() {
