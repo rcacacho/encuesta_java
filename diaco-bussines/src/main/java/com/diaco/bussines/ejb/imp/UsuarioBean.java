@@ -128,4 +128,29 @@ public class UsuarioBean implements UsuarioBeanLocal {
         return lst.get(0);
     }
 
+    @Override
+    public Usuario eliminarUsuario(Integer idusuario) {
+        if (idusuario == null) {
+            context.setRollbackOnly();
+            return null;
+        }
+
+        try {
+            Usuario toUpdate = em.find(Usuario.class, idusuario);
+
+            toUpdate.setActivo(false);
+            em.merge(toUpdate);
+
+            return toUpdate;
+        } catch (ConstraintViolationException ex) {
+            String validationError = getConstraintViolationExceptionAsString(ex);
+            log.error(validationError);
+            context.setRollbackOnly();
+            return null;
+        } catch (Exception ex) {
+            processException(ex);
+            return null;
+        }
+    }
+
 }
