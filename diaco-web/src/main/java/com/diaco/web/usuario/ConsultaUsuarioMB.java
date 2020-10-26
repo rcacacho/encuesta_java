@@ -3,7 +3,6 @@ package com.diaco.web.usuario;
 import com.diaco.api.ejb.UsuarioBeanLocal;
 import com.diaco.api.entity.Usuario;
 import com.diaco.web.utils.JsfUtil;
-import com.diaco.web.utils.UtilMB;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
