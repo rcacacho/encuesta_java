@@ -2,6 +2,7 @@ package com.diaco.bussines.ejb.imp;
 
 import com.diaco.api.ejb.CatalogoBeanLocal;
 import com.diaco.api.ejb.QuejaBeanLocal;
+import com.diaco.api.entity.Encargado;
 import com.diaco.api.entity.Estadoqueja;
 import com.diaco.api.entity.Queja;
 import com.diaco.api.enums.Estado;
@@ -109,5 +110,41 @@ public class QuejaBean implements QuejaBeanLocal {
         }
 
         return lst;
+    }
+
+    @Override
+    public List<Queja> listAllQueja() {
+      List<Queja> lst = em.createQuery("SELECT qj FROM Queja qj", Queja.class)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst;
+    }
+
+    @Override
+    public List<Queja> listQuejaByFechaCreacion(Date fechainicio, Date fechafin) {
+        List<Queja> lst = em.createQuery("SELECT qj FROM Queja qj WHERE qj.fechacreacion >=:fechainio and qj.fechacreacion <=:fechafin", Queja.class)
+                .setParameter("fechacreacion", fechainicio)
+                .setParameter("fechacreacion", fechafin)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst;
+    }
+
+    @Override
+    public Encargado asignacionQueja(Encargado asignacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Encargado> listEncagardoByIdQueja(Integer idqueja) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

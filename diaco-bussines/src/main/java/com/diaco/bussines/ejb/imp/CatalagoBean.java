@@ -8,6 +8,7 @@ import com.diaco.api.entity.Municipio;
 import com.diaco.api.entity.Perfil;
 import com.diaco.api.entity.Region;
 import com.diaco.api.entity.Tipoconsumidor;
+import com.diaco.api.entity.Usuario;
 import java.util.List;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -128,6 +129,18 @@ public class CatalagoBean implements CatalogoBeanLocal {
     @Override
     public List<Perfil> listPerfiles() {
         List<Perfil> lst = em.createQuery("SELECT per FROM Perfil per WHERE per.activo = true", Perfil.class)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst;
+    }
+
+    @Override
+    public List<Usuario> listUsuario() {
+        List<Usuario> lst = em.createQuery("SELECT usu FROM Usuario usu WHERE usu.activo = true", Usuario.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
