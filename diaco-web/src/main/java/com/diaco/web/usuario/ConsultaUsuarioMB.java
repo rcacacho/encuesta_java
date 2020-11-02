@@ -69,6 +69,16 @@ public class ConsultaUsuarioMB implements Serializable {
             throw new RuntimeException(e);
         }
     }
+    
+       public void eliminarUsuario(Integer idusuario) {
+        Usuario response = usuarioBean.eliminarUsuario(idusuario);
+        if (response != null) {
+            JsfUtil.addSuccessMessage("Se elimino el usuario exitosamente");
+            return;
+        }
+
+        JsfUtil.addErrorMessage("Sucedio un error al elimnar");
+    }
 
     /*Metodos getters y setters*/
     public List<Usuario> getListUsuario() {

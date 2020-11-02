@@ -44,6 +44,13 @@
                     </p:column>
 
                     <p:column width="17%" exportable="false" >
+                        <p:commandButton value="Eliminar" 
+                                         style="float:left!important; margin-left:7.5% !important;" process="@this" 
+                                         styleClass="button-16 b-greylight-16" icon="ui-icon-closethick"
+                                         action="#{consultaUsuarioMB.eliminarUsuario(col.idusuario)}" update="@form"/>
+                    </p:column>
+
+                    <p:column width="17%" exportable="false" >
                         <p:commandButton value="Reiniciar Contraseña" 
                                          style="float:left!important; margin-left:7.5% !important;" process="@this" 
                                          styleClass="button-16 b-greylight-16" icon="ui-icon-refresh"
