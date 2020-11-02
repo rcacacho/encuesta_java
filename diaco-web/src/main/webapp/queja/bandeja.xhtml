@@ -8,10 +8,13 @@
                 template="/templates/template.xhtml">
 
     <ui:define name="pageTitle">
-        Consulta de quejas
+        Consulta de quejas en seguimiento
     </ui:define>
 
     <ui:define name="content">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{bandejaQuejaMB.cargarDatos()}" />
+        </f:metadata>
 
         <h:form id="frm_content">
             <div align="center">
@@ -19,39 +22,45 @@
                     <h1 style="margin: 0 0 0 0;">Consulta de quejas</h1>            
                 </ui:define>
 
-                <p:panelGrid columns="1"  styleClass="no-border" style="margin-top: 10px;">
-                    <p:outputLabel value="Codigo solicitud:"  styleClass="field-label"  />
+                <p:panelGrid columns="2"  styleClass="no-border" style="margin-top: 10px;">
+                    <p:outputLabel value="Fecha Inicio:"  styleClass="field-label"  />
+                    <p:outputLabel value="Fecha Fin:"  styleClass="field-label"  />
 
-                    <p:inputText id="ac_empleado" value="#{consultaQuejaMB.idqueja}" style="width: 100%;"  placeholder="(solicitud)"
-                                 requiredMessage="(solicitud)" size="50" >
-                        <p:ajax event="blur" process="@this"  />
-                    </p:inputText>
+                    <p:calendar id="cal_fechaInicio" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                value="#{bandejaQuejaMB.fechaInicio}" navigator="true">  
+                        <p:ajax event="dateSelect" />
+                    </p:calendar>
 
-                    <p:panelGrid columns="2" styleClass="no-border" style="margin-left: 150px;">
-                        <p:commandButton value="Buscar"  
-                                         action="#{consultaQuejaMB.buscarQueja()}" 
-                                         class="boton boton-imgtxt-16 b-gris4 icon-buscar"
-                                         style="background-size: 20px 20px !important; float: right;
-                                         background-position: 4px 1px !important;"   
-                                         id="btn_buscar"  
-                                         update="frm_content"
-                                         onstart="start();" oncomplete="stop();"/>
-                        <p:commandButton value="Limpiar" 
-                                         action="#{consultaQuejaMB.limpiarCampos()}"
-                                         class="boton boton-imgtxt-16 b-gris4 icon-limpiar"
-                                         style="background-size: 20px 20px !important; float: right;
-                                         background-position: 4px 1px !important;"
-                                         update="@form"
-                                         id="btn_limpiar"  onstart="start();" oncomplete="stop();"/>
-                    </p:panelGrid>
+                    <p:calendar id="cal_fechaFin" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                value="#{bandejaQuejaMB.fechaFin}" navigator="true">  
+                        <p:ajax event="dateSelect" />
+                    </p:calendar>
+                </p:panelGrid>
+
+                <p:panelGrid columns="2" styleClass="no-border" style="margin-left: 150px;">
+                    <p:commandButton value="Buscar"  
+                                     action="#{bandejaQuejaMB.buscarQueja()}" 
+                                     class="boton boton-imgtxt-16 b-gris4 icon-buscar"
+                                     style="background-size: 20px 20px !important; float: right;
+                                     background-position: 4px 1px !important;"   
+                                     id="btn_buscar"  
+                                     update="frm_content"
+                                     onstart="start();" oncomplete="stop();"/>
+                    <p:commandButton value="Limpiar" 
+                                     action="#{bandejaQuejaMB.limpiarCampos()}"
+                                     class="boton boton-imgtxt-16 b-gris4 icon-limpiar"
+                                     style="background-size: 20px 20px !important; float: right;
+                                     background-position: 4px 1px !important;"
+                                     update="@form"
+                                     id="btn_limpiar"  onstart="start();" oncomplete="stop();"/>
                 </p:panelGrid>
 
                 <br/>
 
-                <p:dataTable id="dt_queja" var="col" value="#{consultaQuejaMB.listQueja}"
+                <p:dataTable id="dt_queja" var="col" value="#{bandejaQuejaMB.listQueja}"
                              emptyMessage="No hay registros encontrados" 
                              styleClass="tabla-mp" style="width: 85%" rowIndexVar="rowId"
-                             rows="10" paginator="#{consultaQuejaMB.listQueja.size()>5}"  paginatorPosition="bottom">
+                             rows="10" paginator="#{bandejaQuejaMB.listQueja.size()>5}"  paginatorPosition="bottom">
 
                     <p:column headerText="No." style="width: 5%;">
                         #{rowId+1}
@@ -82,9 +91,35 @@
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </p:outputLabel>
                     </p:column>
-                    
+
+                    <p:column width="17%" exportable="false" >
+                        <p:commandButton value="Asignar queja" 
+                                         style="float:left!important; margin-left:7.5% !important;" process="@this" 
+                                         styleClass="button-16 b-greylight-16" icon="ui-icon-refresh"
+                                         action="#{bandejaQuejaMB.dialogAsignacion(col.idqueja)}" update="@form"/>
+                    </p:column>
+
                 </p:dataTable>
             </div>
+
+            <p:dialog header="Asignación Queja" widgetVar="dlgAsignacion" id="dlgAsignacion" 
+                      onShow="stop();"  onHide="stop();" 
+                      modal="true" position="top" resizable="false" width="450px">
+
+                <h:outputLabel  value="Seleccione un usuario: " style="font-weight: bold;"  />
+                <h:selectOneMenu id="usuario"  value="#{bandejaQuejaMB.selectedUsuario}" style="width: 342px;"
+                                 converter="entityConverter">
+                    <f:selectItem itemLabel="Seleccione un usuario" value="#{null}" noSelectionOption="true"/>
+                    <f:selectItems value="#{bandejaQuejaMB.listUsuario}" var="usu" 
+                                   itemLabel="#{usu.nombres} - #{usu.apellidos}" itemValue="#{usu}"  />
+                </h:selectOneMenu>
+
+                <p:outputPanel  style="margin-top: 4%; margin-bottom: 20px; margin-right: 6%; margin-left: 34%;  font-size: 14px;"  >
+                    <p:commandButton value="Guardar" action="#{bandejaQuejaMB.asignarUsuario()}" icon="ui-icon-disk" process="@form"  style=" margin-left: 5px; " onstart="return confirm('¿Confirmas guardar el colaborador?');" update="@form"/>
+                    <p:commandButton value="Cancelar"  process="@this" action="#{bandejaQuejaMB.cerraDialog()}" icon="ui-icon-close" style="margin-left: 12px; " update="@form"/>
+                </p:outputPanel>
+            </p:dialog>
+
         </h:form>
     </ui:define>
 

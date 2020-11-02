@@ -20,7 +20,7 @@
                         <p:password value="#{loginMB.password}" id="password" required="true"
                                     requiredMessage="Debes de ingresar una contraseña" label="password" />
                         <f:facet name="footer">
-                            <p:commandButton id="loginButton" value="Acceder" style="margin-left: 125px;"
+                            <p:commandButton id="loginButton" value="Acceder" style="margin-left: 125px;" icon="ui-icon-play"
                                              action="#{loginMB.loginProject()}"  onstart="start();" oncomplete="stop();"/>
 
                             <p:commandButton value="Cancelar" process="@this" action="#{loginMB.regresar()}" 
