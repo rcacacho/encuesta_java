@@ -58,10 +58,11 @@ public class BandejaQuejaMB implements Serializable {
 
     public void buscarQueja() {
         List<Queja> response = quejaBean.listQuejaByFechaCreacion(fechaInicio, fechaFin);
-        if (response.size() > 0) {
+        if (response != null) {
             listQueja = response;
         } else {
             JsfUtil.addErrorMessage("No se encontraron datos");
+            listQueja = null;
         }
     }
 
