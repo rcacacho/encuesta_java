@@ -42,32 +42,40 @@ public class Encargado implements Serializable {
     @Basic(optional = false)
     @Column(name = "idencargado")
     private Integer idencargado;
-    
+
     @Size(min = 1, max = 250)
     @Column(name = "observacion")
     private String observacion;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
-    
+
+    @Column(name = "fechaeliminacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaeliminacion;
+
+    @Size(max = 25)
+    @Column(name = "usuarioeliminacion")
+    private String usuarioeliminacion;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-    
+
     @JoinColumn(name = "idqueja", referencedColumnName = "idqueja")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Queja idqueja;
-    
+
     @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario idusuario;
@@ -117,6 +125,22 @@ public class Encargado implements Serializable {
 
     public void setUsuariocreacion(String usuariocreacion) {
         this.usuariocreacion = usuariocreacion;
+    }
+
+    public Date getFechaeliminacion() {
+        return fechaeliminacion;
+    }
+
+    public void setFechaeliminacion(Date fechaeliminacion) {
+        this.fechaeliminacion = fechaeliminacion;
+    }
+
+    public String getUsuarioeliminacion() {
+        return usuarioeliminacion;
+    }
+
+    public void setUsuarioeliminacion(String usuarioeliminacion) {
+        this.usuarioeliminacion = usuarioeliminacion;
     }
 
     public boolean getActivo() {

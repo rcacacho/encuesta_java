@@ -44,30 +44,38 @@ public class Estadoqueja implements Serializable {
     @Basic(optional = false)
     @Column(name = "idestadoqueja")
     private Integer idestadoqueja;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "estado")
     private String estado;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
-    
+
+    @Column(name = "fechaeliminacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaeliminacion;
+
+    @Size(max = 25)
+    @Column(name = "usuarioeliminacion")
+    private String usuarioeliminacion;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idestadoqueja", fetch = FetchType.LAZY)
     private List<Queja> quejaList;
 
@@ -116,6 +124,22 @@ public class Estadoqueja implements Serializable {
 
     public void setUsuariocreacion(String usuariocreacion) {
         this.usuariocreacion = usuariocreacion;
+    }
+
+    public Date getFechaeliminacion() {
+        return fechaeliminacion;
+    }
+
+    public void setFechaeliminacion(Date fechaeliminacion) {
+        this.fechaeliminacion = fechaeliminacion;
+    }
+
+    public String getUsuarioeliminacion() {
+        return usuarioeliminacion;
+    }
+
+    public void setUsuarioeliminacion(String usuarioeliminacion) {
+        this.usuarioeliminacion = usuarioeliminacion;
     }
 
     public boolean getActivo() {

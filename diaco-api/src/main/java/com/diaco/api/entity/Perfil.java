@@ -1,6 +1,7 @@
 package com.diaco.api.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -47,6 +50,22 @@ public class Perfil implements Serializable {
     @Size(max = 500)
     @Column(name = "descripcion")
     private String descripcion;
+
+    @Column(name = "fechacreacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechacreacion;
+
+    @Size(max = 25)
+    @Column(name = "usuariocreacion")
+    private String usuariocreacion;
+
+    @Column(name = "fechaeliminacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaeliminacion;
+
+    @Size(max = 25)
+    @Column(name = "usuarioeliminacion")
+    private String usuarioeliminacion;
 
     @Basic(optional = false)
     @NotNull
@@ -85,6 +104,38 @@ public class Perfil implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Date getFechacreacion() {
+        return fechacreacion;
+    }
+
+    public void setFechacreacion(Date fechacreacion) {
+        this.fechacreacion = fechacreacion;
+    }
+
+    public String getUsuariocreacion() {
+        return usuariocreacion;
+    }
+
+    public void setUsuariocreacion(String usuariocreacion) {
+        this.usuariocreacion = usuariocreacion;
+    }
+
+    public Date getFechaeliminacion() {
+        return fechaeliminacion;
+    }
+
+    public void setFechaeliminacion(Date fechaeliminacion) {
+        this.fechaeliminacion = fechaeliminacion;
+    }
+
+    public String getUsuarioeliminacion() {
+        return usuarioeliminacion;
+    }
+
+    public void setUsuarioeliminacion(String usuarioeliminacion) {
+        this.usuarioeliminacion = usuarioeliminacion;
     }
 
     public boolean isActivo() {

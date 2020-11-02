@@ -46,32 +46,32 @@ public class Tipoconsumidor implements Serializable {
     @Basic(optional = false)
     @Column(name = "idtipoconsumidor")
     private Integer idtipoconsumidor;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "consumidor")
     private String consumidor;
-    
+
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @Column(name = "usuariocreacion")
-    private Integer usuariocreacion;
-    
+    private String usuariocreacion;
+
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-    
+
     @Column(name = "usuarioeliminacion")
-    private Integer usuarioeliminacion;
-    
+    private String usuarioeliminacion;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipoconsumidor", fetch = FetchType.LAZY)
     private List<Queja> quejaList;
 
@@ -112,12 +112,20 @@ public class Tipoconsumidor implements Serializable {
         this.fechacreacion = fechacreacion;
     }
 
-    public Integer getUsuariocreacion() {
+    public String getUsuariocreacion() {
         return usuariocreacion;
     }
 
-    public void setUsuariocreacion(Integer usuariocreacion) {
+    public void setUsuariocreacion(String usuariocreacion) {
         this.usuariocreacion = usuariocreacion;
+    }
+
+    public String getUsuarioeliminacion() {
+        return usuarioeliminacion;
+    }
+
+    public void setUsuarioeliminacion(String usuarioeliminacion) {
+        this.usuarioeliminacion = usuarioeliminacion;
     }
 
     public Date getFechaeliminacion() {
@@ -126,14 +134,6 @@ public class Tipoconsumidor implements Serializable {
 
     public void setFechaeliminacion(Date fechaeliminacion) {
         this.fechaeliminacion = fechaeliminacion;
-    }
-
-    public Integer getUsuarioeliminacion() {
-        return usuarioeliminacion;
-    }
-
-    public void setUsuarioeliminacion(Integer usuarioeliminacion) {
-        this.usuarioeliminacion = usuarioeliminacion;
     }
 
     public boolean getActivo() {

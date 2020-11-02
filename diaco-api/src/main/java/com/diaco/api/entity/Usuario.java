@@ -79,6 +79,18 @@ public class Usuario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
 
+    @Size(max = 25)
+    @Column(name = "usuariocreaciom")
+    private String usuariocreaciom;
+
+    @Column(name = "fechaeliminacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaeliminacion;
+
+    @Size(max = 25)
+    @Column(name = "usuarioeliminacion")
+    private String usuarioeliminacion;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
@@ -165,6 +177,30 @@ public class Usuario implements Serializable {
 
     public void setFechacreacion(Date fechacreacion) {
         this.fechacreacion = fechacreacion;
+    }
+
+    public String getUsuariocreaciom() {
+        return usuariocreaciom;
+    }
+
+    public void setUsuariocreaciom(String usuariocreaciom) {
+        this.usuariocreaciom = usuariocreaciom;
+    }
+
+    public Date getFechaeliminacion() {
+        return fechaeliminacion;
+    }
+
+    public void setFechaeliminacion(Date fechaeliminacion) {
+        this.fechaeliminacion = fechaeliminacion;
+    }
+
+    public String getUsuarioeliminacion() {
+        return usuarioeliminacion;
+    }
+
+    public void setUsuarioeliminacion(String usuarioeliminacion) {
+        this.usuarioeliminacion = usuarioeliminacion;
     }
 
     public boolean getActivo() {

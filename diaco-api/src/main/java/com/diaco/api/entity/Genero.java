@@ -46,32 +46,32 @@ public class Genero implements Serializable {
     @Basic(optional = false)
     @Column(name = "idgenero")
     private Integer idgenero;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "genero")
     private String genero;
-    
+
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @Column(name = "usuariocreacion")
-    private Integer usuariocreacion;
-    
+    private String usuariocreacion;
+
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-    
+
     @Column(name = "usuarioeliminacion")
-    private Integer usuarioeliminacion;
-    
+    private String usuarioeliminacion;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgenero", fetch = FetchType.LAZY)
     private List<Queja> quejaList;
 
@@ -112,14 +112,6 @@ public class Genero implements Serializable {
         this.fechacreacion = fechacreacion;
     }
 
-    public Integer getUsuariocreacion() {
-        return usuariocreacion;
-    }
-
-    public void setUsuariocreacion(Integer usuariocreacion) {
-        this.usuariocreacion = usuariocreacion;
-    }
-
     public Date getFechaeliminacion() {
         return fechaeliminacion;
     }
@@ -128,11 +120,19 @@ public class Genero implements Serializable {
         this.fechaeliminacion = fechaeliminacion;
     }
 
-    public Integer getUsuarioeliminacion() {
+    public String getUsuariocreacion() {
+        return usuariocreacion;
+    }
+
+    public void setUsuariocreacion(String usuariocreacion) {
+        this.usuariocreacion = usuariocreacion;
+    }
+
+    public String getUsuarioeliminacion() {
         return usuarioeliminacion;
     }
 
-    public void setUsuarioeliminacion(Integer usuarioeliminacion) {
+    public void setUsuarioeliminacion(String usuarioeliminacion) {
         this.usuarioeliminacion = usuarioeliminacion;
     }
 

@@ -14,5 +14,9 @@ public interface PerfilBeanLocal {
     Perfil findPerfil(Integer idperfil);
 
     List<Perfil> ListPerfil();
+    
+    Perfil eliminarPerfil(Integer idperfil);
+    
+    Perfil actualizarPerfil(Perfil perfil);
 
 }
