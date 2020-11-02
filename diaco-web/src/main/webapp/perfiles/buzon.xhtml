@@ -12,59 +12,63 @@
     </ui:define>
 
     <ui:define name="content">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{buzonPerfilMB.cargarPerfiles()}" />
+        </f:metadata>
+
         <h:form id="frm_content">
             <div align="center">
                 <ui:define name="pageTitle">
                     <h1 style="margin: 0 0 0 0;">Consulta de perfiles</h1>            
                 </ui:define>
                 <br />
-                <p:dataTable id="dt_colaborador" var="col" value="#{consultaUsuarioMB.listUsuario}"
-                             emptyMessage="No hay usuarios registrados" 
+                <p:dataTable id="dt_perfil" var="per" value="#{buzonPerfilMB.listPerfil}"
+                             emptyMessage="No hay perfiles registrados" editable="true"
                              styleClass="tabla-mp" style="width: 85%" rowIndexVar="rowId"
-                             rows="10" paginator="#{consultaUsuarioMB.listUsuario.size()>10}"  paginatorPosition="bottom">
+                             rows="6" paginator="#{buzonPerfilMB.listPerfil.size()>10}"  paginatorPosition="bottom">
+
+                    <p:ajax event="rowEdit" listener="#{buzonPerfilMB.editarPerfil(per)}" 
+                            process="@this" update="@this" immediate="true"
+                            onstart="inicio();" oncomplete="fin();"></p:ajax>
 
                     <p:column headerText="No." style="width: 5%;">
                         #{rowId+1}
                     </p:column>
 
-                    <p:column headerText="Nombres" width="25%" >
-                        <p:outputLabel value="#{col.nombres}"/>
+                    <p:column headerText="Perfil" width="25%" >
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <p:outputLabel value="#{per.nombre}"/>
+                            </f:facet>
+                            <f:facet name="input">     
+                                <p:inputText id="perfil" value="#{per.nombre}"/>
+                            </f:facet>
+                        </p:cellEditor>                        
                     </p:column>
 
-                    <p:column headerText="Apellidos" width="25%" >
-                        <p:outputLabel value="#{col.apellidos}"/>
+                    <p:column headerText="Descripción" width="25%" >
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <p:outputLabel value="#{per.descripcion}"/>
+                            </f:facet>
+                            <f:facet name="input">     
+                                <p:inputText id="desc" value="#{per.descripcion}"/>
+                            </f:facet>
+                        </p:cellEditor>             
                     </p:column>
 
-                    <p:column headerText="Correo Electronico" width="25%" >
-                        <p:outputLabel value="#{col.email}"/>
-                    </p:column>
-
-                    <p:column headerText="Usuario" width="20%" >
-                        <p:outputLabel value="#{col.usuario}"/>
+                    <p:column width="5%"  >
+                        <p:rowEditor  />
                     </p:column>
 
                     <p:column width="17%" exportable="false" >
-                        <p:commandButton value="Reiniciar Contraseña" 
+                        <p:commandButton value="Eliminar" 
                                          style="float:left!important; margin-left:7.5% !important;" process="@this" 
-                                         styleClass="button-16 b-greylight-16" icon="ui-icon-refresh"
-                                         action="#{consultaUsuarioMB.dialogReinicioPassword(col.idusuario)}" update="@form"/>
+                                         styleClass="button-16 b-greylight-16" icon="ui-icon-closethick"
+                                         action="#{buzonPerfilMB.eliminarPerfil(per.idperfil)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
             </div>
-
-            <p:dialog header="Reinicio contraseña" widgetVar="dlgReinicio" id="dlgReinicio" 
-                      onShow="stop();"  onHide="stop();" 
-                      modal="true" position="top" resizable="false" width="450px">
-
-                <h:outputLabel  value="Ingrese la contraseña: " style="font-weight: bold;"  />
-                <p:password value="#{consultaUsuarioMB.password}" id="password" required="true"
-                            requiredMessage="Debes de ingresar una contraseña" label="password" />  
-
-                <p:outputPanel  style="margin-top: 4%; margin-bottom: 20px; margin-right: 6%; margin-left: 34%;  font-size: 14px;"  >
-                    <p:commandButton value="Guardar" action="#{consultaUsuarioMB.reinicioPassword()}" icon="ui-icon-disk" process="@form"  style=" margin-left: 5px; " onstart="return confirm('¿Confirmas guardar el colaborador?');" update="@form"/>
-                    <p:commandButton value="Cancelar"  process="@this" action="#{consultaUsuarioMB.cerraDialog()}" icon="ui-icon-close" style="margin-left: 12px; " update="@form"/>
-                </p:outputPanel>
-            </p:dialog>
 
         </h:form>
     </ui:define>
