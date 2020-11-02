@@ -2,6 +2,7 @@ package com.diaco.bussines.ejb.imp;
 
 import com.diaco.api.ejb.PerfilBeanLocal;
 import com.diaco.api.entity.Perfil;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJBContext;
@@ -18,19 +19,19 @@ import org.apache.log4j.Logger;
  */
 @Singleton
 public class PerfilBean implements PerfilBeanLocal {
-
+    
     private static final Logger log = Logger.getLogger(CatalagoBean.class);
-
+    
     @PersistenceContext(unitName = "DiacoPU")
     EntityManager em;
-
+    
     @Resource
     private EJBContext context;
-
+    
     private void processException(Exception ex) {
         log.error(ex.getMessage(), ex);
     }
-
+    
     private String getConstraintViolationExceptionAsString(ConstraintViolationException ex) {
         StringBuilder sb = new StringBuilder();
         sb.append("Error de validación:\n");
@@ -42,11 +43,12 @@ public class PerfilBean implements PerfilBeanLocal {
         }
         return sb.toString();
     }
-
+    
     @Override
     public Perfil savePerfil(Perfil perfil) {
         try {
             perfil.setActivo(true);
+            perfil.setFechacreacion(new Date());
             em.persist(perfil);
             em.flush();
             return (perfil);
@@ -61,30 +63,81 @@ public class PerfilBean implements PerfilBeanLocal {
             return null;
         }
     }
-
+    
     @Override
     public Perfil findPerfil(Integer idperfil) {
         List<Perfil> lst = em.createQuery("SELECT per FROM Perfil per WHERE per.idperfil =:idperfil and per.activo = true", Perfil.class)
                 .setParameter("idperfil", idperfil)
                 .getResultList();
-
+        
         if (lst == null || lst.isEmpty()) {
             return null;
         }
-
+        
         return lst.get(0);
     }
-
+    
     @Override
     public List<Perfil> ListPerfil() {
         List<Perfil> lst = em.createQuery("SELECT per FROM Perfil per WHERE per.activo = true ", Perfil.class)
                 .getResultList();
-
+        
         if (lst == null || lst.isEmpty()) {
             return null;
         }
-
+        
         return lst;
     }
-
+    
+    @Override
+    public Perfil eliminarPerfil(Integer idperfil) {
+        if (idperfil == null) {
+            context.setRollbackOnly();
+            return null;
+        }
+        
+        try {
+            Perfil toUpdate = em.find(Perfil.class, idperfil);
+            
+            toUpdate.setActivo(false);
+            em.merge(toUpdate);
+            
+            return toUpdate;
+        } catch (ConstraintViolationException ex) {
+            String validationError = getConstraintViolationExceptionAsString(ex);
+            log.error(validationError);
+            context.setRollbackOnly();
+            return null;
+        } catch (Exception ex) {
+            processException(ex);
+            return null;
+        }
+    }
+    
+    @Override
+    public Perfil actualizarPerfil(Perfil perfil) {
+        if (perfil == null) {
+            context.setRollbackOnly();
+            return null;
+        }
+        
+        try {
+            Perfil toUpdate = em.find(Perfil.class, perfil.getIdperfil());
+            
+            toUpdate.setNombre(perfil.getNombre());
+            toUpdate.setDescripcion(perfil.getDescripcion());
+            em.merge(toUpdate);
+            
+            return toUpdate;
+        } catch (ConstraintViolationException ex) {
+            String validationError = getConstraintViolationExceptionAsString(ex);
+            log.error(validationError);
+            context.setRollbackOnly();
+            return null;
+        } catch (Exception ex) {
+            processException(ex);
+            return null;
+        }
+    }
+    
 }
