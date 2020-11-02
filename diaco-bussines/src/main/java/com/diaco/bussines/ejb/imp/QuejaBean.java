@@ -126,9 +126,9 @@ public class QuejaBean implements QuejaBeanLocal {
 
     @Override
     public List<Queja> listQuejaByFechaCreacion(Date fechainicio, Date fechafin) {
-        List<Queja> lst = em.createQuery("SELECT qj FROM Queja qj WHERE qj.fechacreacion >=:fechainio and qj.fechacreacion <=:fechafin", Queja.class)
-                .setParameter("fechacreacion", fechainicio)
-                .setParameter("fechacreacion", fechafin)
+        List<Queja> lst = em.createQuery("SELECT qj FROM Queja qj WHERE qj.fechacreacion >=:fechainicio and qj.fechacreacion <=:fechafin", Queja.class)
+                .setParameter("fechainicio", fechainicio)
+                .setParameter("fechafin", fechafin)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
