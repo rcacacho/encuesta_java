@@ -7,6 +7,7 @@ import com.diaco.api.entity.Municipio;
 import com.diaco.api.entity.Perfil;
 import com.diaco.api.entity.Region;
 import com.diaco.api.entity.Tipoconsumidor;
+import com.diaco.api.entity.Usuario;
 import java.util.List;
 
 /**
@@ -30,4 +31,6 @@ public interface CatalogoBeanLocal {
     List<Departamento> listDepartamentoByIdRegion(Integer idregion);
 
     List<Perfil> listPerfiles();
+    
+    List<Usuario> listUsuario();
 }
