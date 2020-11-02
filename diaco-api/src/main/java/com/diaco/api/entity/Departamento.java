@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "departamento")
@@ -193,5 +193,5 @@ public class Departamento implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Departamento[ iddepartamento=" + iddepartamento + " ]";
     }
-
+    
 }

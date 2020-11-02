@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "municipio")
@@ -193,5 +193,5 @@ public class Municipio implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Municipio[ idmunicipio=" + idmunicipio + " ]";
     }
-
+    
 }

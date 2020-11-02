@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "tipoconsumidor")
@@ -46,32 +46,34 @@ public class Tipoconsumidor implements Serializable {
     @Basic(optional = false)
     @Column(name = "idtipoconsumidor")
     private Integer idtipoconsumidor;
-
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "consumidor")
     private String consumidor;
-
+    
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-
+    
+    @Size(max = 25)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
-
+    
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-
+    
+    @Size(max = 25)
     @Column(name = "usuarioeliminacion")
     private String usuarioeliminacion;
-
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipoconsumidor", fetch = FetchType.LAZY)
     private List<Queja> quejaList;
 
@@ -120,20 +122,20 @@ public class Tipoconsumidor implements Serializable {
         this.usuariocreacion = usuariocreacion;
     }
 
-    public String getUsuarioeliminacion() {
-        return usuarioeliminacion;
-    }
-
-    public void setUsuarioeliminacion(String usuarioeliminacion) {
-        this.usuarioeliminacion = usuarioeliminacion;
-    }
-
     public Date getFechaeliminacion() {
         return fechaeliminacion;
     }
 
     public void setFechaeliminacion(Date fechaeliminacion) {
         this.fechaeliminacion = fechaeliminacion;
+    }
+
+    public String getUsuarioeliminacion() {
+        return usuarioeliminacion;
+    }
+
+    public void setUsuarioeliminacion(String usuarioeliminacion) {
+        this.usuarioeliminacion = usuarioeliminacion;
     }
 
     public boolean getActivo() {
@@ -177,5 +179,5 @@ public class Tipoconsumidor implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Tipoconsumidor[ idtipoconsumidor=" + idtipoconsumidor + " ]";
     }
-
+    
 }

@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "usuario")
@@ -41,6 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
     @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono"),
     @NamedQuery(name = "Usuario.findByFechacreacion", query = "SELECT u FROM Usuario u WHERE u.fechacreacion = :fechacreacion"),
+    @NamedQuery(name = "Usuario.findByUsuariocreacion", query = "SELECT u FROM Usuario u WHERE u.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "Usuario.findByFechaeliminacion", query = "SELECT u FROM Usuario u WHERE u.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "Usuario.findByUsuarioelminacion", query = "SELECT u FROM Usuario u WHERE u.usuarioelminacion = :usuarioelminacion"),
     @NamedQuery(name = "Usuario.findByActivo", query = "SELECT u FROM Usuario u WHERE u.activo = :activo")})
 public class Usuario implements Serializable {
 
@@ -50,55 +53,59 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "idusuario")
     private Integer idusuario;
-
-    @Size(max = 8)
+    
+    @Size(max = 50)
     @Column(name = "usuario")
     private String usuario;
-
+    
     @Size(max = 30)
     @Column(name = "email")
     private String email;
-
-    @Size(max = 1000)
+    
+    @Size(max = 500)
     @Column(name = "password")
     private String password;
-
+    
     @Size(max = 20)
     @Column(name = "nombres")
     private String nombres;
-
+    
     @Size(max = 30)
     @Column(name = "apellidos")
     private String apellidos;
-
+    
     @Size(max = 25)
     @Column(name = "telefono")
     private String telefono;
-
+    
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-
-    @Size(max = 25)
-    @Column(name = "usuariocreaciom")
-    private String usuariocreaciom;
-
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
+    @Column(name = "usuariocreacion")
+    private String usuariocreacion;
+    
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-
-    @Size(max = 25)
-    @Column(name = "usuarioeliminacion")
-    private String usuarioeliminacion;
-
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
+    @Column(name = "usuarioelminacion")
+    private String usuarioelminacion;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario", fetch = FetchType.LAZY)
     private List<Encargado> encargadoList;
-
+    
     @JoinColumn(name = "idperfil", referencedColumnName = "idperfil")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Perfil idperfil;
@@ -110,8 +117,10 @@ public class Usuario implements Serializable {
         this.idusuario = idusuario;
     }
 
-    public Usuario(Integer idusuario, boolean activo) {
+    public Usuario(Integer idusuario, String usuariocreacion, String usuarioelminacion, boolean activo) {
         this.idusuario = idusuario;
+        this.usuariocreacion = usuariocreacion;
+        this.usuarioelminacion = usuarioelminacion;
         this.activo = activo;
     }
 
@@ -179,12 +188,12 @@ public class Usuario implements Serializable {
         this.fechacreacion = fechacreacion;
     }
 
-    public String getUsuariocreaciom() {
-        return usuariocreaciom;
+    public String getUsuariocreacion() {
+        return usuariocreacion;
     }
 
-    public void setUsuariocreaciom(String usuariocreaciom) {
-        this.usuariocreaciom = usuariocreaciom;
+    public void setUsuariocreacion(String usuariocreacion) {
+        this.usuariocreacion = usuariocreacion;
     }
 
     public Date getFechaeliminacion() {
@@ -195,12 +204,12 @@ public class Usuario implements Serializable {
         this.fechaeliminacion = fechaeliminacion;
     }
 
-    public String getUsuarioeliminacion() {
-        return usuarioeliminacion;
+    public String getUsuarioelminacion() {
+        return usuarioelminacion;
     }
 
-    public void setUsuarioeliminacion(String usuarioeliminacion) {
-        this.usuarioeliminacion = usuarioeliminacion;
+    public void setUsuarioelminacion(String usuarioelminacion) {
+        this.usuarioelminacion = usuarioelminacion;
     }
 
     public boolean getActivo() {
@@ -252,5 +261,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Usuario[ idusuario=" + idusuario + " ]";
     }
-
+    
 }

@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "encargado")
@@ -33,6 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Encargado.findByObservacion", query = "SELECT e FROM Encargado e WHERE e.observacion = :observacion"),
     @NamedQuery(name = "Encargado.findByFechacreacion", query = "SELECT e FROM Encargado e WHERE e.fechacreacion = :fechacreacion"),
     @NamedQuery(name = "Encargado.findByUsuariocreacion", query = "SELECT e FROM Encargado e WHERE e.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "Encargado.findByFechaeliminacion", query = "SELECT e FROM Encargado e WHERE e.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "Encargado.findByUsuarioelminacion", query = "SELECT e FROM Encargado e WHERE e.usuarioelminacion = :usuarioelminacion"),
     @NamedQuery(name = "Encargado.findByActivo", query = "SELECT e FROM Encargado e WHERE e.activo = :activo")})
 public class Encargado implements Serializable {
 
@@ -42,40 +44,40 @@ public class Encargado implements Serializable {
     @Basic(optional = false)
     @Column(name = "idencargado")
     private Integer idencargado;
-
-    @Size(min = 1, max = 250)
+    
+    @Size(max = 250)
     @Column(name = "observacion")
     private String observacion;
-
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
-
+    
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-
+    
     @Size(max = 25)
-    @Column(name = "usuarioeliminacion")
-    private String usuarioeliminacion;
-
+    @Column(name = "usuarioelminacion")
+    private String usuarioelminacion;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-
+    
     @JoinColumn(name = "idqueja", referencedColumnName = "idqueja")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Queja idqueja;
-
+    
     @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario idusuario;
@@ -87,9 +89,8 @@ public class Encargado implements Serializable {
         this.idencargado = idencargado;
     }
 
-    public Encargado(Integer idencargado, String observacion, Date fechacreacion, String usuariocreacion, boolean activo) {
+    public Encargado(Integer idencargado, Date fechacreacion, String usuariocreacion, boolean activo) {
         this.idencargado = idencargado;
-        this.observacion = observacion;
         this.fechacreacion = fechacreacion;
         this.usuariocreacion = usuariocreacion;
         this.activo = activo;
@@ -135,12 +136,12 @@ public class Encargado implements Serializable {
         this.fechaeliminacion = fechaeliminacion;
     }
 
-    public String getUsuarioeliminacion() {
-        return usuarioeliminacion;
+    public String getUsuarioelminacion() {
+        return usuarioelminacion;
     }
 
-    public void setUsuarioeliminacion(String usuarioeliminacion) {
-        this.usuarioeliminacion = usuarioeliminacion;
+    public void setUsuarioelminacion(String usuarioelminacion) {
+        this.usuarioelminacion = usuarioelminacion;
     }
 
     public boolean getActivo() {
@@ -191,5 +192,5 @@ public class Encargado implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Encargado[ idencargado=" + idencargado + " ]";
     }
-
+    
 }

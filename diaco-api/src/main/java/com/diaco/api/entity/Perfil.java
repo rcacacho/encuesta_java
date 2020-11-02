@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "perfil")
@@ -33,7 +33,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p"),
     @NamedQuery(name = "Perfil.findByIdperfil", query = "SELECT p FROM Perfil p WHERE p.idperfil = :idperfil"),
     @NamedQuery(name = "Perfil.findByNombre", query = "SELECT p FROM Perfil p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Perfil.findByDescripcion", query = "SELECT p FROM Perfil p WHERE p.descripcion = :descripcion")})
+    @NamedQuery(name = "Perfil.findByDescripcion", query = "SELECT p FROM Perfil p WHERE p.descripcion = :descripcion"),
+    @NamedQuery(name = "Perfil.findByFechacreacion", query = "SELECT p FROM Perfil p WHERE p.fechacreacion = :fechacreacion"),
+    @NamedQuery(name = "Perfil.findByUsuariocreacion", query = "SELECT p FROM Perfil p WHERE p.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "Perfil.findByFechaeliminacion", query = "SELECT p FROM Perfil p WHERE p.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "Perfil.findByUsuarioelminacion", query = "SELECT p FROM Perfil p WHERE p.usuarioelminacion = :usuarioelminacion"),
+    @NamedQuery(name = "Perfil.findByActivo", query = "SELECT p FROM Perfil p WHERE p.activo = :activo")})
 public class Perfil implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,36 +47,38 @@ public class Perfil implements Serializable {
     @Basic(optional = false)
     @Column(name = "idperfil")
     private Integer idperfil;
-
+    
     @Size(max = 250)
     @Column(name = "nombre")
     private String nombre;
-
+    
     @Size(max = 500)
     @Column(name = "descripcion")
     private String descripcion;
-
+    
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-
-    @Size(max = 25)
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
-
+    
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-
+    
     @Size(max = 25)
-    @Column(name = "usuarioeliminacion")
-    private String usuarioeliminacion;
-
+    @Column(name = "usuarioelminacion")
+    private String usuarioelminacion;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperfil", fetch = FetchType.LAZY)
     private List<Usuario> usuarioList;
 
@@ -80,6 +87,12 @@ public class Perfil implements Serializable {
 
     public Perfil(Integer idperfil) {
         this.idperfil = idperfil;
+    }
+
+    public Perfil(Integer idperfil, String usuariocreacion, boolean activo) {
+        this.idperfil = idperfil;
+        this.usuariocreacion = usuariocreacion;
+        this.activo = activo;
     }
 
     public Integer getIdperfil() {
@@ -130,15 +143,15 @@ public class Perfil implements Serializable {
         this.fechaeliminacion = fechaeliminacion;
     }
 
-    public String getUsuarioeliminacion() {
-        return usuarioeliminacion;
+    public String getUsuarioelminacion() {
+        return usuarioelminacion;
     }
 
-    public void setUsuarioeliminacion(String usuarioeliminacion) {
-        this.usuarioeliminacion = usuarioeliminacion;
+    public void setUsuarioelminacion(String usuarioelminacion) {
+        this.usuarioelminacion = usuarioelminacion;
     }
 
-    public boolean isActivo() {
+    public boolean getActivo() {
         return activo;
     }
 
@@ -179,5 +192,5 @@ public class Perfil implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Perfil[ idperfil=" + idperfil + " ]";
     }
-
+    
 }

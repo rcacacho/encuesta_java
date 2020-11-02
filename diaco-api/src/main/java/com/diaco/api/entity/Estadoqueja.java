@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "estadoqueja")
@@ -35,6 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Estadoqueja.findByEstado", query = "SELECT e FROM Estadoqueja e WHERE e.estado = :estado"),
     @NamedQuery(name = "Estadoqueja.findByFechacreacion", query = "SELECT e FROM Estadoqueja e WHERE e.fechacreacion = :fechacreacion"),
     @NamedQuery(name = "Estadoqueja.findByUsuariocreacion", query = "SELECT e FROM Estadoqueja e WHERE e.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "Estadoqueja.findByFechaeliminacion", query = "SELECT e FROM Estadoqueja e WHERE e.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "Estadoqueja.findByUsuarioelminacion", query = "SELECT e FROM Estadoqueja e WHERE e.usuarioelminacion = :usuarioelminacion"),
     @NamedQuery(name = "Estadoqueja.findByActivo", query = "SELECT e FROM Estadoqueja e WHERE e.activo = :activo")})
 public class Estadoqueja implements Serializable {
 
@@ -44,38 +46,37 @@ public class Estadoqueja implements Serializable {
     @Basic(optional = false)
     @Column(name = "idestadoqueja")
     private Integer idestadoqueja;
-
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "estado")
     private String estado;
-
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-
+    
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 25)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
-
+    
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-
     @Size(max = 25)
-    @Column(name = "usuarioeliminacion")
-    private String usuarioeliminacion;
-
+    @Column(name = "usuarioelminacion")
+    private String usuarioelminacion;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idestadoqueja", fetch = FetchType.LAZY)
     private List<Queja> quejaList;
 
@@ -134,12 +135,12 @@ public class Estadoqueja implements Serializable {
         this.fechaeliminacion = fechaeliminacion;
     }
 
-    public String getUsuarioeliminacion() {
-        return usuarioeliminacion;
+    public String getUsuarioelminacion() {
+        return usuarioelminacion;
     }
 
-    public void setUsuarioeliminacion(String usuarioeliminacion) {
-        this.usuarioeliminacion = usuarioeliminacion;
+    public void setUsuarioelminacion(String usuarioelminacion) {
+        this.usuarioelminacion = usuarioelminacion;
     }
 
     public boolean getActivo() {
@@ -183,5 +184,5 @@ public class Estadoqueja implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Estadoqueja[ idestadoqueja=" + idestadoqueja + " ]";
     }
-
+    
 }

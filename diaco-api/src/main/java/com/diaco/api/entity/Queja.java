@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "queja")
@@ -46,46 +46,46 @@ public class Queja implements Serializable {
     @Basic(optional = false)
     @Column(name = "idqueja")
     private Integer idqueja;
-
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
     @Column(name = "nombrecomercio")
     private String nombrecomercio;
-
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "direccioncomercio")
     private String direccioncomercio;
-
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "telefonocomercio")
     private String telefonocomercio;
-
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idqueja", fetch = FetchType.LAZY)
     private List<Encargado> encargadoList;
-
+    
     @JoinColumn(name = "idestadoqueja", referencedColumnName = "idestadoqueja")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Estadoqueja idestadoqueja;
-
+    
     @JoinColumn(name = "idgenero", referencedColumnName = "idgenero")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Genero idgenero;
-
+    
     @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Municipio idmunicipio;
-
+    
     @JoinColumn(name = "idtipoconsumidor", referencedColumnName = "idtipoconsumidor")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tipoconsumidor idtipoconsumidor;
@@ -210,5 +210,5 @@ public class Queja implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Queja[ idqueja=" + idqueja + " ]";
     }
-
+    
 }

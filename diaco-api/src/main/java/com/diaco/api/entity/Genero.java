@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "genero")
@@ -46,32 +46,34 @@ public class Genero implements Serializable {
     @Basic(optional = false)
     @Column(name = "idgenero")
     private Integer idgenero;
-
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "genero")
     private String genero;
-
+    
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-
+    
+    @Size(max = 25)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
-
+    
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-
+    
+    @Size(max = 25)
     @Column(name = "usuarioeliminacion")
     private String usuarioeliminacion;
-
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgenero", fetch = FetchType.LAZY)
     private List<Queja> quejaList;
 
@@ -112,20 +114,20 @@ public class Genero implements Serializable {
         this.fechacreacion = fechacreacion;
     }
 
-    public Date getFechaeliminacion() {
-        return fechaeliminacion;
-    }
-
-    public void setFechaeliminacion(Date fechaeliminacion) {
-        this.fechaeliminacion = fechaeliminacion;
-    }
-
     public String getUsuariocreacion() {
         return usuariocreacion;
     }
 
     public void setUsuariocreacion(String usuariocreacion) {
         this.usuariocreacion = usuariocreacion;
+    }
+
+    public Date getFechaeliminacion() {
+        return fechaeliminacion;
+    }
+
+    public void setFechaeliminacion(Date fechaeliminacion) {
+        this.fechaeliminacion = fechaeliminacion;
     }
 
     public String getUsuarioeliminacion() {
@@ -177,5 +179,5 @@ public class Genero implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Genero[ idgenero=" + idgenero + " ]";
     }
-
+    
 }

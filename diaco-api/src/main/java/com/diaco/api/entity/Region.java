@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author rcacacho
+ * @author elfo_
  */
 @Entity
 @Table(name = "region")
@@ -182,5 +182,5 @@ public class Region implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.Region[ idregion=" + idregion + " ]";
     }
-
+    
 }
