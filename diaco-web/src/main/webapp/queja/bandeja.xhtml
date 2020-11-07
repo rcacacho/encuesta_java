@@ -92,11 +92,18 @@
                         </p:outputLabel>
                     </p:column>
 
-                    <p:column width="17%" exportable="false" >
-                        <p:commandButton value="Asignar queja" 
+                    <p:column width="20%" exportable="false" >
+                        <p:commandButton value="Asignar" 
                                          style="float:left!important; margin-left:7.5% !important;" process="@this" 
-                                         styleClass="button-16 b-greylight-16" icon="ui-icon-refresh"
+                                         styleClass="button-16 b-greylight-16" icon="ui-icon-note"
                                          action="#{bandejaQuejaMB.dialogAsignacion(col)}" update="@form"/>
+                    </p:column>
+                    
+                    <p:column width="20%" exportable="false" >
+                        <p:commandButton value="Detalle" 
+                                         style="float:left!important; margin-left:7.5% !important;" process="@this" 
+                                         styleClass="button-16 b-greylight-16" icon="ui-icon-search"
+                                         action="#{bandejaQuejaMB.detalleQueja(col.idqueja)}" update="@form"/>
                     </p:column>
 
                 </p:dataTable>

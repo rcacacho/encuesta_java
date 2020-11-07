@@ -8,7 +8,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="pageTitle">
-        Registro de queja
+        Seguimiento de queja
     </ui:define>
 
     <ui:define name="content">
@@ -30,7 +30,7 @@
 
                         <p:row>
                             <p:column>
-                                <p:inputText value="#{registroQuejaMB.queja.nombrecomercio}" size="50" style="font-size: 16px!important;"/>
+                                <p:outputLabel value="#{registroQuejaMB.queja.nombrecomercio}"  style="font-size: 16px!important;"/>
                             </p:column>
                             <p:column>
                                 <p:inputText value="#{registroQuejaMB.queja.direccioncomercio}" size="50" style="font-size: 16px!important;"/> 
