@@ -3,9 +3,42 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptRegion" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e5f425f5-b563-457a-8c19-c6240544f8e2">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="USUARIO" class="java.lang.String"/>
-	<queryString>
+	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
+	<field name="central" class="java.lang.String">
+		<fieldDescription><![CDATA[central]]></fieldDescription>
+	</field>
+	<field name="fechaCreacion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaCreacion]]></fieldDescription>
+	</field>
+	<field name="idQueja" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idQueja]]></fieldDescription>
+	</field>
+	<field name="metropolitana" class="java.lang.String">
+		<fieldDescription><![CDATA[metropolitana]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<field name="norOccidente" class="java.lang.String">
+		<fieldDescription><![CDATA[norOccidente]]></fieldDescription>
+	</field>
+	<field name="norOriente" class="java.lang.String">
+		<fieldDescription><![CDATA[norOriente]]></fieldDescription>
+	</field>
+	<field name="norte" class="java.lang.String">
+		<fieldDescription><![CDATA[norte]]></fieldDescription>
+	</field>
+	<field name="peten" class="java.lang.String">
+		<fieldDescription><![CDATA[peten]]></fieldDescription>
+	</field>
+	<field name="surOccidente" class="java.lang.String">
+		<fieldDescription><![CDATA[surOccidente]]></fieldDescription>
+	</field>
+	<field name="surOriente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[surOriente]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -207,6 +240,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{surOccidente}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="358" y="1" width="103" height="19" uuid="99087ede-0326-4c0f-95b6-fea614db03a4">
@@ -219,6 +253,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{central}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="168" y="1" width="98" height="19" uuid="4224b140-5fb3-4af1-9baf-ca446ed0d4e2">
@@ -229,6 +264,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{norOriente}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="0" y="1" width="90" height="19" uuid="bea4cf51-3fae-4cea-a148-b872c2e6545f">
@@ -241,6 +277,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{metropolitana}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="90" y="1" width="78" height="19" uuid="10a6bb71-c9e8-4e48-9a01-f93bcaa5faa8">
@@ -253,6 +290,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{norte}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="266" y="1" width="92" height="19" uuid="b8921cc3-bac6-40c1-ab7a-1d375e88f958">
@@ -263,6 +301,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{surOriente}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="559" y="1" width="98" height="19" uuid="20c3c07c-cd24-4c64-b104-d4943101620c">
@@ -273,6 +312,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{norOccidente}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="657" y="1" width="72" height="19" uuid="37cd9eed-74e5-49dc-b96f-fc077a661ca2">
@@ -283,6 +323,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$F{peten}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
