@@ -160,6 +160,14 @@ public class QuejaBean implements QuejaBeanLocal {
 
     @Override
     public List<Encargado> listEncagardoByIdQueja(Integer idqueja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Encargado> lst = em.createQuery("SELECT qj FROM Encargado qj WHERE Encargado =:idqueja and qj.activo = true ", Encargado.class)
+                .setParameter("idqueja", idqueja)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst;
     }
 }
