@@ -140,7 +140,22 @@ public class QuejaBean implements QuejaBeanLocal {
 
     @Override
     public Encargado asignacionQueja(Encargado asignacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            try {
+            asignacion.setFechacreacion(new Date());
+            asignacion.setActivo(true);
+            em.persist(asignacion);
+            em.flush();
+            return (asignacion);
+        } catch (ConstraintViolationException ex) {
+            String validationError = getConstraintViolationExceptionAsString(ex);
+            log.error(validationError);
+            context.setRollbackOnly();
+            return null;
+        } catch (Exception ex) {
+            processException(ex);
+            context.setRollbackOnly();
+            return null;
+        }
     }
 
     @Override
