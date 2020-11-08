@@ -36,7 +36,7 @@ public class ReporteMB implements Serializable {
 
     @EJB
     private QuejaBeanLocal quejaBean;
-    
+
     private Date fechaIncio;
     private Date fechaFin;
 
@@ -106,6 +106,23 @@ public class ReporteMB implements Serializable {
             JsfUtil.addErrorMessage("Ocurrio un error al generar el pdf del reporte");
         }
         return null;
+    }
+
+    /*Metodos gettets y setters*/
+    public Date getFechaIncio() {
+        return fechaIncio;
+    }
+
+    public void setFechaIncio(Date fechaIncio) {
+        this.fechaIncio = fechaIncio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
 }

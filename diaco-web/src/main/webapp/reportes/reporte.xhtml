@@ -8,18 +8,15 @@
                 template="/templates/template.xhtml">
 
     <ui:define name="pageTitle">
-        Consulta de quejas en seguimiento
+        Reportes
     </ui:define>
 
     <ui:define name="content">
-        <f:metadata>
-            <f:event type="preRenderView" listener="#{bandejaQuejaMB.cargarDatos()}" />
-        </f:metadata>
-
+  
         <h:form id="frm_content">
             <div align="center">
                 <ui:define name="pageTitle">
-                    <h1 style="margin: 0 0 0 0;">Consulta de quejas</h1>            
+                    <h1 style="margin: 0 0 0 0;">Reportes</h1>            
                 </ui:define>
 
                 <p:panelGrid columns="2"  styleClass="no-border" style="margin-top: 10px;">
@@ -27,12 +24,12 @@
                     <p:outputLabel value="Fecha Fin:"  styleClass="field-label"  />
 
                     <p:calendar id="cal_fechaInicio" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
-                                value="#{bandejaQuejaMB.fechaInicio}" navigator="true">  
+                                value="#{reporteMB.fechaIncio}" navigator="true">  
                         <p:ajax event="dateSelect" process="@this" />
                     </p:calendar>
 
                     <p:calendar id="cal_fechaFin" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
-                                value="#{bandejaQuejaMB.fechaFin}" navigator="true">  
+                                value="#{reporteMB.fechaFin}" navigator="true">  
                         <p:ajax event="dateSelect" process="@this" />
                     </p:calendar>
 
