@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBContext;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -114,7 +115,7 @@ public class QuejaBean implements QuejaBeanLocal {
 
     @Override
     public List<Queja> listAllQueja() {
-      List<Queja> lst = em.createQuery("SELECT qj FROM Queja qj", Queja.class)
+        List<Queja> lst = em.createQuery("SELECT qj FROM Queja qj", Queja.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -140,7 +141,7 @@ public class QuejaBean implements QuejaBeanLocal {
 
     @Override
     public Encargado asignacionQueja(Encargado asignacion) {
-            try {
+        try {
             asignacion.setFechacreacion(new Date());
             asignacion.setActivo(true);
             em.persist(asignacion);
@@ -170,4 +171,5 @@ public class QuejaBean implements QuejaBeanLocal {
 
         return lst;
     }
+
 }

@@ -12,6 +12,7 @@
         <class>com.diaco.api.entity.Region</class>
         <class>com.diaco.api.entity.Tipoconsumidor</class>
         <class>com.diaco.api.entity.Usuario</class>
+        <class>com.diaco.api.dto.QuejaDto</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>NONE</shared-cache-mode>
         <properties>
