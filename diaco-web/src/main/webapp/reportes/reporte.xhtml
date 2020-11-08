@@ -28,29 +28,35 @@
 
                     <p:calendar id="cal_fechaInicio" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
                                 value="#{bandejaQuejaMB.fechaInicio}" navigator="true">  
-                        <p:ajax event="dateSelect" />
+                        <p:ajax event="dateSelect" process="@this" />
                     </p:calendar>
 
                     <p:calendar id="cal_fechaFin" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
                                 value="#{bandejaQuejaMB.fechaFin}" navigator="true">  
-                        <p:ajax event="dateSelect" />
+                        <p:ajax event="dateSelect" process="@this" />
                     </p:calendar>
 
                 </p:panelGrid>
 
-                <p:panelGrid columns="2" styleClass="no-border">
+                <p:panelGrid columns="3" styleClass="no-border">
                     <p:commandButton value="Imprimir fechas" style="float: left;"
                                      styleClass="button-16 b-greylight-16" icon="ui-icon-print"
                                      onclick="PrimeFaces.monitorDownload(start, stop);" 
                                      immediate="true" process="@this" update="@form" ajax="false">
-                        <p:fileDownload value="#{reporteMB.generarPdfMenosVendido()}"/>
+                        <p:fileDownload value="#{reporteMB.generarPdfFechas()}"/>
                     </p:commandButton>
 
                     <p:commandButton value="imprimir conteo" style="float: left;"
                                      styleClass="button-16 b-greylight-16" icon="ui-icon-print"
                                      onclick="PrimeFaces.monitorDownload(start, stop);" 
                                      immediate="true" process="@this" update="@form" ajax="false">
-                        <p:fileDownload value="#{reporteMB.generarPdfMenosVendido()}"/>
+                        <p:fileDownload value="#{reporteMB.generarPdfRegion()}"/>
+                    </p:commandButton>
+                     <p:commandButton value="Mas quejas" style="float: left;"
+                                     styleClass="button-16 b-greylight-16" icon="ui-icon-print"
+                                     onclick="PrimeFaces.monitorDownload(start, stop);" 
+                                     immediate="true" process="@this" update="@form" ajax="false">
+                        <p:fileDownload value="#{reporteMB.generarPdfMasQuejas()}"/>
                     </p:commandButton>
                 </p:panelGrid>
 
