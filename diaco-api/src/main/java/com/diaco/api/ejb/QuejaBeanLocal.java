@@ -26,4 +26,5 @@ public interface QuejaBeanLocal {
     Encargado asignacionQueja(Encargado asignacion);
 
     List<Encargado> listEncagardoByIdQueja(Integer idqueja);
+
 }
