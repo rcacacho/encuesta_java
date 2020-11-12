@@ -1,7 +1,7 @@
 package com.diaco.web.perfil;
 
 import com.diaco.api.ejb.PerfilBeanLocal;
-import com.diaco.api.entity.Perfil;
+import com.diaco.api.entity.QaPerfil;
 import com.diaco.web.utils.JsfUtil;
 import com.diaco.web.utils.UtilMB;
 import java.io.IOException;
@@ -24,15 +24,15 @@ public class RegistroPerfilMB implements Serializable {
     @EJB
     private PerfilBeanLocal perfilBean;
 
-    private Perfil perfil;
+    private QaPerfil perfil;
 
     public RegistroPerfilMB() {
-        perfil = new Perfil();
+        perfil = new QaPerfil();
     }
 
     public void crearPerfil() throws IOException {
         perfil.setUsuariocreacion(UtilMB.getUserName());
-        Perfil response = perfilBean.savePerfil(perfil);
+        QaPerfil response = perfilBean.savePerfil(perfil);
         if (response != null) {
             JsfUtil.addSuccessMessage("Se creo el perfil exitosamente!");
             perfil = null;
@@ -44,11 +44,11 @@ public class RegistroPerfilMB implements Serializable {
     }
 
     /*Metodos getters y setters*/
-    public Perfil getPerfil() {
+    public QaPerfil getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(Perfil perfil) {
+    public void setPerfil(QaPerfil perfil) {
         this.perfil = perfil;
     }
 

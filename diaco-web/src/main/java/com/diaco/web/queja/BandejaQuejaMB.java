@@ -2,9 +2,9 @@ package com.diaco.web.queja;
 
 import com.diaco.api.ejb.CatalogoBeanLocal;
 import com.diaco.api.ejb.QuejaBeanLocal;
-import com.diaco.api.entity.Encargado;
-import com.diaco.api.entity.Queja;
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaEncargado;
+import com.diaco.api.entity.QaQueja;
+import com.diaco.api.entity.QaUsuario;
 import com.diaco.web.utils.JsfUtil;
 import com.diaco.web.utils.UtilMB;
 import java.io.IOException;
@@ -33,13 +33,13 @@ public class BandejaQuejaMB implements Serializable {
     @EJB
     private CatalogoBeanLocal catalogoBean;
 
-    private List<Queja> listQueja;
+    private List<QaQueja> listQueja;
     private Integer idqueja;
-    private Queja queja;
+    private QaQueja queja;
     private Date fechaInicio;
     private Date fechaFin;
-    private List<Usuario> listUsuario;
-    private Usuario selectedUsuario;
+    private List<QaUsuario> listUsuario;
+    private QaUsuario selectedUsuario;
     private String observacion;
 
     public BandejaQuejaMB() {
@@ -49,19 +49,19 @@ public class BandejaQuejaMB implements Serializable {
 
     public void cargarDatos() {
         if (fechaInicio == null || fechaFin == null) {
-            List<Queja> response = quejaBean.listAllQueja();
+            List<QaQueja> response = quejaBean.listAllQueja();
             if (response != null) {
                 listQueja = response;
             }
         }
-        List<Usuario> responseUsuario = catalogoBean.listUsuario();
+        List<QaUsuario> responseUsuario = catalogoBean.listUsuario();
         if (responseUsuario != null) {
             listUsuario = responseUsuario;
         }
     }
 
     public void buscarQueja() {
-        List<Queja> response = quejaBean.listQuejaByFechaCreacion(fechaInicio, fechaFin);
+        List<QaQueja> response = quejaBean.listQuejaByFechaCreacion(fechaInicio, fechaFin);
         if (response != null) {
             listQueja = response;
         } else {
@@ -76,7 +76,7 @@ public class BandejaQuejaMB implements Serializable {
         listQueja = null;
     }
 
-    public void dialogAsignacion(Queja id) {
+    public void dialogAsignacion(QaQueja id) {
         queja = id;
         RequestContext.getCurrentInstance().execute("PF('dlgAsignacion').show()");
     }
@@ -91,12 +91,12 @@ public class BandejaQuejaMB implements Serializable {
             return;
         }
 
-        Encargado asignacion = new Encargado();
+        QaEncargado asignacion = new QaEncargado();
         asignacion.setIdqueja(queja);
         asignacion.setIdusuario(selectedUsuario);
         asignacion.setObservacion(observacion);
         asignacion.setUsuariocreacion(UtilMB.getUserName());
-        Encargado response = quejaBean.asignacionQueja(asignacion);
+        QaEncargado response = quejaBean.asignacionQueja(asignacion);
         if (response != null) {
             RequestContext.getCurrentInstance().execute("PF('dlgAsignacion').hide()");
             JsfUtil.addSuccessMessage("Se asigno la queja correctamente");
@@ -104,15 +104,15 @@ public class BandejaQuejaMB implements Serializable {
     }
 
     public void detalleQueja(Integer id) {
-        JsfUtil.redirectTo("/quejaa/detalle.xhtml?idQueha=" + id);
+        JsfUtil.redirectTo("/queja/detalle.xhtml?idQueja=" + id);
     }
 
     /*Metodos getters y setteres*/
-    public List<Queja> getListQueja() {
+    public List<QaQueja> getListQueja() {
         return listQueja;
     }
 
-    public void setListQueja(List<Queja> listQueja) {
+    public void setListQueja(List<QaQueja> listQueja) {
         this.listQueja = listQueja;
     }
 
@@ -140,19 +140,19 @@ public class BandejaQuejaMB implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public List<Usuario> getListUsuario() {
+    public List<QaUsuario> getListUsuario() {
         return listUsuario;
     }
 
-    public void setListUsuario(List<Usuario> listUsuario) {
+    public void setListUsuario(List<QaUsuario> listUsuario) {
         this.listUsuario = listUsuario;
     }
 
-    public Usuario getSelectedUsuario() {
+    public QaUsuario getSelectedUsuario() {
         return selectedUsuario;
     }
 
-    public void setSelectedUsuario(Usuario selectedUsuario) {
+    public void setSelectedUsuario(QaUsuario selectedUsuario) {
         this.selectedUsuario = selectedUsuario;
     }
 

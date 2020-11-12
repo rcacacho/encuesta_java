@@ -1,7 +1,7 @@
 package com.diaco.web.login;
 
 import com.diaco.api.ejb.LoginBeanLocal;
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaUsuario;
 import com.diaco.web.utils.JsfUtil;
 import com.diaco.web.utils.UtilMB;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class LoginMB implements Serializable {
     }
 
     public String loginProject() {
-        Usuario usu = new Usuario();
+        QaUsuario usu = new QaUsuario();
         password = md5(password);
         usu = loginBeanLocal.verificarUsuario(usuario, password);
         if (usu != null) {

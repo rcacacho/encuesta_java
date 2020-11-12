@@ -2,8 +2,8 @@ package com.diaco.web.usuario;
 
 import com.diaco.api.ejb.CatalogoBeanLocal;
 import com.diaco.api.ejb.UsuarioBeanLocal;
-import com.diaco.api.entity.Perfil;
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaPerfil;
+import com.diaco.api.entity.QaUsuario;
 import com.diaco.web.utils.JsfUtil;
 import com.diaco.web.utils.UtilMB;
 import java.io.IOException;
@@ -33,13 +33,13 @@ public class RegistroUsuarioMB implements Serializable {
     @EJB
     private CatalogoBeanLocal catalogoBean;
 
-    private Usuario usuario;
-    private Perfil selectedPerfil;
-    private List<Perfil> listPerfil;
+    private QaUsuario usuario;
+    private QaPerfil selectedPerfil;
+    private List<QaPerfil> listPerfil;
     private String password;
 
     public RegistroUsuarioMB() {
-        usuario = new Usuario();
+        usuario = new QaUsuario();
     }
 
     @PostConstruct
@@ -52,7 +52,7 @@ public class RegistroUsuarioMB implements Serializable {
         String contra = md5(password);
         usuario.setPassword(contra);
         usuario.setUsuariocreacion(UtilMB.getUserName());
-        Usuario response = usuarioBean.saveUsuario(usuario);
+        QaUsuario response = usuarioBean.saveUsuario(usuario);
     }
 
     public String md5(String input) {
@@ -76,27 +76,27 @@ public class RegistroUsuarioMB implements Serializable {
     }
 
     /*Metodos getters y setters*/
-    public Usuario getUsuario() {
+    public QaUsuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(QaUsuario usuario) {
         this.usuario = usuario;
     }
 
-    public Perfil getSelectedPerfil() {
+    public QaPerfil getSelectedPerfil() {
         return selectedPerfil;
     }
 
-    public void setSelectedPerfil(Perfil selectedPerfil) {
+    public void setSelectedPerfil(QaPerfil selectedPerfil) {
         this.selectedPerfil = selectedPerfil;
     }
 
-    public List<Perfil> getListPerfil() {
+    public List<QaPerfil> getListPerfil() {
         return listPerfil;
     }
 
-    public void setListPerfil(List<Perfil> listPerfil) {
+    public void setListPerfil(List<QaPerfil> listPerfil) {
         this.listPerfil = listPerfil;
     }
 

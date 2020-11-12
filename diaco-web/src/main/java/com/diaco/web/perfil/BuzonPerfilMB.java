@@ -1,7 +1,7 @@
 package com.diaco.web.perfil;
 
 import com.diaco.api.ejb.PerfilBeanLocal;
-import com.diaco.api.entity.Perfil;
+import com.diaco.api.entity.QaPerfil;
 import com.diaco.web.utils.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -23,14 +23,14 @@ public class BuzonPerfilMB implements Serializable {
     @EJB
     private PerfilBeanLocal perfilBean;
 
-    private List<Perfil> listPerfil;
+    private List<QaPerfil> listPerfil;
 
    public void cargarPerfiles() {
         listPerfil = perfilBean.ListPerfil();
     }
 
-    public void editarPerfil(Perfil per) {
-        Perfil response = perfilBean.actualizarPerfil(per);
+    public void editarPerfil(QaPerfil per) {
+        QaPerfil response = perfilBean.actualizarPerfil(per);
         if (response != null) {
             JsfUtil.addSuccessMessage("Se actualizo el perfil exitosamente");
             return;
@@ -40,7 +40,7 @@ public class BuzonPerfilMB implements Serializable {
     }
 
     public void eliminarPerfil(Integer idperfil) {
-        Perfil response = perfilBean.eliminarPerfil(idperfil);
+        QaPerfil response = perfilBean.eliminarPerfil(idperfil);
         if (response != null) {
             JsfUtil.addSuccessMessage("Se elimino el perfil exitosamente");
             return;
@@ -50,11 +50,11 @@ public class BuzonPerfilMB implements Serializable {
     }
 
     /*Metdos getters y setters*/
-    public List<Perfil> getListPerfil() {
+    public List<QaPerfil> getListPerfil() {
         return listPerfil;
     }
 
-    public void setListPerfil(List<Perfil> listPerfil) {
+    public void setListPerfil(List<QaPerfil> listPerfil) {
         this.listPerfil = listPerfil;
     }
 }

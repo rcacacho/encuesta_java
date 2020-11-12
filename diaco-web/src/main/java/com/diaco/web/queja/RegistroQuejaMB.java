@@ -2,12 +2,12 @@ package com.diaco.web.queja;
 
 import com.diaco.api.ejb.CatalogoBeanLocal;
 import com.diaco.api.ejb.QuejaBeanLocal;
-import com.diaco.api.entity.Departamento;
-import com.diaco.api.entity.Genero;
-import com.diaco.api.entity.Municipio;
-import com.diaco.api.entity.Queja;
-import com.diaco.api.entity.Region;
-import com.diaco.api.entity.Tipoconsumidor;
+import com.diaco.api.entity.QaDepartamento;
+import com.diaco.api.entity.QaGenero;
+import com.diaco.api.entity.QaMunicipio;
+import com.diaco.api.entity.QaQueja;
+import com.diaco.api.entity.QaRegion;
+import com.diaco.api.entity.QaTipoConsumidor;
 import com.diaco.web.utils.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -33,21 +33,21 @@ public class RegistroQuejaMB implements Serializable {
     @EJB
     private CatalogoBeanLocal catalogoBean;
 
-    private Queja queja;
-    private List<Departamento> listDepartamentos;
-    private List<Municipio> listMunicipios;
-    private Municipio municipioSelected;
-    private Departamento departamentoSelected;
-    private List<Tipoconsumidor> listTipoConsumidor;
-    private Tipoconsumidor tipoConsumidor;
-    private List<Genero> listGenero;
-    private Genero genero;
-    private List<Region> listRegion;
-    private Region selectedRegion;
+    private QaQueja queja;
+    private List<QaDepartamento> listDepartamentos;
+    private List<QaMunicipio> listMunicipios;
+    private QaMunicipio municipioSelected;
+    private QaDepartamento departamentoSelected;
+    private List<QaTipoConsumidor> listTipoConsumidor;
+    private QaTipoConsumidor tipoConsumidor;
+    private List<QaGenero> listGenero;
+    private QaGenero genero;
+    private List<QaRegion> listRegion;
+    private QaRegion selectedRegion;
     private Integer codigoQueja;
 
     public RegistroQuejaMB() {
-        queja = new Queja();
+        queja = new QaQueja();
     }
 
     @PostConstruct
@@ -101,91 +101,91 @@ public class RegistroQuejaMB implements Serializable {
     }
 
     /*Metodos getters y setters*/
-    public Queja getQueja() {
+    public QaQueja getQueja() {
         return queja;
     }
 
-    public void setQueja(Queja queja) {
+    public void setQueja(QaQueja queja) {
         this.queja = queja;
     }
 
-    public List<Departamento> getListDepartamentos() {
+    public List<QaDepartamento> getListDepartamentos() {
         return listDepartamentos;
     }
 
-    public void setListDepartamentos(List<Departamento> listDepartamentos) {
+    public void setListDepartamentos(List<QaDepartamento> listDepartamentos) {
         this.listDepartamentos = listDepartamentos;
     }
 
-    public List<Municipio> getListMunicipios() {
+    public List<QaMunicipio> getListMunicipios() {
         return listMunicipios;
     }
 
-    public void setListMunicipios(List<Municipio> listMunicipios) {
+    public void setListMunicipios(List<QaMunicipio> listMunicipios) {
         this.listMunicipios = listMunicipios;
     }
 
-    public Municipio getMunicipioSelected() {
+    public QaMunicipio getMunicipioSelected() {
         return municipioSelected;
     }
 
-    public void setMunicipioSelected(Municipio municipioSelected) {
+    public void setMunicipioSelected(QaMunicipio municipioSelected) {
         this.municipioSelected = municipioSelected;
     }
 
-    public Departamento getDepartamentoSelected() {
+    public QaDepartamento getDepartamentoSelected() {
         return departamentoSelected;
     }
 
-    public void setDepartamentoSelected(Departamento departamentoSelected) {
+    public void setDepartamentoSelected(QaDepartamento departamentoSelected) {
         this.departamentoSelected = departamentoSelected;
     }
 
-    public List<Tipoconsumidor> getListTipoConsumidor() {
+    public List<QaTipoConsumidor> getListTipoConsumidor() {
         return listTipoConsumidor;
     }
 
-    public void setListTipoConsumidor(List<Tipoconsumidor> listTipoConsumidor) {
+    public void setListTipoConsumidor(List<QaTipoConsumidor> listTipoConsumidor) {
         this.listTipoConsumidor = listTipoConsumidor;
     }
 
-    public Tipoconsumidor getTipoConsumidor() {
+    public QaTipoConsumidor getTipoConsumidor() {
         return tipoConsumidor;
     }
 
-    public void setTipoConsumidor(Tipoconsumidor tipoConsumidor) {
+    public void setTipoConsumidor(QaTipoConsumidor tipoConsumidor) {
         this.tipoConsumidor = tipoConsumidor;
     }
 
-    public List<Genero> getListGenero() {
+    public List<QaGenero> getListGenero() {
         return listGenero;
     }
 
-    public void setListGenero(List<Genero> listGenero) {
+    public void setListGenero(List<QaGenero> listGenero) {
         this.listGenero = listGenero;
     }
 
-    public Genero getGenero() {
+    public QaGenero getGenero() {
         return genero;
     }
 
-    public void setGenero(Genero genero) {
+    public void setGenero(QaGenero genero) {
         this.genero = genero;
     }
 
-    public List<Region> getListRegion() {
+    public List<QaRegion> getListRegion() {
         return listRegion;
     }
 
-    public void setListRegion(List<Region> listRegion) {
+    public void setListRegion(List<QaRegion> listRegion) {
         this.listRegion = listRegion;
     }
 
-    public Region getSelectedRegion() {
+    public QaRegion getSelectedRegion() {
         return selectedRegion;
     }
 
-    public void setSelectedRegion(Region selectedRegion) {
+    public void setSelectedRegion(QaRegion selectedRegion) {
         this.selectedRegion = selectedRegion;
     }
 

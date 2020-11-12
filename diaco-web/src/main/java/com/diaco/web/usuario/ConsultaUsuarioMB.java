@@ -1,7 +1,7 @@
 package com.diaco.web.usuario;
 
 import com.diaco.api.ejb.UsuarioBeanLocal;
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaUsuario;
 import com.diaco.web.utils.JsfUtil;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -28,7 +28,7 @@ public class ConsultaUsuarioMB implements Serializable {
     @EJB
     private UsuarioBeanLocal usuarioBean;
 
-    private List<Usuario> listUsuario;
+    private List<QaUsuario> listUsuario;
     private String password;
     private Integer idUsuario;
 
@@ -44,7 +44,7 @@ public class ConsultaUsuarioMB implements Serializable {
 
     public void reinicioPassword() {
         password = md5(password);
-        Usuario response = usuarioBean.reinicioPassword(idUsuario, password);
+        QaUsuario response = usuarioBean.reinicioPassword(idUsuario, password);
         if (response != null) {
             JsfUtil.addSuccessMessage("Reinicio de contraseña exitoso");
         }
@@ -71,7 +71,7 @@ public class ConsultaUsuarioMB implements Serializable {
     }
     
        public void eliminarUsuario(Integer idusuario) {
-        Usuario response = usuarioBean.eliminarUsuario(idusuario);
+        QaUsuario response = usuarioBean.eliminarUsuario(idusuario);
         if (response != null) {
             JsfUtil.addSuccessMessage("Se elimino el usuario exitosamente");
             return;
@@ -81,11 +81,11 @@ public class ConsultaUsuarioMB implements Serializable {
     }
 
     /*Metodos getters y setters*/
-    public List<Usuario> getListUsuario() {
+    public List<QaUsuario> getListUsuario() {
         return listUsuario;
     }
 
-    public void setListUsuario(List<Usuario> listUsuario) {
+    public void setListUsuario(List<QaUsuario> listUsuario) {
         this.listUsuario = listUsuario;
     }
 

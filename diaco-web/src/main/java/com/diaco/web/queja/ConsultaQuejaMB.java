@@ -1,7 +1,7 @@
 package com.diaco.web.queja;
 
 import com.diaco.api.ejb.QuejaBeanLocal;
-import com.diaco.api.entity.Queja;
+import com.diaco.api.entity.QaQueja;
 import com.diaco.web.utils.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -23,11 +23,11 @@ public class ConsultaQuejaMB implements Serializable {
     @EJB
     private QuejaBeanLocal quejaBean;
 
-    private List<Queja> listQueja;
+    private List<QaQueja> listQueja;
     private Integer idqueja;
 
     public void buscarQueja() {
-        List<Queja> response = quejaBean.listQuejaByIdQueja(idqueja);
+        List<QaQueja> response = quejaBean.listQuejaByIdQueja(idqueja);
         if (response.size() > 0) {
             listQueja = response;
         } else {
@@ -41,11 +41,11 @@ public class ConsultaQuejaMB implements Serializable {
     }
 
     /*Metodos getters y setters*/
-    public List<Queja> getListQueja() {
+    public List<QaQueja> getListQueja() {
         return listQueja;
     }
 
-    public void setListQueja(List<Queja> listQueja) {
+    public void setListQueja(List<QaQueja> listQueja) {
         this.listQueja = listQueja;
     }
 
