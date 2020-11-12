@@ -115,7 +115,7 @@ public class CatalagoBean implements CatalogoBeanLocal {
             return null;
         }
 
-        List<QaEstadoQueja> lst = em.createQuery("SELECT est FROM QaEstadoqueja est WHERE est.idestadoqueja =:idestadoqueja", QaEstadoQueja.class)
+        List<QaEstadoQueja> lst = em.createQuery("SELECT est FROM QaEstadoQueja est WHERE est.idestadoqueja =:idestadoqueja", QaEstadoQueja.class)
                 .setParameter("idestadoqueja", idestadoqueja)
                 .getResultList();
 
