@@ -1,7 +1,7 @@
 package com.diaco.bussines.ejb.imp;
 
 import com.diaco.api.ejb.PerfilBeanLocal;
-import com.diaco.api.entity.Perfil;
+import com.diaco.api.entity.QaPerfil;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -45,7 +45,7 @@ public class PerfilBean implements PerfilBeanLocal {
     }
     
     @Override
-    public Perfil savePerfil(Perfil perfil) {
+    public QaPerfil savePerfil(QaPerfil perfil) {
         try {
             perfil.setActivo(true);
             perfil.setFechacreacion(new Date());
@@ -65,8 +65,8 @@ public class PerfilBean implements PerfilBeanLocal {
     }
     
     @Override
-    public Perfil findPerfil(Integer idperfil) {
-        List<Perfil> lst = em.createQuery("SELECT per FROM Perfil per WHERE per.idperfil =:idperfil and per.activo = true", Perfil.class)
+    public QaPerfil findPerfil(Integer idperfil) {
+        List<QaPerfil> lst = em.createQuery("SELECT per FROM QaPerfil per WHERE per.idperfil =:idperfil and per.activo = true", QaPerfil.class)
                 .setParameter("idperfil", idperfil)
                 .getResultList();
         
@@ -78,8 +78,8 @@ public class PerfilBean implements PerfilBeanLocal {
     }
     
     @Override
-    public List<Perfil> ListPerfil() {
-        List<Perfil> lst = em.createQuery("SELECT per FROM Perfil per WHERE per.activo = true ", Perfil.class)
+    public List<QaPerfil> ListPerfil() {
+        List<QaPerfil> lst = em.createQuery("SELECT per FROM QaPerfil per WHERE per.activo = true ", QaPerfil.class)
                 .getResultList();
         
         if (lst == null || lst.isEmpty()) {
@@ -90,14 +90,14 @@ public class PerfilBean implements PerfilBeanLocal {
     }
     
     @Override
-    public Perfil eliminarPerfil(Integer idperfil) {
+    public QaPerfil eliminarPerfil(Integer idperfil) {
         if (idperfil == null) {
             context.setRollbackOnly();
             return null;
         }
         
         try {
-            Perfil toUpdate = em.find(Perfil.class, idperfil);
+            QaPerfil toUpdate = em.find(QaPerfil.class, idperfil);
             
             toUpdate.setActivo(false);
             em.merge(toUpdate);
@@ -115,14 +115,14 @@ public class PerfilBean implements PerfilBeanLocal {
     }
     
     @Override
-    public Perfil actualizarPerfil(Perfil perfil) {
+    public QaPerfil actualizarPerfil(QaPerfil perfil) {
         if (perfil == null) {
             context.setRollbackOnly();
             return null;
         }
         
         try {
-            Perfil toUpdate = em.find(Perfil.class, perfil.getIdperfil());
+            QaPerfil toUpdate = em.find(QaPerfil.class, perfil.getIdperfil());
             
             toUpdate.setNombre(perfil.getNombre());
             toUpdate.setDescripcion(perfil.getDescripcion());

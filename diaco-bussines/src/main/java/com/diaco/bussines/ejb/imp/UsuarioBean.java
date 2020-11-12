@@ -1,8 +1,8 @@
 package com.diaco.bussines.ejb.imp;
 
 import com.diaco.api.ejb.UsuarioBeanLocal;
-import com.diaco.api.entity.Perfil;
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaPerfil;
+import com.diaco.api.entity.QaUsuario;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -46,7 +46,7 @@ public class UsuarioBean implements UsuarioBeanLocal {
     }
 
     @Override
-    public Usuario saveUsuario(Usuario usuario) {
+    public QaUsuario saveUsuario(QaUsuario usuario) {
         try {
             usuario.setFechacreacion(new Date());
             usuario.setActivo(true);
@@ -66,8 +66,8 @@ public class UsuarioBean implements UsuarioBeanLocal {
     }
 
     @Override
-    public Usuario findUsuario(Integer idusuario) {
-        List<Usuario> lst = em.createQuery("SELECT us FROM Usuario us WHERE us.idusuario =:idsuario and us.activo = true", Usuario.class)
+    public QaUsuario findUsuario(Integer idusuario) {
+        List<QaUsuario> lst = em.createQuery("SELECT us FROM QaUsuario us WHERE us.idusuario =:idsuario and us.activo = true", QaUsuario.class)
                 .setParameter("idusuario", idusuario)
                 .getResultList();
 
@@ -79,8 +79,8 @@ public class UsuarioBean implements UsuarioBeanLocal {
     }
 
     @Override
-    public List<Usuario> ListaUsuarios() {
-        List<Usuario> lst = em.createQuery("SELECT us FROM Usuario us WHERE us.activo = true ", Usuario.class)
+    public List<QaUsuario> ListaUsuarios() {
+        List<QaUsuario> lst = em.createQuery("SELECT us FROM QaUsuario us WHERE us.activo = true ", QaUsuario.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -91,14 +91,14 @@ public class UsuarioBean implements UsuarioBeanLocal {
     }
 
     @Override
-    public Usuario reinicioPassword(Integer idusuario, String password) {
+    public QaUsuario reinicioPassword(Integer idusuario, String password) {
         if (idusuario == null) {
             context.setRollbackOnly();
             return null;
         }
 
         try {
-            Usuario toUpdate = em.find(Usuario.class, idusuario);
+            QaUsuario toUpdate = em.find(QaUsuario.class, idusuario);
 
             toUpdate.setPassword(password);
             em.merge(toUpdate);
@@ -116,8 +116,8 @@ public class UsuarioBean implements UsuarioBeanLocal {
     }
 
     @Override
-    public Perfil findPerfilIdUsuario(Integer idPerfil) {
-        List<Perfil> lst = em.createQuery("SELECT us.idperfil FROM Usuario us WHERE us.idperfil.idperfil =:idPerfil and us.activo = true", Perfil.class)
+    public QaPerfil findPerfilIdUsuario(Integer idPerfil) {
+        List<QaPerfil> lst = em.createQuery("SELECT us.idperfil FROM QaUsuario us WHERE us.idperfil.idperfil =:idPerfil and us.activo = true", QaPerfil.class)
                 .setParameter("idperfil", idPerfil)
                 .getResultList();
 
@@ -129,14 +129,14 @@ public class UsuarioBean implements UsuarioBeanLocal {
     }
 
     @Override
-    public Usuario eliminarUsuario(Integer idusuario) {
+    public QaUsuario eliminarUsuario(Integer idusuario) {
         if (idusuario == null) {
             context.setRollbackOnly();
             return null;
         }
 
         try {
-            Usuario toUpdate = em.find(Usuario.class, idusuario);
+            QaUsuario toUpdate = em.find(QaUsuario.class, idusuario);
 
             toUpdate.setActivo(false);
             em.merge(toUpdate);

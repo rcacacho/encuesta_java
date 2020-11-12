@@ -2,16 +2,16 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="DiacoPU" transaction-type="JTA">
         <jta-data-source>jdbc/diaco</jta-data-source>
-        <class>com.diaco.api.entity.Departamento</class>
-        <class>com.diaco.api.entity.Genero</class>
-        <class>com.diaco.api.entity.Municipio</class>
-        <class>com.diaco.api.entity.Perfil</class>
-        <class>com.diaco.api.entity.Queja</class>
-        <class>com.diaco.api.entity.Estadoqueja</class>
-        <class>com.diaco.api.entity.Encargado</class>
-        <class>com.diaco.api.entity.Region</class>
-        <class>com.diaco.api.entity.Tipoconsumidor</class>
-        <class>com.diaco.api.entity.Usuario</class>
+        <class>com.diaco.api.entity.QaDepartamento</class>
+        <class>com.diaco.api.entity.QaGenero</class>
+        <class>com.diaco.api.entity.QaMunicipio</class>
+        <class>com.diaco.api.entity.QaPerfil</class>
+        <class>com.diaco.api.entity.QaQueja</class>
+        <class>com.diaco.api.entity.QaEstadoQueja</class>
+        <class>com.diaco.api.entity.QaEncargado</class>
+        <class>com.diaco.api.entity.QaRegion</class>
+        <class>com.diaco.api.entity.QaTipoConsumidor</class>
+        <class>com.diaco.api.entity.QaUsuario</class>
         <class>com.diaco.api.dto.QuejaDto</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>NONE</shared-cache-mode>

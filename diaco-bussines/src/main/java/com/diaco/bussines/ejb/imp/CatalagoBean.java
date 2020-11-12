@@ -1,14 +1,14 @@
 package com.diaco.bussines.ejb.imp;
 
 import com.diaco.api.ejb.CatalogoBeanLocal;
-import com.diaco.api.entity.Departamento;
-import com.diaco.api.entity.Estadoqueja;
-import com.diaco.api.entity.Genero;
-import com.diaco.api.entity.Municipio;
-import com.diaco.api.entity.Perfil;
-import com.diaco.api.entity.Region;
-import com.diaco.api.entity.Tipoconsumidor;
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaDepartamento;
+import com.diaco.api.entity.QaEstadoQueja;
+import com.diaco.api.entity.QaGenero;
+import com.diaco.api.entity.QaMunicipio;
+import com.diaco.api.entity.QaPerfil;
+import com.diaco.api.entity.QaRegion;
+import com.diaco.api.entity.QaTipoConsumidor;
+import com.diaco.api.entity.QaUsuario;
 import java.util.List;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -28,8 +28,8 @@ public class CatalagoBean implements CatalogoBeanLocal {
     EntityManager em;
 
     @Override
-    public List<Departamento> listDepartamentos() {
-        List<Departamento> lst = em.createQuery("SELECT dep FROM Departamento dep WHERE dep.activo  = true", Departamento.class)
+    public List<QaDepartamento> listDepartamentos() {
+        List<QaDepartamento> lst = em.createQuery("SELECT dep FROM QaDepartamento dep WHERE dep.activo  = true", QaDepartamento.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -40,12 +40,12 @@ public class CatalagoBean implements CatalogoBeanLocal {
     }
 
     @Override
-    public List<Municipio> listMunicipioByIdDepartamento(Integer iddepartamento) {
+    public List<QaMunicipio> listMunicipioByIdDepartamento(Integer iddepartamento) {
         if (iddepartamento == null) {
             return null;
         }
 
-        List<Municipio> lst = em.createQuery("SELECT muni FROM Municipio muni WHERE muni.iddepartamento.iddepartamento =:iddepartamento", Municipio.class)
+        List<QaMunicipio> lst = em.createQuery("SELECT muni FROM QaMunicipio muni WHERE muni.iddepartamento.iddepartamento =:iddepartamento", QaMunicipio.class)
                 .setParameter("iddepartamento", iddepartamento)
                 .getResultList();
 
@@ -57,8 +57,8 @@ public class CatalagoBean implements CatalogoBeanLocal {
     }
 
     @Override
-    public List<Tipoconsumidor> listTipoConsumidor() {
-        List<Tipoconsumidor> lst = em.createQuery("SELECT tipo FROM Tipoconsumidor tipo WHERE tipo.activo  = true", Tipoconsumidor.class)
+    public List<QaTipoConsumidor> listTipoConsumidor() {
+        List<QaTipoConsumidor> lst = em.createQuery("SELECT tipo FROM QaTipoConsumidor tipo WHERE tipo.activo  = true", QaTipoConsumidor.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -69,8 +69,8 @@ public class CatalagoBean implements CatalogoBeanLocal {
     }
 
     @Override
-    public List<Genero> listGenero() {
-        List<Genero> lst = em.createQuery("SELECT gen FROM Genero gen WHERE gen.activo = true", Genero.class)
+    public List<QaGenero> listGenero() {
+        List<QaGenero> lst = em.createQuery("SELECT gen FROM QaGenero gen WHERE gen.activo = true", QaGenero.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -81,8 +81,8 @@ public class CatalagoBean implements CatalogoBeanLocal {
     }
 
     @Override
-    public List<Region> listRegion() {
-        List<Region> lst = em.createQuery("SELECT reg FROM Region reg WHERE reg.activo = true", Region.class)
+    public List<QaRegion> listRegion() {
+        List<QaRegion> lst = em.createQuery("SELECT reg FROM QaRegion reg WHERE reg.activo = true", QaRegion.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -93,12 +93,12 @@ public class CatalagoBean implements CatalogoBeanLocal {
     }
 
     @Override
-    public List<Departamento> listDepartamentoByIdRegion(Integer idregion) {
+    public List<QaDepartamento> listDepartamentoByIdRegion(Integer idregion) {
         if (idregion == null) {
             return null;
         }
 
-        List<Departamento> lst = em.createQuery("SELECT dep FROM Departamento dep WHERE dep.idregion.idregion =:idregion", Departamento.class)
+        List<QaDepartamento> lst = em.createQuery("SELECT dep FROM QaDepartamento dep WHERE dep.idregion.idregion =:idregion", QaDepartamento.class)
                 .setParameter("idregion", idregion)
                 .getResultList();
 
@@ -110,12 +110,12 @@ public class CatalagoBean implements CatalogoBeanLocal {
     }
 
     @Override
-    public Estadoqueja findEstadoQuejaById(Integer idestadoqueja) {
+    public QaEstadoQueja findEstadoQuejaById(Integer idestadoqueja) {
         if (idestadoqueja == null) {
             return null;
         }
 
-        List<Estadoqueja> lst = em.createQuery("SELECT est FROM Estadoqueja est WHERE est.idestadoqueja =:idestadoqueja", Estadoqueja.class)
+        List<QaEstadoQueja> lst = em.createQuery("SELECT est FROM QaEstadoqueja est WHERE est.idestadoqueja =:idestadoqueja", QaEstadoQueja.class)
                 .setParameter("idestadoqueja", idestadoqueja)
                 .getResultList();
 
@@ -127,8 +127,8 @@ public class CatalagoBean implements CatalogoBeanLocal {
     }
 
     @Override
-    public List<Perfil> listPerfiles() {
-        List<Perfil> lst = em.createQuery("SELECT per FROM Perfil per WHERE per.activo = true", Perfil.class)
+    public List<QaPerfil> listPerfiles() {
+        List<QaPerfil> lst = em.createQuery("SELECT per FROM QaPerfil per WHERE per.activo = true", QaPerfil.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -139,8 +139,8 @@ public class CatalagoBean implements CatalogoBeanLocal {
     }
 
     @Override
-    public List<Usuario> listUsuario() {
-        List<Usuario> lst = em.createQuery("SELECT usu FROM Usuario usu WHERE usu.activo = true", Usuario.class)
+    public List<QaUsuario> listUsuario() {
+        List<QaUsuario> lst = em.createQuery("SELECT usu FROM QaUsuario usu WHERE usu.activo = true", QaUsuario.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {

@@ -1,7 +1,7 @@
 package com.diaco.bussines.ejb.imp;
 
 import com.diaco.api.ejb.LoginBeanLocal;
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaUsuario;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -45,8 +45,8 @@ public class LoginBean implements LoginBeanLocal {
     }
 
     @Override
-    public Usuario verificarUsuario(String usuario, String password) {
-        List<Usuario> lst = em.createQuery("SELECT usuario FROM Usuario usuario WHERE usuario.usuario =:usuario and usuario.password =:password ", Usuario.class)
+    public QaUsuario verificarUsuario(String usuario, String password) {
+        List<QaUsuario> lst = em.createQuery("SELECT usuario FROM QaUsuario usuario WHERE usuario.usuario =:usuario and usuario.password =:password ", QaUsuario.class)
                 .setParameter("usuario", usuario)
                 .setParameter("password", password)
                 .getResultList();
@@ -59,7 +59,7 @@ public class LoginBean implements LoginBeanLocal {
     }
 
     @Override
-    public Usuario saveUsuario(Usuario usuario) {
+    public QaUsuario saveUsuario(QaUsuario usuario) {
         try {
 
             usuario.setFechacreacion(new Date());
@@ -84,7 +84,7 @@ public class LoginBean implements LoginBeanLocal {
 
     @Override
     public String findUsuario(String usuario) {
-        List<Usuario> lst = em.createQuery("SELECT usu FROM Usuario usu WHERE usu.usuario =:usuario ", Usuario.class)
+        List<QaUsuario> lst = em.createQuery("SELECT usu FROM QaUsuario usu WHERE usu.usuario =:usuario ", QaUsuario.class)
                 .setParameter("usuario", usuario)
                 .getResultList();
 
