@@ -13,43 +13,43 @@
 	<queryString>
 		<![CDATA[select idqueja, nombrecomercio, r2.region, d.departamento, m.municipio,    
 count(nombrecomercio) Total 
-from queja q
-join municipio m on q.idmunicipio = m.idmunicipio 
-join departamento d on m.iddepartamento = d.iddepartamento 
-join region r2 on d.idregion = r2.idregion 
+from qa_queja q
+join qa_municipio m on q.idmunicipio = m.idmunicipio 
+join qa_departamento d on m.iddepartamento = d.iddepartamento 
+join qa_region r2 on d.idregion = r2.idregion 
 where q.fechacreacion >= $P{FECHA_INICIO}
 and q.fechacreacion <= $P{FECHA_FIN}
 group by nombrecomercio 
-order by count(nombrecomercio) desc ]]>
+order by count(nombrecomercio) desc]]>
 	</queryString>
 	<field name="idqueja" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="idqueja"/>
 		<property name="com.jaspersoft.studio.field.label" value="idqueja"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="queja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="qa_queja"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nombrecomercio" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nombrecomercio"/>
 		<property name="com.jaspersoft.studio.field.label" value="nombrecomercio"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="queja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="qa_queja"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="region" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="region"/>
 		<property name="com.jaspersoft.studio.field.label" value="region"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="region"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="qa_region"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="departamento" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="departamento"/>
 		<property name="com.jaspersoft.studio.field.label" value="departamento"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="departamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="qa_departamento"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="municipio" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="municipio"/>
 		<property name="com.jaspersoft.studio.field.label" value="municipio"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="municipio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="qa_municipio"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="Total" class="java.lang.Long">

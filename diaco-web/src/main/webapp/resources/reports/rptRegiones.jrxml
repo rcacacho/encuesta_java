@@ -9,58 +9,58 @@
 	<queryString>
 		<![CDATA[select distinct subquery1.METROPOLITANA, subquery2.NORTE, subquery3.NORORIENTE,
 subquery4.SURORIENTE, subquery5.CENTRAL, subquery6.SUROCCIDENTE, subquery7.NOROCCIDENTE, subquery8.PETEN
-FROM   queja q,
+FROM   qa_queja q,
        (SELECT count(*) as METROPOLITANA 
-       from queja q2, municipio m2, departamento d2, region r2 
+       from qa_queja q2, qa_municipio m2, qa_departamento d2, qa_region r2 
        where q2.idmunicipio = m2.idmunicipio 
        and m2.iddepartamento = d2.iddepartamento 
        and d2.idregion = r2.idregion 
        and r2.idregion = 1
        ) AS subquery1,
        (SELECT count(*) as NORTE 
-       from queja q2, municipio m2, departamento d2, region r2 
+       from qa_queja q2, qa_municipio m2, qa_departamento d2, qa_region r2 
        where q2.idmunicipio = m2.idmunicipio 
        and m2.iddepartamento = d2.iddepartamento 
        and d2.idregion = r2.idregion 
        and r2.idregion = 2
        ) AS subquery2,
        (SELECT count(*) as NORORIENTE 
-       from queja q2, municipio m2, departamento d2, region r2 
+       from qa_queja q2, qa_municipio m2, qa_departamento d2, qa_region r2 
        where q2.idmunicipio = m2.idmunicipio 
        and m2.iddepartamento = d2.iddepartamento 
        and d2.idregion = r2.idregion 
        and r2.idregion = 3
        ) AS subquery3,
         (SELECT count(*) as SURORIENTE 
-       from queja q2, municipio m2, departamento d2, region r2 
+       from qa_queja q2, qa_municipio m2, qa_departamento d2, qa_region r2 
        where q2.idmunicipio = m2.idmunicipio 
        and m2.iddepartamento = d2.iddepartamento 
        and d2.idregion = r2.idregion 
        and r2.idregion = 4
        ) AS subquery4,
         (SELECT count(*) as CENTRAL 
-       from queja q2, municipio m2, departamento d2, region r2 
+       from qa_queja q2, qa_municipio m2, qa_departamento d2, qa_region r2 
        where q2.idmunicipio = m2.idmunicipio 
        and m2.iddepartamento = d2.iddepartamento 
        and d2.idregion = r2.idregion 
        and r2.idregion = 5
        ) AS subquery5,
         (SELECT count(*) as SUROCCIDENTE 
-       from queja q2, municipio m2, departamento d2, region r2 
+       from qa_queja q2, qa_municipio m2, qa_departamento d2, qa_region r2 
        where q2.idmunicipio = m2.idmunicipio 
        and m2.iddepartamento = d2.iddepartamento 
        and d2.idregion = r2.idregion 
        and r2.idregion = 6
        ) AS subquery6,
         (SELECT count(*) as NOROCCIDENTE 
-       from queja q2, municipio m2, departamento d2, region r2 
+       from qa_queja q2, qa_municipio m2, qa_departamento d2, qa_region r2 
        where q2.idmunicipio = m2.idmunicipio 
        and m2.iddepartamento = d2.iddepartamento 
        and d2.idregion = r2.idregion 
        and r2.idregion = 7
        ) AS subquery7,
         (SELECT count(*) as PETEN 
-       from queja q2, municipio m2, departamento d2, region r2 
+       from qa_queja q2, qa_municipio m2, qa_departamento d2, qa_region r2 
        where q2.idmunicipio = m2.idmunicipio 
        and m2.iddepartamento = d2.iddepartamento 
        and d2.idregion = r2.idregion 
