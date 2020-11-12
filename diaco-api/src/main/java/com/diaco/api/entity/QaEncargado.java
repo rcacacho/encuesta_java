@@ -25,18 +25,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author elfo_
  */
 @Entity
-@Table(name = "encargado")
+@Table(name = "qa_encargado")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Encargado.findAll", query = "SELECT e FROM Encargado e"),
-    @NamedQuery(name = "Encargado.findByIdencargado", query = "SELECT e FROM Encargado e WHERE e.idencargado = :idencargado"),
-    @NamedQuery(name = "Encargado.findByObservacion", query = "SELECT e FROM Encargado e WHERE e.observacion = :observacion"),
-    @NamedQuery(name = "Encargado.findByFechacreacion", query = "SELECT e FROM Encargado e WHERE e.fechacreacion = :fechacreacion"),
-    @NamedQuery(name = "Encargado.findByUsuariocreacion", query = "SELECT e FROM Encargado e WHERE e.usuariocreacion = :usuariocreacion"),
-    @NamedQuery(name = "Encargado.findByFechaeliminacion", query = "SELECT e FROM Encargado e WHERE e.fechaeliminacion = :fechaeliminacion"),
-    @NamedQuery(name = "Encargado.findByUsuarioelminacion", query = "SELECT e FROM Encargado e WHERE e.usuarioelminacion = :usuarioelminacion"),
-    @NamedQuery(name = "Encargado.findByActivo", query = "SELECT e FROM Encargado e WHERE e.activo = :activo")})
-public class Encargado implements Serializable {
+    @NamedQuery(name = "QaEncargado.findAll", query = "SELECT q FROM QaEncargado q"),
+    @NamedQuery(name = "QaEncargado.findByIdencargado", query = "SELECT q FROM QaEncargado q WHERE q.idencargado = :idencargado"),
+    @NamedQuery(name = "QaEncargado.findByObservacion", query = "SELECT q FROM QaEncargado q WHERE q.observacion = :observacion"),
+    @NamedQuery(name = "QaEncargado.findByFechacreacion", query = "SELECT q FROM QaEncargado q WHERE q.fechacreacion = :fechacreacion"),
+    @NamedQuery(name = "QaEncargado.findByUsuariocreacion", query = "SELECT q FROM QaEncargado q WHERE q.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "QaEncargado.findByFechaeliminacion", query = "SELECT q FROM QaEncargado q WHERE q.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "QaEncargado.findByUsuarioelminacion", query = "SELECT q FROM QaEncargado q WHERE q.usuarioelminacion = :usuarioelminacion"),
+    @NamedQuery(name = "QaEncargado.findByActivo", query = "SELECT q FROM QaEncargado q WHERE q.activo = :activo")})
+public class QaEncargado implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -76,20 +76,20 @@ public class Encargado implements Serializable {
     
     @JoinColumn(name = "idqueja", referencedColumnName = "idqueja")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Queja idqueja;
+    private QaQueja idqueja;
     
     @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Usuario idusuario;
+    private QaUsuario idusuario;
 
-    public Encargado() {
+    public QaEncargado() {
     }
 
-    public Encargado(Integer idencargado) {
+    public QaEncargado(Integer idencargado) {
         this.idencargado = idencargado;
     }
 
-    public Encargado(Integer idencargado, Date fechacreacion, String usuariocreacion, boolean activo) {
+    public QaEncargado(Integer idencargado, Date fechacreacion, String usuariocreacion, boolean activo) {
         this.idencargado = idencargado;
         this.fechacreacion = fechacreacion;
         this.usuariocreacion = usuariocreacion;
@@ -152,19 +152,19 @@ public class Encargado implements Serializable {
         this.activo = activo;
     }
 
-    public Queja getIdqueja() {
+    public QaQueja getIdqueja() {
         return idqueja;
     }
 
-    public void setIdqueja(Queja idqueja) {
+    public void setIdqueja(QaQueja idqueja) {
         this.idqueja = idqueja;
     }
 
-    public Usuario getIdusuario() {
+    public QaUsuario getIdusuario() {
         return idusuario;
     }
 
-    public void setIdusuario(Usuario idusuario) {
+    public void setIdusuario(QaUsuario idusuario) {
         this.idusuario = idusuario;
     }
 
@@ -178,10 +178,10 @@ public class Encargado implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Encargado)) {
+        if (!(object instanceof QaEncargado)) {
             return false;
         }
-        Encargado other = (Encargado) object;
+        QaEncargado other = (QaEncargado) object;
         if ((this.idencargado == null && other.idencargado != null) || (this.idencargado != null && !this.idencargado.equals(other.idencargado))) {
             return false;
         }
@@ -190,7 +190,7 @@ public class Encargado implements Serializable {
 
     @Override
     public String toString() {
-        return "com.diaco.api.entity.Encargado[ idencargado=" + idencargado + " ]";
+        return "com.diaco.api.entity.QaEncargado[ idencargado=" + idencargado + " ]";
     }
     
 }

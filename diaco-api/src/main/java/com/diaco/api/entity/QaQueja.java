@@ -29,16 +29,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author elfo_
  */
 @Entity
-@Table(name = "queja")
+@Table(name = "qa_queja")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Queja.findAll", query = "SELECT q FROM Queja q"),
-    @NamedQuery(name = "Queja.findByIdqueja", query = "SELECT q FROM Queja q WHERE q.idqueja = :idqueja"),
-    @NamedQuery(name = "Queja.findByNombrecomercio", query = "SELECT q FROM Queja q WHERE q.nombrecomercio = :nombrecomercio"),
-    @NamedQuery(name = "Queja.findByDireccioncomercio", query = "SELECT q FROM Queja q WHERE q.direccioncomercio = :direccioncomercio"),
-    @NamedQuery(name = "Queja.findByTelefonocomercio", query = "SELECT q FROM Queja q WHERE q.telefonocomercio = :telefonocomercio"),
-    @NamedQuery(name = "Queja.findByFechacreacion", query = "SELECT q FROM Queja q WHERE q.fechacreacion = :fechacreacion")})
-public class Queja implements Serializable {
+    @NamedQuery(name = "QaQueja.findAll", query = "SELECT q FROM QaQueja q"),
+    @NamedQuery(name = "QaQueja.findByIdqueja", query = "SELECT q FROM QaQueja q WHERE q.idqueja = :idqueja"),
+    @NamedQuery(name = "QaQueja.findByNombrecomercio", query = "SELECT q FROM QaQueja q WHERE q.nombrecomercio = :nombrecomercio"),
+    @NamedQuery(name = "QaQueja.findByDireccioncomercio", query = "SELECT q FROM QaQueja q WHERE q.direccioncomercio = :direccioncomercio"),
+    @NamedQuery(name = "QaQueja.findByTelefonocomercio", query = "SELECT q FROM QaQueja q WHERE q.telefonocomercio = :telefonocomercio"),
+    @NamedQuery(name = "QaQueja.findByFechacreacion", query = "SELECT q FROM QaQueja q WHERE q.fechacreacion = :fechacreacion")})
+public class QaQueja implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,33 +71,33 @@ public class Queja implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idqueja", fetch = FetchType.LAZY)
-    private List<Encargado> encargadoList;
-    
     @JoinColumn(name = "idestadoqueja", referencedColumnName = "idestadoqueja")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Estadoqueja idestadoqueja;
+    private QaEstadoQueja idestadoqueja;
     
     @JoinColumn(name = "idgenero", referencedColumnName = "idgenero")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Genero idgenero;
+    private QaGenero idgenero;
     
     @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Municipio idmunicipio;
+    private QaMunicipio idmunicipio;
     
     @JoinColumn(name = "idtipoconsumidor", referencedColumnName = "idtipoconsumidor")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Tipoconsumidor idtipoconsumidor;
+    private QaTipoConsumidor idtipoconsumidor;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idqueja", fetch = FetchType.LAZY)
+    private List<QaEncargado> qaEncargadoList;
 
-    public Queja() {
+    public QaQueja() {
     }
 
-    public Queja(Integer idqueja) {
+    public QaQueja(Integer idqueja) {
         this.idqueja = idqueja;
     }
 
-    public Queja(Integer idqueja, String nombrecomercio, String direccioncomercio, String telefonocomercio, Date fechacreacion) {
+    public QaQueja(Integer idqueja, String nombrecomercio, String direccioncomercio, String telefonocomercio, Date fechacreacion) {
         this.idqueja = idqueja;
         this.nombrecomercio = nombrecomercio;
         this.direccioncomercio = direccioncomercio;
@@ -145,45 +145,45 @@ public class Queja implements Serializable {
         this.fechacreacion = fechacreacion;
     }
 
-    @XmlTransient
-    public List<Encargado> getEncargadoList() {
-        return encargadoList;
-    }
-
-    public void setEncargadoList(List<Encargado> encargadoList) {
-        this.encargadoList = encargadoList;
-    }
-
-    public Estadoqueja getIdestadoqueja() {
+    public QaEstadoQueja getIdestadoqueja() {
         return idestadoqueja;
     }
 
-    public void setIdestadoqueja(Estadoqueja idestadoqueja) {
+    public void setIdestadoqueja(QaEstadoQueja idestadoqueja) {
         this.idestadoqueja = idestadoqueja;
     }
 
-    public Genero getIdgenero() {
+    public QaGenero getIdgenero() {
         return idgenero;
     }
 
-    public void setIdgenero(Genero idgenero) {
+    public void setIdgenero(QaGenero idgenero) {
         this.idgenero = idgenero;
     }
 
-    public Municipio getIdmunicipio() {
+    public QaMunicipio getIdmunicipio() {
         return idmunicipio;
     }
 
-    public void setIdmunicipio(Municipio idmunicipio) {
+    public void setIdmunicipio(QaMunicipio idmunicipio) {
         this.idmunicipio = idmunicipio;
     }
 
-    public Tipoconsumidor getIdtipoconsumidor() {
+    public QaTipoConsumidor getIdtipoconsumidor() {
         return idtipoconsumidor;
     }
 
-    public void setIdtipoconsumidor(Tipoconsumidor idtipoconsumidor) {
+    public void setIdtipoconsumidor(QaTipoConsumidor idtipoconsumidor) {
         this.idtipoconsumidor = idtipoconsumidor;
+    }
+
+    @XmlTransient
+    public List<QaEncargado> getQaEncargadoList() {
+        return qaEncargadoList;
+    }
+
+    public void setQaEncargadoList(List<QaEncargado> qaEncargadoList) {
+        this.qaEncargadoList = qaEncargadoList;
     }
 
     @Override
@@ -196,10 +196,10 @@ public class Queja implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Queja)) {
+        if (!(object instanceof QaQueja)) {
             return false;
         }
-        Queja other = (Queja) object;
+        QaQueja other = (QaQueja) object;
         if ((this.idqueja == null && other.idqueja != null) || (this.idqueja != null && !this.idqueja.equals(other.idqueja))) {
             return false;
         }
@@ -208,7 +208,7 @@ public class Queja implements Serializable {
 
     @Override
     public String toString() {
-        return "com.diaco.api.entity.Queja[ idqueja=" + idqueja + " ]";
+        return "com.diaco.api.entity.QaQueja[ idqueja=" + idqueja + " ]";
     }
     
 }

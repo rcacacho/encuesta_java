@@ -1,7 +1,7 @@
 package com.diaco.api.ejb;
 
-import com.diaco.api.entity.Perfil;
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaPerfil;
+import com.diaco.api.entity.QaUsuario;
 import java.util.List;
 
 /**
@@ -10,16 +10,16 @@ import java.util.List;
  */
 public interface UsuarioBeanLocal {
 
-    Usuario saveUsuario(Usuario usuario);
+    QaUsuario saveUsuario(QaUsuario usuario);
 
-    Usuario findUsuario(Integer idQueja);
-    
-    List<Usuario> ListaUsuarios();
-    
-    Usuario reinicioPassword(Integer idusuario, String password);
-    
-    Perfil findPerfilIdUsuario(Integer idPerfil);
-    
-        Usuario eliminarUsuario(Integer idusuario);
+    QaUsuario findUsuario(Integer idQueja);
+
+    List<QaUsuario> ListaUsuarios();
+
+    QaUsuario reinicioPassword(Integer idusuario, String password);
+
+    QaPerfil findPerfilIdUsuario(Integer idPerfil);
+
+    QaUsuario eliminarUsuario(Integer idusuario);
 
 }

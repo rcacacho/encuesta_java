@@ -1,7 +1,7 @@
 package com.diaco.api.ejb;
 
-import com.diaco.api.entity.Encargado;
-import com.diaco.api.entity.Queja;
+import com.diaco.api.entity.QaEncargado;
+import com.diaco.api.entity.QaQueja;
 import java.util.Date;
 import java.util.List;
 
@@ -11,26 +11,26 @@ import java.util.List;
  */
 public interface QuejaBeanLocal {
 
-    List<Queja> ListaQuejas();
+    List<QaQueja> ListaQuejas();
 
-    Queja saveQueja(Queja queja);
+    QaQueja saveQueja(QaQueja queja);
 
-    Queja findQueja(Integer idQueja);
+    QaQueja findQueja(Integer idQueja);
 
-    List<Queja> listQuejaByIdQueja(Integer idqueja);
+    List<QaQueja> listQuejaByIdQueja(Integer idqueja);
 
-    List<Queja> listAllQueja();
+    List<QaQueja> listAllQueja();
 
-    List<Queja> listQuejaByFechaCreacion(Date fechainicio, Date fechafin);
+    List<QaQueja> listQuejaByFechaCreacion(Date fechainicio, Date fechafin);
 
-    Encargado asignacionQueja(Encargado asignacion);
+    QaEncargado asignacionQueja(QaEncargado asignacion);
 
-    List<Encargado> listEncagardoByIdQueja(Integer idqueja);
+    List<QaEncargado> listEncagardoByIdQueja(Integer idqueja);
 
-    Queja rechazoQueja(Integer idQueja);
+    QaQueja rechazoQueja(Integer idQueja);
     
-    Queja seguimientoQueja(Integer idQueja);
+    QaQueja seguimientoQueja(Integer idQueja);
     
-    List<Encargado> listEncagardo();
+    List<QaEncargado> listEncagardo();
 
 }

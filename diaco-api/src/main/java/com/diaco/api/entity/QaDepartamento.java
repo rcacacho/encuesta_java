@@ -29,18 +29,18 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author elfo_
  */
 @Entity
-@Table(name = "departamento")
+@Table(name = "qa_departamento")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d"),
-    @NamedQuery(name = "Departamento.findByIddepartamento", query = "SELECT d FROM Departamento d WHERE d.iddepartamento = :iddepartamento"),
-    @NamedQuery(name = "Departamento.findByDepartamento", query = "SELECT d FROM Departamento d WHERE d.departamento = :departamento"),
-    @NamedQuery(name = "Departamento.findByFechacreacion", query = "SELECT d FROM Departamento d WHERE d.fechacreacion = :fechacreacion"),
-    @NamedQuery(name = "Departamento.findByUsuariocreacion", query = "SELECT d FROM Departamento d WHERE d.usuariocreacion = :usuariocreacion"),
-    @NamedQuery(name = "Departamento.findByFechaeliminacion", query = "SELECT d FROM Departamento d WHERE d.fechaeliminacion = :fechaeliminacion"),
-    @NamedQuery(name = "Departamento.findByUsuarioeliminacion", query = "SELECT d FROM Departamento d WHERE d.usuarioeliminacion = :usuarioeliminacion"),
-    @NamedQuery(name = "Departamento.findByActivo", query = "SELECT d FROM Departamento d WHERE d.activo = :activo")})
-public class Departamento implements Serializable {
+    @NamedQuery(name = "QaDepartamento.findAll", query = "SELECT q FROM QaDepartamento q"),
+    @NamedQuery(name = "QaDepartamento.findByIddepartamento", query = "SELECT q FROM QaDepartamento q WHERE q.iddepartamento = :iddepartamento"),
+    @NamedQuery(name = "QaDepartamento.findByDepartamento", query = "SELECT q FROM QaDepartamento q WHERE q.departamento = :departamento"),
+    @NamedQuery(name = "QaDepartamento.findByFechacreacion", query = "SELECT q FROM QaDepartamento q WHERE q.fechacreacion = :fechacreacion"),
+    @NamedQuery(name = "QaDepartamento.findByUsuariocreacion", query = "SELECT q FROM QaDepartamento q WHERE q.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "QaDepartamento.findByFechaeliminacion", query = "SELECT q FROM QaDepartamento q WHERE q.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "QaDepartamento.findByUsuarioeliminacion", query = "SELECT q FROM QaDepartamento q WHERE q.usuarioeliminacion = :usuarioeliminacion"),
+    @NamedQuery(name = "QaDepartamento.findByActivo", query = "SELECT q FROM QaDepartamento q WHERE q.activo = :activo")})
+public class QaDepartamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -74,23 +74,23 @@ public class Departamento implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
-    private boolean activo;
+    private Boolean activo;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddepartamento", fetch = FetchType.LAZY)
-    private List<Municipio> municipioList;
+    private List<QaMunicipio> qaMunicipioList;
     
     @JoinColumn(name = "idregion", referencedColumnName = "idregion")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Region idregion;
+    private QaRegion idregion;
 
-    public Departamento() {
+    public QaDepartamento() {
     }
 
-    public Departamento(Integer iddepartamento) {
+    public QaDepartamento(Integer iddepartamento) {
         this.iddepartamento = iddepartamento;
     }
 
-    public Departamento(Integer iddepartamento, String departamento, boolean activo) {
+    public QaDepartamento(Integer iddepartamento, String departamento, boolean activo) {
         this.iddepartamento = iddepartamento;
         this.departamento = departamento;
         this.activo = activo;
@@ -153,19 +153,19 @@ public class Departamento implements Serializable {
     }
 
     @XmlTransient
-    public List<Municipio> getMunicipioList() {
-        return municipioList;
+    public List<QaMunicipio> getQaMunicipioList() {
+        return qaMunicipioList;
     }
 
-    public void setMunicipioList(List<Municipio> municipioList) {
-        this.municipioList = municipioList;
+    public void setQaMunicipioList(List<QaMunicipio> qaMunicipioList) {
+        this.qaMunicipioList = qaMunicipioList;
     }
 
-    public Region getIdregion() {
+    public QaRegion getIdregion() {
         return idregion;
     }
 
-    public void setIdregion(Region idregion) {
+    public void setIdregion(QaRegion idregion) {
         this.idregion = idregion;
     }
 
@@ -179,10 +179,10 @@ public class Departamento implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Departamento)) {
+        if (!(object instanceof QaDepartamento)) {
             return false;
         }
-        Departamento other = (Departamento) object;
+        QaDepartamento other = (QaDepartamento) object;
         if ((this.iddepartamento == null && other.iddepartamento != null) || (this.iddepartamento != null && !this.iddepartamento.equals(other.iddepartamento))) {
             return false;
         }
@@ -191,7 +191,7 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return "com.diaco.api.entity.Departamento[ iddepartamento=" + iddepartamento + " ]";
+        return "com.diaco.api.entity.QaDepartamento[ iddepartamento=" + iddepartamento + " ]";
     }
     
 }

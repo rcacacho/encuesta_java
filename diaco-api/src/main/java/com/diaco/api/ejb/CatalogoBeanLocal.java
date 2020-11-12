@@ -1,13 +1,13 @@
 package com.diaco.api.ejb;
 
-import com.diaco.api.entity.Departamento;
-import com.diaco.api.entity.Estadoqueja;
-import com.diaco.api.entity.Genero;
-import com.diaco.api.entity.Municipio;
-import com.diaco.api.entity.Perfil;
-import com.diaco.api.entity.Region;
-import com.diaco.api.entity.Tipoconsumidor;
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaDepartamento;
+import com.diaco.api.entity.QaEstadoQueja;
+import com.diaco.api.entity.QaGenero;
+import com.diaco.api.entity.QaMunicipio;
+import com.diaco.api.entity.QaPerfil;
+import com.diaco.api.entity.QaRegion;
+import com.diaco.api.entity.QaTipoConsumidor;
+import com.diaco.api.entity.QaUsuario;
 import java.util.List;
 
 /**
@@ -16,21 +16,21 @@ import java.util.List;
  */
 public interface CatalogoBeanLocal {
 
-    List<Departamento> listDepartamentos();
+    List<QaDepartamento> listDepartamentos();
 
-    List<Municipio> listMunicipioByIdDepartamento(Integer iddepartamento);
+    List<QaMunicipio> listMunicipioByIdDepartamento(Integer iddepartamento);
 
-    List<Tipoconsumidor> listTipoConsumidor();
+    List<QaTipoConsumidor> listTipoConsumidor();
 
-    List<Genero> listGenero();
+    List<QaGenero> listGenero();
 
-    List<Region> listRegion();
+    List<QaRegion> listRegion();
 
-    Estadoqueja findEstadoQuejaById(Integer idestadoqueja);
+    QaEstadoQueja findEstadoQuejaById(Integer idestadoqueja);
 
-    List<Departamento> listDepartamentoByIdRegion(Integer idregion);
+    List<QaDepartamento> listDepartamentoByIdRegion(Integer idregion);
 
-    List<Perfil> listPerfiles();
-    
-    List<Usuario> listUsuario();
+    List<QaPerfil> listPerfiles();
+
+    List<QaUsuario> listUsuario();
 }

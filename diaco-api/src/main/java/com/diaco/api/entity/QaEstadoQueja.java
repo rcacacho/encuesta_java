@@ -27,18 +27,18 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author elfo_
  */
 @Entity
-@Table(name = "estadoqueja")
+@Table(name = "qa_estado_queja")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Estadoqueja.findAll", query = "SELECT e FROM Estadoqueja e"),
-    @NamedQuery(name = "Estadoqueja.findByIdestadoqueja", query = "SELECT e FROM Estadoqueja e WHERE e.idestadoqueja = :idestadoqueja"),
-    @NamedQuery(name = "Estadoqueja.findByEstado", query = "SELECT e FROM Estadoqueja e WHERE e.estado = :estado"),
-    @NamedQuery(name = "Estadoqueja.findByFechacreacion", query = "SELECT e FROM Estadoqueja e WHERE e.fechacreacion = :fechacreacion"),
-    @NamedQuery(name = "Estadoqueja.findByUsuariocreacion", query = "SELECT e FROM Estadoqueja e WHERE e.usuariocreacion = :usuariocreacion"),
-    @NamedQuery(name = "Estadoqueja.findByFechaeliminacion", query = "SELECT e FROM Estadoqueja e WHERE e.fechaeliminacion = :fechaeliminacion"),
-    @NamedQuery(name = "Estadoqueja.findByUsuarioelminacion", query = "SELECT e FROM Estadoqueja e WHERE e.usuarioelminacion = :usuarioelminacion"),
-    @NamedQuery(name = "Estadoqueja.findByActivo", query = "SELECT e FROM Estadoqueja e WHERE e.activo = :activo")})
-public class Estadoqueja implements Serializable {
+    @NamedQuery(name = "QaEstadoQueja.findAll", query = "SELECT q FROM QaEstadoQueja q"),
+    @NamedQuery(name = "QaEstadoQueja.findByIdestadoqueja", query = "SELECT q FROM QaEstadoQueja q WHERE q.idestadoqueja = :idestadoqueja"),
+    @NamedQuery(name = "QaEstadoQueja.findByEstado", query = "SELECT q FROM QaEstadoQueja q WHERE q.estado = :estado"),
+    @NamedQuery(name = "QaEstadoQueja.findByFechacreacion", query = "SELECT q FROM QaEstadoQueja q WHERE q.fechacreacion = :fechacreacion"),
+    @NamedQuery(name = "QaEstadoQueja.findByUsuariocreacion", query = "SELECT q FROM QaEstadoQueja q WHERE q.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "QaEstadoQueja.findByFechaeliminacion", query = "SELECT q FROM QaEstadoQueja q WHERE q.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "QaEstadoQueja.findByUsuarioelminacion", query = "SELECT q FROM QaEstadoQueja q WHERE q.usuarioelminacion = :usuarioelminacion"),
+    @NamedQuery(name = "QaEstadoQueja.findByActivo", query = "SELECT q FROM QaEstadoQueja q WHERE q.activo = :activo")})
+public class QaEstadoQueja implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -68,6 +68,7 @@ public class Estadoqueja implements Serializable {
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
+    
     @Size(max = 25)
     @Column(name = "usuarioelminacion")
     private String usuarioelminacion;
@@ -78,16 +79,16 @@ public class Estadoqueja implements Serializable {
     private boolean activo;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idestadoqueja", fetch = FetchType.LAZY)
-    private List<Queja> quejaList;
+    private List<QaQueja> qaQuejaList;
 
-    public Estadoqueja() {
+    public QaEstadoQueja() {
     }
 
-    public Estadoqueja(Integer idestadoqueja) {
+    public QaEstadoQueja(Integer idestadoqueja) {
         this.idestadoqueja = idestadoqueja;
     }
 
-    public Estadoqueja(Integer idestadoqueja, String estado, Date fechacreacion, String usuariocreacion, boolean activo) {
+    public QaEstadoQueja(Integer idestadoqueja, String estado, Date fechacreacion, String usuariocreacion, boolean activo) {
         this.idestadoqueja = idestadoqueja;
         this.estado = estado;
         this.fechacreacion = fechacreacion;
@@ -152,12 +153,12 @@ public class Estadoqueja implements Serializable {
     }
 
     @XmlTransient
-    public List<Queja> getQuejaList() {
-        return quejaList;
+    public List<QaQueja> getQaQuejaList() {
+        return qaQuejaList;
     }
 
-    public void setQuejaList(List<Queja> quejaList) {
-        this.quejaList = quejaList;
+    public void setQaQuejaList(List<QaQueja> qaQuejaList) {
+        this.qaQuejaList = qaQuejaList;
     }
 
     @Override
@@ -170,10 +171,10 @@ public class Estadoqueja implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Estadoqueja)) {
+        if (!(object instanceof QaEstadoQueja)) {
             return false;
         }
-        Estadoqueja other = (Estadoqueja) object;
+        QaEstadoQueja other = (QaEstadoQueja) object;
         if ((this.idestadoqueja == null && other.idestadoqueja != null) || (this.idestadoqueja != null && !this.idestadoqueja.equals(other.idestadoqueja))) {
             return false;
         }
@@ -182,7 +183,7 @@ public class Estadoqueja implements Serializable {
 
     @Override
     public String toString() {
-        return "com.diaco.api.entity.Estadoqueja[ idestadoqueja=" + idestadoqueja + " ]";
+        return "com.diaco.api.entity.QaEstadoQueja[ idestadoqueja=" + idestadoqueja + " ]";
     }
     
 }

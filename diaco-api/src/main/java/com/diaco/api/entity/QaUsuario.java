@@ -29,23 +29,23 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author elfo_
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "qa_usuario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByIdusuario", query = "SELECT u FROM Usuario u WHERE u.idusuario = :idusuario"),
-    @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = :usuario"),
-    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
-    @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
-    @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
-    @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono"),
-    @NamedQuery(name = "Usuario.findByFechacreacion", query = "SELECT u FROM Usuario u WHERE u.fechacreacion = :fechacreacion"),
-    @NamedQuery(name = "Usuario.findByUsuariocreacion", query = "SELECT u FROM Usuario u WHERE u.usuariocreacion = :usuariocreacion"),
-    @NamedQuery(name = "Usuario.findByFechaeliminacion", query = "SELECT u FROM Usuario u WHERE u.fechaeliminacion = :fechaeliminacion"),
-    @NamedQuery(name = "Usuario.findByUsuarioelminacion", query = "SELECT u FROM Usuario u WHERE u.usuarioelminacion = :usuarioelminacion"),
-    @NamedQuery(name = "Usuario.findByActivo", query = "SELECT u FROM Usuario u WHERE u.activo = :activo")})
-public class Usuario implements Serializable {
+    @NamedQuery(name = "QaUsuario.findAll", query = "SELECT q FROM QaUsuario q"),
+    @NamedQuery(name = "QaUsuario.findByIdusuario", query = "SELECT q FROM QaUsuario q WHERE q.idusuario = :idusuario"),
+    @NamedQuery(name = "QaUsuario.findByUsuario", query = "SELECT q FROM QaUsuario q WHERE q.usuario = :usuario"),
+    @NamedQuery(name = "QaUsuario.findByEmail", query = "SELECT q FROM QaUsuario q WHERE q.email = :email"),
+    @NamedQuery(name = "QaUsuario.findByPassword", query = "SELECT q FROM QaUsuario q WHERE q.password = :password"),
+    @NamedQuery(name = "QaUsuario.findByNombres", query = "SELECT q FROM QaUsuario q WHERE q.nombres = :nombres"),
+    @NamedQuery(name = "QaUsuario.findByApellidos", query = "SELECT q FROM QaUsuario q WHERE q.apellidos = :apellidos"),
+    @NamedQuery(name = "QaUsuario.findByTelefono", query = "SELECT q FROM QaUsuario q WHERE q.telefono = :telefono"),
+    @NamedQuery(name = "QaUsuario.findByFechacreacion", query = "SELECT q FROM QaUsuario q WHERE q.fechacreacion = :fechacreacion"),
+    @NamedQuery(name = "QaUsuario.findByUsuariocreacion", query = "SELECT q FROM QaUsuario q WHERE q.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "QaUsuario.findByFechaeliminacion", query = "SELECT q FROM QaUsuario q WHERE q.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "QaUsuario.findByUsuarioelminacion", query = "SELECT q FROM QaUsuario q WHERE q.usuarioelminacion = :usuarioelminacion"),
+    @NamedQuery(name = "QaUsuario.findByActivo", query = "SELECT q FROM QaUsuario q WHERE q.activo = :activo")})
+public class QaUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -103,21 +103,21 @@ public class Usuario implements Serializable {
     @Column(name = "activo")
     private boolean activo;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario", fetch = FetchType.LAZY)
-    private List<Encargado> encargadoList;
-    
     @JoinColumn(name = "idperfil", referencedColumnName = "idperfil")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Perfil idperfil;
+    private QaPerfil idperfil;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario", fetch = FetchType.LAZY)
+    private List<QaEncargado> qaEncargadoList;
 
-    public Usuario() {
+    public QaUsuario() {
     }
 
-    public Usuario(Integer idusuario) {
+    public QaUsuario(Integer idusuario) {
         this.idusuario = idusuario;
     }
 
-    public Usuario(Integer idusuario, String usuariocreacion, String usuarioelminacion, boolean activo) {
+    public QaUsuario(Integer idusuario, String usuariocreacion, String usuarioelminacion, boolean activo) {
         this.idusuario = idusuario;
         this.usuariocreacion = usuariocreacion;
         this.usuarioelminacion = usuarioelminacion;
@@ -220,21 +220,21 @@ public class Usuario implements Serializable {
         this.activo = activo;
     }
 
-    @XmlTransient
-    public List<Encargado> getEncargadoList() {
-        return encargadoList;
-    }
-
-    public void setEncargadoList(List<Encargado> encargadoList) {
-        this.encargadoList = encargadoList;
-    }
-
-    public Perfil getIdperfil() {
+    public QaPerfil getIdperfil() {
         return idperfil;
     }
 
-    public void setIdperfil(Perfil idperfil) {
+    public void setIdperfil(QaPerfil idperfil) {
         this.idperfil = idperfil;
+    }
+
+    @XmlTransient
+    public List<QaEncargado> getQaEncargadoList() {
+        return qaEncargadoList;
+    }
+
+    public void setQaEncargadoList(List<QaEncargado> qaEncargadoList) {
+        this.qaEncargadoList = qaEncargadoList;
     }
 
     @Override
@@ -247,10 +247,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof QaUsuario)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        QaUsuario other = (QaUsuario) object;
         if ((this.idusuario == null && other.idusuario != null) || (this.idusuario != null && !this.idusuario.equals(other.idusuario))) {
             return false;
         }
@@ -259,7 +259,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.diaco.api.entity.Usuario[ idusuario=" + idusuario + " ]";
+        return "com.diaco.api.entity.QaUsuario[ idusuario=" + idusuario + " ]";
     }
     
 }

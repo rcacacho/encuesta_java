@@ -1,6 +1,6 @@
 package com.diaco.api.ejb;
 
-import com.diaco.api.entity.Perfil;
+import com.diaco.api.entity.QaPerfil;
 import java.util.List;
 
 /**
@@ -9,14 +9,14 @@ import java.util.List;
  */
 public interface PerfilBeanLocal {
 
-    Perfil savePerfil(Perfil perfil);
+    QaPerfil savePerfil(QaPerfil perfil);
 
-    Perfil findPerfil(Integer idperfil);
+    QaPerfil findPerfil(Integer idperfil);
 
-    List<Perfil> ListPerfil();
-    
-    Perfil eliminarPerfil(Integer idperfil);
-    
-    Perfil actualizarPerfil(Perfil perfil);
+    List<QaPerfil> ListPerfil();
+
+    QaPerfil eliminarPerfil(Integer idperfil);
+
+    QaPerfil actualizarPerfil(QaPerfil perfil);
 
 }

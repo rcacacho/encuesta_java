@@ -27,19 +27,19 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author elfo_
  */
 @Entity
-@Table(name = "perfil")
+@Table(name = "qa_perfil")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p"),
-    @NamedQuery(name = "Perfil.findByIdperfil", query = "SELECT p FROM Perfil p WHERE p.idperfil = :idperfil"),
-    @NamedQuery(name = "Perfil.findByNombre", query = "SELECT p FROM Perfil p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Perfil.findByDescripcion", query = "SELECT p FROM Perfil p WHERE p.descripcion = :descripcion"),
-    @NamedQuery(name = "Perfil.findByFechacreacion", query = "SELECT p FROM Perfil p WHERE p.fechacreacion = :fechacreacion"),
-    @NamedQuery(name = "Perfil.findByUsuariocreacion", query = "SELECT p FROM Perfil p WHERE p.usuariocreacion = :usuariocreacion"),
-    @NamedQuery(name = "Perfil.findByFechaeliminacion", query = "SELECT p FROM Perfil p WHERE p.fechaeliminacion = :fechaeliminacion"),
-    @NamedQuery(name = "Perfil.findByUsuarioelminacion", query = "SELECT p FROM Perfil p WHERE p.usuarioelminacion = :usuarioelminacion"),
-    @NamedQuery(name = "Perfil.findByActivo", query = "SELECT p FROM Perfil p WHERE p.activo = :activo")})
-public class Perfil implements Serializable {
+    @NamedQuery(name = "QaPerfil.findAll", query = "SELECT q FROM QaPerfil q"),
+    @NamedQuery(name = "QaPerfil.findByIdperfil", query = "SELECT q FROM QaPerfil q WHERE q.idperfil = :idperfil"),
+    @NamedQuery(name = "QaPerfil.findByNombre", query = "SELECT q FROM QaPerfil q WHERE q.nombre = :nombre"),
+    @NamedQuery(name = "QaPerfil.findByDescripcion", query = "SELECT q FROM QaPerfil q WHERE q.descripcion = :descripcion"),
+    @NamedQuery(name = "QaPerfil.findByFechacreacion", query = "SELECT q FROM QaPerfil q WHERE q.fechacreacion = :fechacreacion"),
+    @NamedQuery(name = "QaPerfil.findByUsuariocreacion", query = "SELECT q FROM QaPerfil q WHERE q.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "QaPerfil.findByFechaeliminacion", query = "SELECT q FROM QaPerfil q WHERE q.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "QaPerfil.findByUsuarioelminacion", query = "SELECT q FROM QaPerfil q WHERE q.usuarioelminacion = :usuarioelminacion"),
+    @NamedQuery(name = "QaPerfil.findByActivo", query = "SELECT q FROM QaPerfil q WHERE q.activo = :activo")})
+public class QaPerfil implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -80,16 +80,16 @@ public class Perfil implements Serializable {
     private boolean activo;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idperfil", fetch = FetchType.LAZY)
-    private List<Usuario> usuarioList;
+    private List<QaUsuario> qaUsuarioList;
 
-    public Perfil() {
+    public QaPerfil() {
     }
 
-    public Perfil(Integer idperfil) {
+    public QaPerfil(Integer idperfil) {
         this.idperfil = idperfil;
     }
 
-    public Perfil(Integer idperfil, String usuariocreacion, boolean activo) {
+    public QaPerfil(Integer idperfil, String usuariocreacion, boolean activo) {
         this.idperfil = idperfil;
         this.usuariocreacion = usuariocreacion;
         this.activo = activo;
@@ -160,12 +160,12 @@ public class Perfil implements Serializable {
     }
 
     @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
+    public List<QaUsuario> getQaUsuarioList() {
+        return qaUsuarioList;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setQaUsuarioList(List<QaUsuario> qaUsuarioList) {
+        this.qaUsuarioList = qaUsuarioList;
     }
 
     @Override
@@ -178,10 +178,10 @@ public class Perfil implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Perfil)) {
+        if (!(object instanceof QaPerfil)) {
             return false;
         }
-        Perfil other = (Perfil) object;
+        QaPerfil other = (QaPerfil) object;
         if ((this.idperfil == null && other.idperfil != null) || (this.idperfil != null && !this.idperfil.equals(other.idperfil))) {
             return false;
         }
@@ -190,7 +190,7 @@ public class Perfil implements Serializable {
 
     @Override
     public String toString() {
-        return "com.diaco.api.entity.Perfil[ idperfil=" + idperfil + " ]";
+        return "com.diaco.api.entity.QaPerfil[ idperfil=" + idperfil + " ]";
     }
     
 }

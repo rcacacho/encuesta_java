@@ -11,8 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,31 +27,31 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author elfo_
  */
 @Entity
-@Table(name = "municipio")
+@Table(name = "qa_tipo_consumidor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Municipio.findAll", query = "SELECT m FROM Municipio m"),
-    @NamedQuery(name = "Municipio.findByIdmunicipio", query = "SELECT m FROM Municipio m WHERE m.idmunicipio = :idmunicipio"),
-    @NamedQuery(name = "Municipio.findByMunicipio", query = "SELECT m FROM Municipio m WHERE m.municipio = :municipio"),
-    @NamedQuery(name = "Municipio.findByFechacreacion", query = "SELECT m FROM Municipio m WHERE m.fechacreacion = :fechacreacion"),
-    @NamedQuery(name = "Municipio.findByUsuariocreacion", query = "SELECT m FROM Municipio m WHERE m.usuariocreacion = :usuariocreacion"),
-    @NamedQuery(name = "Municipio.findByFechaeliminacion", query = "SELECT m FROM Municipio m WHERE m.fechaeliminacion = :fechaeliminacion"),
-    @NamedQuery(name = "Municipio.findByUsuarioeliminacion", query = "SELECT m FROM Municipio m WHERE m.usuarioeliminacion = :usuarioeliminacion"),
-    @NamedQuery(name = "Municipio.findByActivo", query = "SELECT m FROM Municipio m WHERE m.activo = :activo")})
-public class Municipio implements Serializable {
+    @NamedQuery(name = "QaTipoConsumidor.findAll", query = "SELECT q FROM QaTipoConsumidor q"),
+    @NamedQuery(name = "QaTipoConsumidor.findByIdtipoconsumidor", query = "SELECT q FROM QaTipoConsumidor q WHERE q.idtipoconsumidor = :idtipoconsumidor"),
+    @NamedQuery(name = "QaTipoConsumidor.findByConsumidor", query = "SELECT q FROM QaTipoConsumidor q WHERE q.consumidor = :consumidor"),
+    @NamedQuery(name = "QaTipoConsumidor.findByFechacreacion", query = "SELECT q FROM QaTipoConsumidor q WHERE q.fechacreacion = :fechacreacion"),
+    @NamedQuery(name = "QaTipoConsumidor.findByUsuariocreacion", query = "SELECT q FROM QaTipoConsumidor q WHERE q.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "QaTipoConsumidor.findByFechaeliminacion", query = "SELECT q FROM QaTipoConsumidor q WHERE q.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "QaTipoConsumidor.findByUsuarioeliminacion", query = "SELECT q FROM QaTipoConsumidor q WHERE q.usuarioeliminacion = :usuarioeliminacion"),
+    @NamedQuery(name = "QaTipoConsumidor.findByActivo", query = "SELECT q FROM QaTipoConsumidor q WHERE q.activo = :activo")})
+public class QaTipoConsumidor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idmunicipio")
-    private Integer idmunicipio;
+    @Column(name = "idtipoconsumidor")
+    private Integer idtipoconsumidor;
     
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
-    @Column(name = "municipio")
-    private String municipio;
+    @Column(name = "consumidor")
+    private String consumidor;
     
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
@@ -76,40 +74,36 @@ public class Municipio implements Serializable {
     @Column(name = "activo")
     private boolean activo;
     
-    @JoinColumn(name = "iddepartamento", referencedColumnName = "iddepartamento")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Departamento iddepartamento;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmunicipio", fetch = FetchType.LAZY)
-    private List<Queja> quejaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipoconsumidor", fetch = FetchType.LAZY)
+    private List<QaQueja> qaQuejaList;
 
-    public Municipio() {
+    public QaTipoConsumidor() {
     }
 
-    public Municipio(Integer idmunicipio) {
-        this.idmunicipio = idmunicipio;
+    public QaTipoConsumidor(Integer idtipoconsumidor) {
+        this.idtipoconsumidor = idtipoconsumidor;
     }
 
-    public Municipio(Integer idmunicipio, String municipio, boolean activo) {
-        this.idmunicipio = idmunicipio;
-        this.municipio = municipio;
+    public QaTipoConsumidor(Integer idtipoconsumidor, String consumidor, boolean activo) {
+        this.idtipoconsumidor = idtipoconsumidor;
+        this.consumidor = consumidor;
         this.activo = activo;
     }
 
-    public Integer getIdmunicipio() {
-        return idmunicipio;
+    public Integer getIdtipoconsumidor() {
+        return idtipoconsumidor;
     }
 
-    public void setIdmunicipio(Integer idmunicipio) {
-        this.idmunicipio = idmunicipio;
+    public void setIdtipoconsumidor(Integer idtipoconsumidor) {
+        this.idtipoconsumidor = idtipoconsumidor;
     }
 
-    public String getMunicipio() {
-        return municipio;
+    public String getConsumidor() {
+        return consumidor;
     }
 
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
+    public void setConsumidor(String consumidor) {
+        this.consumidor = consumidor;
     }
 
     public Date getFechacreacion() {
@@ -152,38 +146,30 @@ public class Municipio implements Serializable {
         this.activo = activo;
     }
 
-    public Departamento getIddepartamento() {
-        return iddepartamento;
-    }
-
-    public void setIddepartamento(Departamento iddepartamento) {
-        this.iddepartamento = iddepartamento;
-    }
-
     @XmlTransient
-    public List<Queja> getQuejaList() {
-        return quejaList;
+    public List<QaQueja> getQaQuejaList() {
+        return qaQuejaList;
     }
 
-    public void setQuejaList(List<Queja> quejaList) {
-        this.quejaList = quejaList;
+    public void setQaQuejaList(List<QaQueja> qaQuejaList) {
+        this.qaQuejaList = qaQuejaList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idmunicipio != null ? idmunicipio.hashCode() : 0);
+        hash += (idtipoconsumidor != null ? idtipoconsumidor.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Municipio)) {
+        if (!(object instanceof QaTipoConsumidor)) {
             return false;
         }
-        Municipio other = (Municipio) object;
-        if ((this.idmunicipio == null && other.idmunicipio != null) || (this.idmunicipio != null && !this.idmunicipio.equals(other.idmunicipio))) {
+        QaTipoConsumidor other = (QaTipoConsumidor) object;
+        if ((this.idtipoconsumidor == null && other.idtipoconsumidor != null) || (this.idtipoconsumidor != null && !this.idtipoconsumidor.equals(other.idtipoconsumidor))) {
             return false;
         }
         return true;
@@ -191,7 +177,7 @@ public class Municipio implements Serializable {
 
     @Override
     public String toString() {
-        return "com.diaco.api.entity.Municipio[ idmunicipio=" + idmunicipio + " ]";
+        return "com.diaco.api.entity.QaTipoConsumidor[ idtipoconsumidor=" + idtipoconsumidor + " ]";
     }
     
 }

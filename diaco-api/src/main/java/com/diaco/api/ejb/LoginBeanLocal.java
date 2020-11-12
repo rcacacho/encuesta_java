@@ -1,6 +1,6 @@
 package com.diaco.api.ejb;
 
-import com.diaco.api.entity.Usuario;
+import com.diaco.api.entity.QaUsuario;
 
 /**
  *
@@ -8,9 +8,9 @@ import com.diaco.api.entity.Usuario;
  */
 public interface LoginBeanLocal {
 
-    Usuario verificarUsuario(String usuario, String password);
+    QaUsuario verificarUsuario(String usuario, String password);
 
-    Usuario saveUsuario(Usuario colaborador);
+    QaUsuario saveUsuario(QaUsuario colaborador);
 
     String findUsuario(String usuario);
 

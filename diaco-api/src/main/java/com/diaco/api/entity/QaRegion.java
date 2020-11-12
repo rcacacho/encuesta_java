@@ -27,37 +27,39 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author elfo_
  */
 @Entity
-@Table(name = "genero")
+@Table(name = "qa_region")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Genero.findAll", query = "SELECT g FROM Genero g"),
-    @NamedQuery(name = "Genero.findByIdgenero", query = "SELECT g FROM Genero g WHERE g.idgenero = :idgenero"),
-    @NamedQuery(name = "Genero.findByGenero", query = "SELECT g FROM Genero g WHERE g.genero = :genero"),
-    @NamedQuery(name = "Genero.findByFechacreacion", query = "SELECT g FROM Genero g WHERE g.fechacreacion = :fechacreacion"),
-    @NamedQuery(name = "Genero.findByUsuariocreacion", query = "SELECT g FROM Genero g WHERE g.usuariocreacion = :usuariocreacion"),
-    @NamedQuery(name = "Genero.findByFechaeliminacion", query = "SELECT g FROM Genero g WHERE g.fechaeliminacion = :fechaeliminacion"),
-    @NamedQuery(name = "Genero.findByUsuarioeliminacion", query = "SELECT g FROM Genero g WHERE g.usuarioeliminacion = :usuarioeliminacion"),
-    @NamedQuery(name = "Genero.findByActivo", query = "SELECT g FROM Genero g WHERE g.activo = :activo")})
-public class Genero implements Serializable {
+    @NamedQuery(name = "QaRegion.findAll", query = "SELECT q FROM QaRegion q"),
+    @NamedQuery(name = "QaRegion.findByIdregion", query = "SELECT q FROM QaRegion q WHERE q.idregion = :idregion"),
+    @NamedQuery(name = "QaRegion.findByRegion", query = "SELECT q FROM QaRegion q WHERE q.region = :region"),
+    @NamedQuery(name = "QaRegion.findByFechacreacio", query = "SELECT q FROM QaRegion q WHERE q.fechacreacio = :fechacreacio"),
+    @NamedQuery(name = "QaRegion.findByUsuariocreacion", query = "SELECT q FROM QaRegion q WHERE q.usuariocreacion = :usuariocreacion"),
+    @NamedQuery(name = "QaRegion.findByFechaeliminacion", query = "SELECT q FROM QaRegion q WHERE q.fechaeliminacion = :fechaeliminacion"),
+    @NamedQuery(name = "QaRegion.findByUsuarioeliminacion", query = "SELECT q FROM QaRegion q WHERE q.usuarioeliminacion = :usuarioeliminacion"),
+    @NamedQuery(name = "QaRegion.findByActivo", query = "SELECT q FROM QaRegion q WHERE q.activo = :activo")})
+public class QaRegion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idgenero")
-    private Integer idgenero;
+    @Column(name = "idregion")
+    private Integer idregion;
     
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
-    @Column(name = "genero")
-    private String genero;
+    @Column(name = "region")
+    private String region;
     
-    @Column(name = "fechacreacion")
+    @Column(name = "fechacreacio")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechacreacion;
+    private Date fechacreacio;
     
-    @Size(max = 25)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
     
@@ -74,44 +76,45 @@ public class Genero implements Serializable {
     @Column(name = "activo")
     private boolean activo;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgenero", fetch = FetchType.LAZY)
-    private List<Queja> quejaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idregion", fetch = FetchType.LAZY)
+    private List<QaDepartamento> qaDepartamentoList;
 
-    public Genero() {
+    public QaRegion() {
     }
 
-    public Genero(Integer idgenero) {
-        this.idgenero = idgenero;
+    public QaRegion(Integer idregion) {
+        this.idregion = idregion;
     }
 
-    public Genero(Integer idgenero, String genero, boolean activo) {
-        this.idgenero = idgenero;
-        this.genero = genero;
+    public QaRegion(Integer idregion, String region, String usuariocreacion, boolean activo) {
+        this.idregion = idregion;
+        this.region = region;
+        this.usuariocreacion = usuariocreacion;
         this.activo = activo;
     }
 
-    public Integer getIdgenero() {
-        return idgenero;
+    public Integer getIdregion() {
+        return idregion;
     }
 
-    public void setIdgenero(Integer idgenero) {
-        this.idgenero = idgenero;
+    public void setIdregion(Integer idregion) {
+        this.idregion = idregion;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getRegion() {
+        return region;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public Date getFechacreacion() {
-        return fechacreacion;
+    public Date getFechacreacio() {
+        return fechacreacio;
     }
 
-    public void setFechacreacion(Date fechacreacion) {
-        this.fechacreacion = fechacreacion;
+    public void setFechacreacio(Date fechacreacio) {
+        this.fechacreacio = fechacreacio;
     }
 
     public String getUsuariocreacion() {
@@ -147,29 +150,29 @@ public class Genero implements Serializable {
     }
 
     @XmlTransient
-    public List<Queja> getQuejaList() {
-        return quejaList;
+    public List<QaDepartamento> getQaDepartamentoList() {
+        return qaDepartamentoList;
     }
 
-    public void setQuejaList(List<Queja> quejaList) {
-        this.quejaList = quejaList;
+    public void setQaDepartamentoList(List<QaDepartamento> qaDepartamentoList) {
+        this.qaDepartamentoList = qaDepartamentoList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idgenero != null ? idgenero.hashCode() : 0);
+        hash += (idregion != null ? idregion.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Genero)) {
+        if (!(object instanceof QaRegion)) {
             return false;
         }
-        Genero other = (Genero) object;
-        if ((this.idgenero == null && other.idgenero != null) || (this.idgenero != null && !this.idgenero.equals(other.idgenero))) {
+        QaRegion other = (QaRegion) object;
+        if ((this.idregion == null && other.idregion != null) || (this.idregion != null && !this.idregion.equals(other.idregion))) {
             return false;
         }
         return true;
@@ -177,7 +180,7 @@ public class Genero implements Serializable {
 
     @Override
     public String toString() {
-        return "com.diaco.api.entity.Genero[ idgenero=" + idgenero + " ]";
+        return "com.diaco.api.entity.QaRegion[ idregion=" + idregion + " ]";
     }
     
 }
