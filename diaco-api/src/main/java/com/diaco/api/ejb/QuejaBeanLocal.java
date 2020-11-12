@@ -27,4 +27,10 @@ public interface QuejaBeanLocal {
 
     List<Encargado> listEncagardoByIdQueja(Integer idqueja);
 
+    Queja rechazoQueja(Integer idQueja);
+    
+    Queja seguimientoQueja(Integer idQueja);
+    
+    List<Encargado> listEncagardo();
+
 }
