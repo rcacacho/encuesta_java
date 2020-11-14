@@ -116,9 +116,9 @@ public class UsuarioBean implements UsuarioBeanLocal {
     }
 
     @Override
-    public QaPerfil findPerfilIdUsuario(Integer idPerfil) {
-        List<QaPerfil> lst = em.createQuery("SELECT us.idperfil FROM QaUsuario us WHERE us.idperfil.idperfil =:idPerfil and us.activo = true", QaPerfil.class)
-                .setParameter("idperfil", idPerfil)
+    public QaPerfil findPerfilIdUsuario(String usuario) {
+        List<QaPerfil> lst = em.createQuery("SELECT us.idperfil FROM QaUsuario us WHERE us.usuario =:usuario and us.activo = true", QaPerfil.class)
+                .setParameter("usuario", usuario)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
