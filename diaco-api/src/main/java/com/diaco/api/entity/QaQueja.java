@@ -1,5 +1,6 @@
 package com.diaco.api.entity;
 
+import com.diaco.api.enums.Estado;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -46,47 +47,47 @@ public class QaQueja implements Serializable {
     @Basic(optional = false)
     @Column(name = "idqueja")
     private Integer idqueja;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
     @Column(name = "nombrecomercio")
     private String nombrecomercio;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "direccioncomercio")
     private String direccioncomercio;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "telefonocomercio")
     private String telefonocomercio;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @JoinColumn(name = "idestadoqueja", referencedColumnName = "idestadoqueja")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private QaEstadoQueja idestadoqueja;
-    
+
     @JoinColumn(name = "idgenero", referencedColumnName = "idgenero")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private QaGenero idgenero;
-    
+
     @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private QaMunicipio idmunicipio;
-    
+
     @JoinColumn(name = "idtipoconsumidor", referencedColumnName = "idtipoconsumidor")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private QaTipoConsumidor idtipoconsumidor;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idqueja", fetch = FetchType.LAZY)
     private List<QaEncargado> qaEncargadoList;
 
@@ -210,5 +211,20 @@ public class QaQueja implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.QaQueja[ idqueja=" + idqueja + " ]";
     }
-    
+
+    public String getStyleClass() {
+        if (idestadoqueja != null) {
+            if (Estado.RECHAZADA.getValue() == idestadoqueja.getIdestadoqueja()) {
+                return "rowColorRojo";
+            } else if (Estado.REGISTRADA.getValue() == idestadoqueja.getIdestadoqueja()) {
+                return "rowColorBlanco";
+            } else if (Estado.INVESTIGACION.getValue() == idestadoqueja.getIdestadoqueja()) {
+                return "rowColorCeleste";
+            } else if (Estado.FINALIZADA.getValue() == idestadoqueja.getIdestadoqueja()) {
+                return "rowColorVerdeClaro";
+            }
+        }
+        return "";
+    }
+
 }
