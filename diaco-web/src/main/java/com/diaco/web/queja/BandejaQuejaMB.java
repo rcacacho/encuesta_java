@@ -6,7 +6,7 @@ import com.diaco.api.entity.QaEncargado;
 import com.diaco.api.entity.QaQueja;
 import com.diaco.api.entity.QaUsuario;
 import com.diaco.web.utils.JsfUtil;
-import com.diaco.web.utils.UtilMB;
+import com.diaco.web.utils.SesionUsuarioMB;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class BandejaQuejaMB implements Serializable {
         asignacion.setIdqueja(queja);
         asignacion.setIdusuario(selectedUsuario);
         asignacion.setObservacion(observacion);
-        asignacion.setUsuariocreacion(UtilMB.getUserName());
+        asignacion.setUsuariocreacion(SesionUsuarioMB.getUserName());
         QaEncargado response = quejaBean.asignacionQueja(asignacion);
         if (response != null) {
             RequestContext.getCurrentInstance().execute("PF('dlgAsignacion').hide()");

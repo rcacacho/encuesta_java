@@ -4,7 +4,7 @@ import com.diaco.api.ejb.QuejaBeanLocal;
 import com.diaco.web.utils.JasperUtil;
 import com.diaco.web.utils.JsfUtil;
 import com.diaco.web.utils.ReporteJasper;
-import com.diaco.web.utils.UtilMB;
+import com.diaco.web.utils.SesionUsuarioMB;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.Serializable;
@@ -49,7 +49,7 @@ public class ReporteMB implements Serializable {
             HashMap parametros = new HashMap();
             parametros.put("IMAGE", "umg.png");
             parametros.put("DIRECTORIO", realPath + File.separator + "resources" + File.separator + "images" + File.separator);
-            parametros.put("USUARIO", UtilMB.getUserName());
+            parametros.put("USUARIO", SesionUsuarioMB.getUserName());
             ReporteJasper reporteJasper = JasperUtil.jasperReportPDF(nombreReporte, nombreArchivo, parametros, dataSource);
             StreamedContent streamedContent;
             FileInputStream stream = new FileInputStream(realPath + "resources/reports/" + reporteJasper.getFileName());
@@ -71,7 +71,7 @@ public class ReporteMB implements Serializable {
             HashMap parametros = new HashMap();
             parametros.put("IMAGE", "umg.png");
             parametros.put("DIRECTORIO", realPath + File.separator + "resources" + File.separator + "images" + File.separator);
-            parametros.put("USUARIO", UtilMB.getUserName());
+            parametros.put("USUARIO", SesionUsuarioMB.getUserName());
             ReporteJasper reporteJasper = JasperUtil.jasperReportPDF(nombreReporte, nombreArchivo, parametros, dataSource);
             StreamedContent streamedContent;
             FileInputStream stream = new FileInputStream(realPath + "resources/reports/" + reporteJasper.getFileName());
@@ -93,7 +93,7 @@ public class ReporteMB implements Serializable {
             HashMap parametros = new HashMap();
             parametros.put("IMAGE", "umg.png");
             parametros.put("DIRECTORIO", realPath + File.separator + "resources" + File.separator + "images" + File.separator);
-            parametros.put("USUARIO", UtilMB.getUserName());
+            parametros.put("USUARIO", SesionUsuarioMB.getUserName());
             parametros.put("FECHA_INICIO", fechaIncio);
             parametros.put("FECHA_FIN", fechaFin);
             ReporteJasper reporteJasper = JasperUtil.jasperReportPDF(nombreReporte, nombreArchivo, parametros, dataSource);

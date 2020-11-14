@@ -5,7 +5,7 @@ import com.diaco.api.ejb.UsuarioBeanLocal;
 import com.diaco.api.entity.QaPerfil;
 import com.diaco.api.entity.QaUsuario;
 import com.diaco.web.utils.JsfUtil;
-import com.diaco.web.utils.UtilMB;
+import com.diaco.web.utils.SesionUsuarioMB;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -51,7 +51,7 @@ public class RegistroUsuarioMB implements Serializable {
         usuario.setIdperfil(selectedPerfil);
         String contra = md5(password);
         usuario.setPassword(contra);
-        usuario.setUsuariocreacion(UtilMB.getUserName());
+        usuario.setUsuariocreacion(SesionUsuarioMB.getUserName());
         QaUsuario response = usuarioBean.saveUsuario(usuario);
     }
 

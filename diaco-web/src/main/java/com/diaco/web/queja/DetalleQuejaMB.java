@@ -37,7 +37,7 @@ public class DetalleQuejaMB implements Serializable {
     }
 
     public void regresar() {
-        JsfUtil.redirectTo("/queja/bandeja.xhtml");
+        JsfUtil.redirectTo("/queja-configuracion/bandeja.xhtml");
     }
 
     public void rechazar() {

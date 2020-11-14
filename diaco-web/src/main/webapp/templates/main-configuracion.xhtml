@@ -5,17 +5,21 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="frm_menu" >
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{menuMB.cargarDatos()}" />
+        </f:metadata>
+
         <p:menubar style="border: 1px solid #ccc; font-size: small; height: 30px; margin-top: 48px;"  autoDisplay="false" >
 
-            <p:submenu label="Queja" icon="ui-icon-comment"> 
-                <p:menuitem value="Seguimiento" url="/queja/bandeja.xhtml"/>
+            <p:submenu label="Queja" icon="ui-icon-comment" rendered="#{menuMB.perfil.idperfil eq 1 || menuMB.perfil.idperfil eq 2}"> 
+                <p:menuitem value="Seguimiento" url="/queja-configuracion/bandeja.xhtml"/>
             </p:submenu>
 
-            <p:submenu label="Usuario" icon="ui-icon-person">  
+            <p:submenu label="Usuario" icon="ui-icon-person" rendered="#{menuMB.perfil.idperfil eq 1}">  
                 <p:menuitem value="Consulta" outcome="/usuario/lista.xhtml" style="width: 90px;"/>
                 <p:menuitem value="Registro" outcome="/usuario/registro.xhtml" style="width: 90px;"/>
             </p:submenu>
-            
+
             <p:submenu label="Asignación" icon="ui-icon-lightbulb">  
                 <p:menuitem value="Consulta" outcome="/asignacion/bandeja.xhtml" style="width: 90px;"/>
             </p:submenu>

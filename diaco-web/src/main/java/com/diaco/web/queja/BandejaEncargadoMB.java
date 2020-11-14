@@ -3,6 +3,8 @@ package com.diaco.web.queja;
 import com.diaco.api.ejb.QuejaBeanLocal;
 import com.diaco.api.entity.QaEncargado;
 import com.diaco.web.utils.JsfUtil;
+import com.diaco.web.utils.SesionUsuarioMB;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +36,11 @@ public class BandejaEncargadoMB implements Serializable {
         listEncargado = new ArrayList<>();
     }
 
-    public void cargarDatos() {
+    public void cargarDatos() throws IOException {
+        if (SesionUsuarioMB.getUserName() == null) {
+            JsfUtil.redirectTo("/menu/menu.xhtml");
+        }
+
         List<QaEncargado> responseEncargado = quejaBean.listEncagardo();
         if (responseEncargado != null) {
             listEncargado = responseEncargado;
@@ -47,8 +53,8 @@ public class BandejaEncargadoMB implements Serializable {
         idQueja = null;
         listEncargado = null;
     }
-    
-     public void buscarQueja() {
+
+    public void buscarQueja() {
         List<QaEncargado> response = quejaBean.listEncagardo();
         if (response != null) {
             listEncargado = response;

@@ -3,7 +3,7 @@ package com.diaco.web.perfil;
 import com.diaco.api.ejb.PerfilBeanLocal;
 import com.diaco.api.entity.QaPerfil;
 import com.diaco.web.utils.JsfUtil;
-import com.diaco.web.utils.UtilMB;
+import com.diaco.web.utils.SesionUsuarioMB;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -31,7 +31,7 @@ public class RegistroPerfilMB implements Serializable {
     }
 
     public void crearPerfil() throws IOException {
-        perfil.setUsuariocreacion(UtilMB.getUserName());
+        perfil.setUsuariocreacion(SesionUsuarioMB.getUserName());
         QaPerfil response = perfilBean.savePerfil(perfil);
         if (response != null) {
             JsfUtil.addSuccessMessage("Se creo el perfil exitosamente!");
