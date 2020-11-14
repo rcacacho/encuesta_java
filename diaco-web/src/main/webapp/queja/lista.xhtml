@@ -49,7 +49,7 @@
                 <br/>
 
                 <p:dataTable id="dt_queja" var="col" value="#{consultaQuejaMB.listQueja}"
-                             emptyMessage="No hay registros encontrados" 
+                             emptyMessage="No hay registros encontrados" rowStyleClass="#{col.styleClass}"
                              styleClass="tabla-mp" style="width: 85%" rowIndexVar="rowId"
                              rows="10" paginator="#{consultaQuejaMB.listQueja.size()>5}"  paginatorPosition="bottom">
 
@@ -82,8 +82,37 @@
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </p:outputLabel>
                     </p:column>
-                    
+
                 </p:dataTable>
+
+                <div align="center" style="margin-top: 15px;">
+                    <p:panelGrid columns="4" style="text-align: center !important;" styleClass="no-border" >
+                        <p:outputPanel style="width: 75px;">
+                            <div align="center">
+                                <div id="rectangle" class="rowColorBlanco"  style="border: 1px solid black;"/>
+                            </div>
+                            Registrada
+                        </p:outputPanel>
+                        <p:outputPanel style="width: 75px;">
+                            <div align="center">
+                                <div id="rectangle" class="rowColorCeleste"  style="border: 1px solid black;"/>
+                            </div>
+                            Investigación
+                        </p:outputPanel>
+                        <p:outputPanel style="width: 75px;">
+                            <div align="center">
+                                <div id="rectangle" class="rowColorRojo" style="border: 1px solid black;"/>
+                            </div>
+                            Rechazada
+                        </p:outputPanel>
+                        <p:outputPanel style="width: 75px;">
+                            <div align="center">
+                                <div id="rectangle" class="rowColorVerdeClaro" style="border: 1px solid black;"/>
+                            </div>
+                            Finalizada
+                        </p:outputPanel>
+                    </p:panelGrid>
+                </div>
             </div>
         </h:form>
     </ui:define>

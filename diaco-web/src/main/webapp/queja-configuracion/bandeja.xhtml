@@ -82,7 +82,7 @@
                         <p:outputLabel value="#{col.idmunicipio.municipio}"/>
                     </p:column>
 
-                    <p:column headerText="Estado" width="15%" >
+                    <p:column headerText="Estado" width="18%" >
                         <p:outputLabel value="#{col.idestadoqueja.estado}"/>
                     </p:column>
 
@@ -92,21 +92,50 @@
                         </p:outputLabel>
                     </p:column>
 
-                    <p:column width="20%" exportable="false" >
-                        <p:commandButton value="Asignar" 
+                    <p:column width="15%" exportable="false" >
+                        <p:commandButton value="" title="Asignar" 
                                          style="float:left!important; margin-left:7.5% !important;" process="@this" 
-                                         styleClass="button-16 b-greylight-16" icon="ui-icon-note"
+                                         styleClass="button-16 b-greylight-16 no-border" icon="ui-icon-note"
                                          action="#{bandejaQuejaMB.dialogAsignacion(col)}" update="@form"/>
                     </p:column>
-                    
-                    <p:column width="20%" exportable="false" >
-                        <p:commandButton value="Detalle" 
+
+                    <p:column width="15%" exportable="false" >
+                        <p:commandButton value="" title="Detalle" 
                                          style="float:left!important; margin-left:7.5% !important;" process="@this" 
-                                         styleClass="button-16 b-greylight-16" icon="ui-icon-search"
+                                         styleClass="button-16 b-greylight-16 no-border" icon="ui-icon-search"
                                          action="#{bandejaQuejaMB.detalleQueja(col.idqueja)}" update="@form"/>
                     </p:column>
 
                 </p:dataTable>
+
+                <div align="center" style="margin-top: 15px;">
+                    <p:panelGrid columns="4" style="text-align: center !important;" styleClass="no-border" >
+                        <p:outputPanel style="width: 75px;">
+                            <div align="center">
+                                <div id="rectangle" class="rowColorBlanco"  style="border: 1px solid black;"/>
+                            </div>
+                            Registrada
+                        </p:outputPanel>
+                        <p:outputPanel style="width: 75px;">
+                            <div align="center">
+                                <div id="rectangle" class="rowColorCeleste"  style="border: 1px solid black;"/>
+                            </div>
+                            Investigación
+                        </p:outputPanel>
+                        <p:outputPanel style="width: 75px;">
+                            <div align="center">
+                                <div id="rectangle" class="rowColorRojo" style="border: 1px solid black;"/>
+                            </div>
+                            Rechazada
+                        </p:outputPanel>
+                        <p:outputPanel style="width: 75px;">
+                            <div align="center">
+                                <div id="rectangle" class="rowColorVerdeClaro" style="border: 1px solid black;"/>
+                            </div>
+                            Finalizada
+                        </p:outputPanel>
+                    </p:panelGrid>
+                </div>
             </div> 
         </h:form>
 
