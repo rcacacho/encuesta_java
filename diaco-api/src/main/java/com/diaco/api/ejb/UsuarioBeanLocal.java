@@ -18,7 +18,7 @@ public interface UsuarioBeanLocal {
 
     QaUsuario reinicioPassword(Integer idusuario, String password);
 
-    QaPerfil findPerfilIdUsuario(Integer idPerfil);
+    QaPerfil findPerfilIdUsuario(String usuario);
 
     QaUsuario eliminarUsuario(Integer idusuario);
 

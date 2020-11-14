@@ -53,60 +53,58 @@ public class QaUsuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "idusuario")
     private Integer idusuario;
-    
-    @Size(max = 50)
+
+    @Size(max = 25)
     @Column(name = "usuario")
     private String usuario;
-    
-    @Size(max = 30)
+
+    @Size(max = 250)
     @Column(name = "email")
     private String email;
-    
-    @Size(max = 500)
+
+    @Size(max = 50)
     @Column(name = "password")
     private String password;
-    
-    @Size(max = 20)
+
+    @Size(max = 250)
     @Column(name = "nombres")
     private String nombres;
-    
-    @Size(max = 30)
+
+    @Size(max = 250)
     @Column(name = "apellidos")
     private String apellidos;
-    
+
     @Size(max = 25)
     @Column(name = "telefono")
     private String telefono;
-    
+
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
-    
+
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-    
-    @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 25)
     @Column(name = "usuarioelminacion")
     private String usuarioelminacion;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-    
+
     @JoinColumn(name = "idperfil", referencedColumnName = "idperfil")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private QaPerfil idperfil;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario", fetch = FetchType.LAZY)
     private List<QaEncargado> qaEncargadoList;
 
@@ -261,5 +259,5 @@ public class QaUsuario implements Serializable {
     public String toString() {
         return "com.diaco.api.entity.QaUsuario[ idusuario=" + idusuario + " ]";
     }
-    
+
 }
