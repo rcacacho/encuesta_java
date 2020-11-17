@@ -72,6 +72,12 @@ public class QaQueja implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 5000)
+    @Column(name = "descripcion")
+    private String descripcion;
+
     @JoinColumn(name = "idestadoqueja", referencedColumnName = "idestadoqueja")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private QaEstadoQueja idestadoqueja;
@@ -136,6 +142,14 @@ public class QaQueja implements Serializable {
 
     public void setTelefonocomercio(String telefonocomercio) {
         this.telefonocomercio = telefonocomercio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Date getFechacreacion() {
