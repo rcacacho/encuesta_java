@@ -43,6 +43,7 @@ public class DetalleQuejaMB implements Serializable {
     public void rechazar() {
         QaQueja response = quejaBean.rechazoQueja(idQueja);
         if (response != null) {
+            JsfUtil.redirectTo("/queja-configuracion/bandeja.xhtml");
             JsfUtil.addSuccessMessage("Se rechazo la queja exitosamente!");
         }
     }
@@ -50,6 +51,7 @@ public class DetalleQuejaMB implements Serializable {
     public void aprobar() {
         QaQueja response = quejaBean.seguimientoQueja(idQueja);
         if (response != null) {
+            JsfUtil.redirectTo("/queja-configuracion/bandeja.xhtml");
             JsfUtil.addSuccessMessage("Se dio seguimiento la queja exitosamente!");
         }
     }

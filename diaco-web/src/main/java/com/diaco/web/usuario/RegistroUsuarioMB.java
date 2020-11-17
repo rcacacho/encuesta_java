@@ -53,6 +53,7 @@ public class RegistroUsuarioMB implements Serializable {
         usuario.setPassword(contra);
         usuario.setUsuariocreacion(SesionUsuarioMB.getUserName());
         QaUsuario response = usuarioBean.saveUsuario(usuario);
+         JsfUtil.redirectTo("/usuario/lista.xhtml");
     }
 
     public String md5(String input) {
@@ -72,7 +73,7 @@ public class RegistroUsuarioMB implements Serializable {
     }
 
     public void regresarMenu() {
-        JsfUtil.redirectTo("/menu/menu.xhtml");
+        JsfUtil.redirectTo("/usuario/lista.xhtml");
     }
 
     /*Metodos getters y setters*/

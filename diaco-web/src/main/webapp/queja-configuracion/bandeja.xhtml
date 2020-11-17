@@ -58,7 +58,7 @@
                 <br/>
 
                 <p:dataTable id="dt_queja" var="col" value="#{bandejaQuejaMB.listQueja}"
-                             emptyMessage="No hay registros encontrados" 
+                             emptyMessage="No hay registros encontrados" rowStyleClass="#{col.styleClass}"
                              styleClass="tabla-mp" style="width: 85%" rowIndexVar="rowId"
                              rows="10" paginator="#{bandejaQuejaMB.listQueja.size()>5}"  paginatorPosition="bottom">
 
@@ -162,7 +162,7 @@
 
                 <p:outputPanel  style="margin-top: 4%; margin-bottom: 20px; margin-right: 6%; margin-left: 34%;  font-size: 14px;"  >
                     <p:commandButton value="Guardar" action="#{bandejaQuejaMB.asignarUsuario()}" icon="ui-icon-disk" immediate="true"
-                                     style="margin-left: 5px; " onstart="return confirm('¿Confirmas asignar la encuesta?');" update="@form"/>
+                                     style="margin-left: 5px; " onstart="return confirm('¿Confirmas asignar la queja?');" update="@form"/>
                     <p:commandButton value="Cancelar"  process="@this" action="#{bandejaQuejaMB.cerraDialog()}" icon="ui-icon-close" style="margin-left: 12px; " update="@form"/>
                 </p:outputPanel>
             </h:form>

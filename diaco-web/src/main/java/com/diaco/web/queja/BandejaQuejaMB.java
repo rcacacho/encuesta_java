@@ -104,7 +104,7 @@ public class BandejaQuejaMB implements Serializable {
     }
 
     public void detalleQueja(Integer id) {
-        JsfUtil.redirectTo("/queja/detalle.xhtml?idQueja=" + id);
+        JsfUtil.redirectTo("/queja-configuracion/detalle.xhtml?idQueja=" + id);
     }
 
     /*Metodos getters y setteres*/
