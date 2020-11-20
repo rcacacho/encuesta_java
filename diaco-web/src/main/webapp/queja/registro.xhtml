@@ -52,7 +52,7 @@
                                              required="true" requiredMessage="Debes ingresar el teléfono de la empresa o comercio"/>
                             </p:column>
                             <p:column>
-                                <p:selectOneMenu id="consumidor" value="#{registroQuejaMB.selectedRegion}" style="width: 50%" 
+                                <p:selectOneMenu id="consumidor" value="#{registroQuejaMB.tipoConsumidor}" style="width: 50%" 
                                                  converter="entityConverter" filter="true" filterMatchMode="contains"
                                                  required="true" requiredMessage="Debes selecciona un consumidor" >
                                     <f:selectItem itemLabel="(selecciona una consumidor)" itemValue="" noSelectionOption="true" />

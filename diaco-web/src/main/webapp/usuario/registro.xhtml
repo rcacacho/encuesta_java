@@ -22,26 +22,33 @@
                         <p:outputLabel for="pNombre" value="Nombres:" />
                         <p:outputLabel for="sNombre"  value="Apellidos:" />
 
-                        <p:inputText id="pNombre" value="#{registroUsuarioMB.usuario.nombres}" style="width: 350px;"  placeholder="Ingrese un nombre" />
-                        <p:inputText id="sNombre" value="#{registroUsuarioMB.usuario.apellidos}" style="width: 350px;"  placeholder="Ingrese un apellido" />
+                        <p:inputText id="pNombre" value="#{registroUsuarioMB.usuario.nombres}" style="width: 350px;"  placeholder="Ingrese un nombre" 
+                                     required="true" requiredMessage="Debes ingresar un nombre"/>
+                        <p:inputText id="sNombre" value="#{registroUsuarioMB.usuario.apellidos}" style="width: 350px;"  placeholder="Ingrese un apellido" 
+                                     required="true" requiredMessage="Debes ingresar un apellido"/>
 
                         <p:outputLabel for="email" value="Correo Electronico:" />
                         <p:outputLabel for="telefono"  value="Telefono:" />
 
-                        <p:inputText id="email" value="#{registroUsuarioMB.usuario.email}" style="width: 350px;"  placeholder="Ingrese un correo electonico" />
-                        <p:inputText id="telefono" value="#{registroUsuarioMB.usuario.telefono}" style="width: 150px;"  placeholder="Ingrese un telefono" />
+                        <p:inputText id="email" value="#{registroUsuarioMB.usuario.email}" style="width: 350px;"  placeholder="Ingrese un correo electonico"
+                                     required="true" requiredMessage="Debes ingresar un email"/>
+                        <p:inputText id="telefono" value="#{registroUsuarioMB.usuario.telefono}" style="width: 150px;"  placeholder="Ingrese un telefono" 
+                                     required="true" requiredMessage="Debes ingresar un teléfono"/>
 
                         <p:outputLabel for="per" value="Perfil" />
                         <p:outputLabel for="usu"  value="Usuario:" />
 
-                        <h:selectOneMenu id="per"  value="#{registroUsuarioMB.selectedPerfil}" style="width: 342px;"
-                                         converter="entityConverter" 
-                                         required="true" requiredMessage="Debe seleccionar un tipo de perfil">
-                            <f:selectItem itemLabel="Seleccione un Tipo de perfil" value="#{null}" noSelectionOption="true"/>
+
+                        <p:selectOneMenu id="per" value="#{registroUsuarioMB.selectedPerfil}" style="width: 50%" 
+                                         converter="entityConverter" filter="true" filterMatchMode="contains"
+                                         required="true" requiredMessage="Debe seleccionar un tipo de perfil" >
+                            <f:selectItem itemLabel="(selecciona un Tipo de perfil)" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{registroUsuarioMB.listPerfil}" var="per" 
-                                           itemLabel="#{per.nombre}" itemValue="#{per}"  />
-                        </h:selectOneMenu>
-                        <p:inputText id="usu" value="#{registroUsuarioMB.usuario.usuario}" style="width: 350px;"  placeholder="Ingrese un nùmero de empleado" />
+                                           itemLabel="#{per.nombre}" itemValue="#{per}"  />  />
+                        </p:selectOneMenu>
+                    
+                        <p:inputText id="usu" value="#{registroUsuarioMB.usuario.usuario}" style="width: 350px;"  placeholder="Ingrese el nombre del usuario" 
+                                   required="true" requiredMessage="Debes ingresar un email"  />
 
                         <p:outputLabel for="pass" value="Password" />
                         <p:outputLabel  value="" />
