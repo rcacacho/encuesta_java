@@ -47,7 +47,7 @@
     
     <session-config>
         <session-timeout>
-            60
+            30
         </session-timeout>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
@@ -57,7 +57,7 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     
-      <error-page>
+    <error-page>
         <exception-type>java.lang.SecurityException</exception-type>
         <location>/templates/error-seguridad.xhtml</location>        
     </error-page>
