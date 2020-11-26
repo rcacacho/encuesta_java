@@ -52,8 +52,15 @@ public class RegistroUsuarioMB implements Serializable {
         String contra = md5(password);
         usuario.setPassword(contra);
         usuario.setUsuariocreacion(SesionUsuarioMB.getUserName());
+
+        QaUsuario responseVerificacion = usuarioBean.findUsuarioExistente(usuario.getUsuario());
+        if (responseVerificacion != null) {
+            JsfUtil.addErrorMessage("El usuario ya existe verifique");
+            return;
+        }
+
         QaUsuario response = usuarioBean.saveUsuario(usuario);
-         JsfUtil.redirectTo("/usuario/lista.xhtml");
+        JsfUtil.redirectTo("/usuario/lista.xhtml");
     }
 
     public String md5(String input) {

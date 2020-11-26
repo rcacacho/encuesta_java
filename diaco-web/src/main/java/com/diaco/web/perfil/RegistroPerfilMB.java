@@ -32,6 +32,13 @@ public class RegistroPerfilMB implements Serializable {
 
     public void crearPerfil() throws IOException {
         perfil.setUsuariocreacion(SesionUsuarioMB.getUserName());
+
+        QaPerfil responseVerificacion = perfilBean.findPerfilExistente(perfil.getNombre());
+        if (responseVerificacion != null) {
+            JsfUtil.addErrorMessage("Ya exite este perfil verifique!");
+            return;
+        }
+
         QaPerfil response = perfilBean.savePerfil(perfil);
         if (response != null) {
             JsfUtil.addSuccessMessage("Se creo el perfil exitosamente!");
