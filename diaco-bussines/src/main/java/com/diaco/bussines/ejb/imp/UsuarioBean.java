@@ -153,4 +153,17 @@ public class UsuarioBean implements UsuarioBeanLocal {
         }
     }
 
+    @Override
+    public QaUsuario findUsuarioExistente(String usuario) {
+        List<QaUsuario> lst = em.createQuery("SELECT us FROM QaUsuario us WHERE us.usuario =:usuario and us.activo = true", QaUsuario.class)
+                .setParameter("usuario", usuario)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst.get(0);
+    }
+
 }

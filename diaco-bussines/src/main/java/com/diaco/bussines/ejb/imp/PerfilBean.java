@@ -19,19 +19,19 @@ import org.apache.log4j.Logger;
  */
 @Singleton
 public class PerfilBean implements PerfilBeanLocal {
-    
+
     private static final Logger log = Logger.getLogger(CatalagoBean.class);
-    
+
     @PersistenceContext(unitName = "DiacoPU")
     EntityManager em;
-    
+
     @Resource
     private EJBContext context;
-    
+
     private void processException(Exception ex) {
         log.error(ex.getMessage(), ex);
     }
-    
+
     private String getConstraintViolationExceptionAsString(ConstraintViolationException ex) {
         StringBuilder sb = new StringBuilder();
         sb.append("Error de validación:\n");
@@ -43,7 +43,7 @@ public class PerfilBean implements PerfilBeanLocal {
         }
         return sb.toString();
     }
-    
+
     @Override
     public QaPerfil savePerfil(QaPerfil perfil) {
         try {
@@ -63,45 +63,45 @@ public class PerfilBean implements PerfilBeanLocal {
             return null;
         }
     }
-    
+
     @Override
     public QaPerfil findPerfil(Integer idperfil) {
         List<QaPerfil> lst = em.createQuery("SELECT per FROM QaPerfil per WHERE per.idperfil =:idperfil and per.activo = true", QaPerfil.class)
                 .setParameter("idperfil", idperfil)
                 .getResultList();
-        
+
         if (lst == null || lst.isEmpty()) {
             return null;
         }
-        
+
         return lst.get(0);
     }
-    
+
     @Override
     public List<QaPerfil> ListPerfil() {
         List<QaPerfil> lst = em.createQuery("SELECT per FROM QaPerfil per WHERE per.activo = true ", QaPerfil.class)
                 .getResultList();
-        
+
         if (lst == null || lst.isEmpty()) {
             return null;
         }
-        
+
         return lst;
     }
-    
+
     @Override
     public QaPerfil eliminarPerfil(Integer idperfil) {
         if (idperfil == null) {
             context.setRollbackOnly();
             return null;
         }
-        
+
         try {
             QaPerfil toUpdate = em.find(QaPerfil.class, idperfil);
-            
+
             toUpdate.setActivo(false);
             em.merge(toUpdate);
-            
+
             return toUpdate;
         } catch (ConstraintViolationException ex) {
             String validationError = getConstraintViolationExceptionAsString(ex);
@@ -113,21 +113,21 @@ public class PerfilBean implements PerfilBeanLocal {
             return null;
         }
     }
-    
+
     @Override
     public QaPerfil actualizarPerfil(QaPerfil perfil) {
         if (perfil == null) {
             context.setRollbackOnly();
             return null;
         }
-        
+
         try {
             QaPerfil toUpdate = em.find(QaPerfil.class, perfil.getIdperfil());
-            
+
             toUpdate.setNombre(perfil.getNombre());
             toUpdate.setDescripcion(perfil.getDescripcion());
             em.merge(toUpdate);
-            
+
             return toUpdate;
         } catch (ConstraintViolationException ex) {
             String validationError = getConstraintViolationExceptionAsString(ex);
@@ -139,5 +139,18 @@ public class PerfilBean implements PerfilBeanLocal {
             return null;
         }
     }
-    
+
+    @Override
+    public QaPerfil findPerfilExistente(String nombre) {
+        List<QaPerfil> lst = em.createQuery("SELECT per FROM QaPerfil per WHERE per.nombre =:nombre and per.activo = true", QaPerfil.class)
+                .setParameter("nombre", nombre)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst.get(0);
+    }
+
 }
