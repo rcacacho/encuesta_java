@@ -21,5 +21,7 @@ public interface UsuarioBeanLocal {
     QaPerfil findPerfilIdUsuario(String usuario);
 
     QaUsuario eliminarUsuario(Integer idusuario);
+    
+    QaUsuario findUsuarioExistente(String usuario);
 
 }

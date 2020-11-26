@@ -19,4 +19,6 @@ public interface PerfilBeanLocal {
 
     QaPerfil actualizarPerfil(QaPerfil perfil);
 
+    QaPerfil findPerfilExistente(String nombre);
+
 }
